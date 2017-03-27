@@ -34,9 +34,7 @@ namespace TutorWindows
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
             finished = false;
-            StreamWriter eraseUser = new StreamWriter("..\\..\\..\\Temp\\CurrentUser.txt", false);
-            eraseUser.WriteLine("");
-            eraseUser.Close();
+
             Login logoutScreen = new Login();
             logoutScreen.Show();
             this.Close();
