@@ -16,7 +16,8 @@ namespace TundraControls
         public ObservableCollection<Day> Days { get; set; }
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraCalendar));
-        TutoringDB.Tutee user;
+        private TutoringDB.TutorDatabaseEntities readUser;
+        private TutoringDB.Tutee user;
 
         public event EventHandler<DayChangedEventArgs> DayChanged;
 
@@ -38,8 +39,13 @@ namespace TundraControls
 
             DayNames = new ObservableCollection<string> { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
+            //Get the current user
             user = new TutoringDB.Tutee();
-            user.Username = "jim";
+            readUser = new TutoringDB.TutorDatabaseEntities();
+            readUser.CurrentUsers.Load();
+            var userList = from i in readUser.CurrentUsers select i;
+            foreach (var oneUser in userList) { user.Username = oneUser.UserName; }
+            
             Days = new ObservableCollection<Day>();
             BuildCalendar(DateTime.Today);
         }
@@ -47,6 +53,7 @@ namespace TundraControls
         public void BuildCalendar(DateTime targetDate)
         {
             Days.Clear();
+            
 
             TutoringDB.TutorDatabaseEntities tutorSchedule = new TutoringDB.TutorDatabaseEntities();
 
