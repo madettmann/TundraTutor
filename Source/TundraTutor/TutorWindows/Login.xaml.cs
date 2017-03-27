@@ -19,6 +19,15 @@ using System.Windows.Forms;
 
 namespace TutorWindows
 {
+    //
+    //
+    //
+    //
+    //Faculty cannot log in ---- ?
+    //
+    //
+    //
+    //
 
     public partial class Login : TundraControls.CustomWindow
     {
@@ -26,9 +35,9 @@ namespace TutorWindows
         TutoringDB.TutorDatabaseEntities userCreds;
         bool usernamePasswordCorrect
         {
-            get => (userCreds.Tutors.Any(user => user.UserName == Username1.Text && user.Password == Password1.Password) ||
-                   userCreds.Tutees.Any(user => user.Username == Username1.Text && user.Password == Password1.Password) ||
-                   userCreds.Faculties.Any(user => user.Username == Username1.Text && user.Password == Password1.Password));
+            get => (userCreds.Tutors.Any(userF => userF.UserName == Username1.Text && userF.Password == Password1.Password) ||
+                   userCreds.Tutees.Any(userF => userF.Username == Username1.Text && userF.Password == Password1.Password) ||
+                   userCreds.Faculties.Any(userF => userF.Username == Username1.Text && userF.Password == Password1.Password));
         }
         string type;
         
@@ -95,9 +104,7 @@ namespace TutorWindows
                 }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-                StreamWriter saveUser = new StreamWriter("..\\..\\..\\Temp\\CurrentUser.txt", false);
-                saveUser.WriteLine(Username1.Text);
-                saveUser.Close();
+                
                 MainWindow monthView = new MainWindow();
                 monthView.Show();
                 this.Hide();

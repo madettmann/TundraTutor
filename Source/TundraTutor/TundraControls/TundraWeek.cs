@@ -55,6 +55,7 @@ namespace TundraControls
             TutoringDB.TutorDatabaseEntities tutorAppointments = new TutoringDB.TutorDatabaseEntities();
             TutoringDB.TutorDatabaseEntities tutorBusyTime = new TutoringDB.TutorDatabaseEntities();
 
+            //Load appointments
             tutorAppointments.TutorTuteeCourseAppointments
                 .Where(apt => (apt.Tutee.Username == user.Username || apt.Tutor.UserName == user.Username) && apt.Appointment.Date.Month == CurrentDate.Month
                                 && (apt.Appointment.Date >= CurrentDate && apt.Appointment.Date <= endDate))
@@ -62,9 +63,22 @@ namespace TundraControls
                 .ThenBy(apt => apt.Appointment.Time)
                 .Load();
 
-            //
-            //Still need to add in busy time loading and showing
-            //
+            //Load busy times
+            tutorBusyTime.TutorBusyTimes
+                .Where(busy => busy.BusyTime.Date >= startDate && busy.BusyTime.Date <= endDate)
+                .OrderBy(busy => busy.BusyTime.Date)
+                .ThenBy(busy => busy.BusyTime.Time)
+                .Load();
+
+            if (tutorBusyTime.TuteeBusyTimes.Count() == 0) // <----Will this work??????????
+            {
+                tutorBusyTime.TuteeBusyTimes
+                .Where(busy => busy.BusyTime.Date >= startDate && busy.BusyTime.Date <= endDate)
+                .OrderBy(busy => busy.BusyTime.Date)
+                .ThenBy(busy => busy.BusyTime.Time)
+                .Load();
+            }
+            
 
             DateTime d = CurrentDate;
             TimeSpan t = new TimeSpan(8, 00, 00);
