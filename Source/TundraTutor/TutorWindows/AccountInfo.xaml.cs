@@ -62,24 +62,28 @@ namespace TutorWindows
     }
     public partial class AccountInfo : TundraControls.CustomWindow
     {
-        private string userName;
         UserInfo info;
+        private TutoringDB.TutorDatabaseEntities readUser;
+        private TutoringDB.Tutee user;
 
         public AccountInfo()
         {
             //userName = "jim";
-            
-            info = new UserInfo();
-            StreamReader getUser = new StreamReader("..\\..\\..\\Temp\\CurrentUser.txt");
-            userName = getUser.ReadLine();
-            getUser.Close();
+
+            //Get the current user
+            user = new TutoringDB.Tutee();
+            readUser = new TutoringDB.TutorDatabaseEntities();
+            readUser.CurrentUsers.Load();
+            var multipleUsers = from i in readUser.CurrentUsers select i;
+            foreach (var oneUser in multipleUsers) { user.Username = oneUser.UserName; }
+
             TutoringDB.TutorDatabaseEntities tutorSchedule = new TutoringDB.TutorDatabaseEntities();
             
 
-            if (tutorSchedule.Tutees.Any(user => user.Username == userName))
+            if (tutorSchedule.Tutees.Any(userF => userF.Username == user.Username))
             {
                 tutorSchedule.Tutees
-                    .Where(user => (user.Username == userName))
+                    .Where(userF => (userF.Username == user.Username))
                     .Load();
                 var userList = from i in tutorSchedule.Tutees
                                 select i;
@@ -91,10 +95,10 @@ namespace TutorWindows
                     info.UserApprovedValue = "No";
                 }
             }
-            else if (tutorSchedule.Tutors.Any(user => user.UserName == userName))
+            else if (tutorSchedule.Tutors.Any(userF => userF.UserName == user.Username))
             {
                 tutorSchedule.Tutors
-                    .Where(user => (user.UserName == userName))
+                    .Where(userF => (userF.UserName == user.Username))
                     .Load();
                 var userList = from i in tutorSchedule.Tutors
                                              select i;
@@ -111,7 +115,7 @@ namespace TutorWindows
             else
             {
                 tutorSchedule.Faculties
-                    .Where(fac => fac.Username == userName)
+                    .Where(fac => fac.Username == user.Username)
                     .Load();
                 var userList = from i in tutorSchedule.Faculties
                                select i;
@@ -146,9 +150,9 @@ namespace TutorWindows
             else
             {
                 TutoringDB.TutorDatabaseEntities userCreds = new TutoringDB.TutorDatabaseEntities();
-                bool correctOldPassword = (userCreds.Tutors.Any(user => user.UserName == userName && user.Password == oldPasswordBox.Password) ||
-                       userCreds.Tutees.Any(user => user.Username == userName && user.Password == oldPasswordBox.Password) ||
-                       userCreds.Faculties.Any(user => user.Username == userName && user.Password == oldPasswordBox.Password));
+                bool correctOldPassword = (userCreds.Tutors.Any(userF => userF.UserName == user.Username && userF.Password == oldPasswordBox.Password) ||
+                       userCreds.Tutees.Any(userF => userF.Username == user.Username && userF.Password == oldPasswordBox.Password) ||
+                       userCreds.Faculties.Any(userF => userF.Username == user.Username && userF.Password == oldPasswordBox.Password));
                 if (correctOldPassword)
                 {
                     info.WrongOldPassword = "Password change successful / NOT IMPLEMENTED";

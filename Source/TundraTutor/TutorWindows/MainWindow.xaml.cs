@@ -94,9 +94,6 @@ namespace TutorWindows
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            StreamWriter eraseUser = new StreamWriter("..\\..\\..\\Temp\\CurrentUser.txt", false);
-            eraseUser.WriteLine("");
-            eraseUser.Close();
             finished = false;
             Login logoutScreen = new Login();
             logoutScreen.Show();
@@ -133,6 +130,19 @@ namespace TutorWindows
         {
             AddBusy addBusyWindow = new AddBusy();
             addBusyWindow.ShowDialog();
+        }
+
+        private void CustomWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Width = SystemParameters.WorkArea.Width;
+            this.Height = SystemParameters.WorkArea.Height;
+            this.Left = SystemParameters.WorkArea.Left;
+            this.Top = SystemParameters.WorkArea.Top;
+        }
+
+        private void TundraButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("No use helping you...");
         }
     }
 }
