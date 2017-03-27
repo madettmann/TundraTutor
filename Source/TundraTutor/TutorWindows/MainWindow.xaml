@@ -30,7 +30,7 @@
                 <Menu Background="White" FontSize="24">
                     <MenuItem Header="Actions" Background="White" FontSize="24" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
                         <MenuItem x:Name="appointmentButton" Header="Make an Appointment" Background="White" Margin="-1" Click="appointmentButton_Click_1"/>
-                        <MenuItem Header="Modify Schedule" Background="White" Margin="-1" Click="MenuItem_Click"/>
+                        <MenuItem Header="Add Busy Time" Background="White" Margin="-1" Click="MenuItem_Click"/>
                         <MenuItem Header="Find a Tutor" Background="White" Margin="-1"/>
                     </MenuItem>
                 </Menu>
@@ -45,7 +45,7 @@
             <control:TundraButton Name="weekButton" Grid.Row="0" Grid.Column="4" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="weekButton_Click">
                 <TextBlock Text="View Current Week" FontSize="24"/>
             </control:TundraButton>
-            <control:TundraButton Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,7,7" Width="33" Grid.ColumnSpan="2">
+            <control:TundraButton Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,7,7" Width="33" Grid.ColumnSpan="2" Click="TundraButton_Click">
                 <TextBlock Text="Help"/>
             </control:TundraButton>
 

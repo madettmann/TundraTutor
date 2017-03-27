@@ -142,5 +142,10 @@ namespace TutorWindows
             this.Left = SystemParameters.WorkArea.Left;
             this.Top = SystemParameters.WorkArea.Top;
         }
+
+        private void TundraButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("No use helping you...");
+        }
     }
 }
