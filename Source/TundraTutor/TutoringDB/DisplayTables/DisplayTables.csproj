@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F0D23F07-28C6-4023-8F04-19B15A80E457}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DisplayTables</RootNamespace>
+    <AssemblyName>DisplayTables</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusyTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusyTime.Designer.cs">
+      <DependentUpon>BusyTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayAppointments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayAppointments.Designer.cs">
+      <DependentUpon>DisplayAppointments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayCourses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayCourses.Designer.cs">
+      <DependentUpon>DisplayCourses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayFaculty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayFaculty.Designer.cs">
+      <DependentUpon>DisplayFaculty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayTutees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayTutees.Designer.cs">
+      <DependentUpon>DisplayTutees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayTutors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayTutors.Designer.cs">
+      <DependentUpon>DisplayTutors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LaunchPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LaunchPage.Designer.cs">
+      <DependentUpon>LaunchPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BusyTime.resx">
+      <DependentUpon>BusyTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayAppointments.resx">
+      <DependentUpon>DisplayAppointments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayCourses.resx">
+      <DependentUpon>DisplayCourses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayFaculty.resx">
+      <DependentUpon>DisplayFaculty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayTutees.resx">
+      <DependentUpon>DisplayTutees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayTutors.resx">
+      <DependentUpon>DisplayTutors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaunchPage.resx">
+      <DependentUpon>LaunchPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\TutoringDB.Appointment.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.BusyTime.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Cours.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Faculty.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.FacultyCours.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Tutee.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TuteeBusyTime.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Tutor.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorBusyTime.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorConfirmationRequest.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorDatabaseEntities.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorTuteeCourseAppointment.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TutoringDB\TutoringDB.csproj">
+      <Project>{2710a91b-bc8d-49bd-95cb-8223da6189d2}</Project>
+      <Name>TutoringDB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

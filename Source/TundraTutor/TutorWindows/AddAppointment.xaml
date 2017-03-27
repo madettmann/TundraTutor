@@ -1,0 +1,9 @@
+﻿<control:CustomWindow x:Class="TutorWindows.AddAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
+        Title="AddAppointment">
+    <Grid>
+        <Image Margin="83,16,83,17" Source="TundraTutorLogo.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Height="116" Width="126"/>
+    </Grid>
+</control:CustomWindow>
