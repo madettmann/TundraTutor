@@ -473,7 +473,9 @@
                                             <!--<Border.Style>
                                                 <Style TargetType="{x:Type Border}">
                                                     <Style.Triggers>
-                                                        --><!--Current Day--><!--
+                                                        -->
+                                            <!--Current Day-->
+                                            <!--
                                                         <DataTrigger Binding="{Binding IsToday}" Value="true">
                                                             <Setter Property="Border.Background">
                                                                 <Setter.Value>

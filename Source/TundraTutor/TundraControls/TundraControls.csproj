@@ -66,6 +66,7 @@
     <Compile Include="Converters\AppointmentsVisibilityConverter.cs" />
     <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="Converters\DayBorderColorConverter.cs" />
+    <Compile Include="Converters\TimeInfoColorConverter.cs" />
     <Compile Include="CustomWindow.cs" />
     <Compile Include="Day.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
