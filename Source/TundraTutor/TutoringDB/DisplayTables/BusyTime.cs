@@ -25,7 +25,7 @@ namespace DisplayTables
                 .Load();
 
             //specify DataSource for busyTimeBindingSource
-            busyTimeBindingSource.DataSource = dbcontext.Faculties.Local;
+            busyTimeBindingSource.DataSource = dbcontext.BusyTimes.Local;
         }
         private void busyTimeBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {

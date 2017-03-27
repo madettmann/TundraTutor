@@ -22,224 +22,244 @@
         <control:TundraButton x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Bottom" Width="75" />
         <Label x:Name="titleLabel" Content="Busy Time" Margin="0" VerticalAlignment="Top" FontSize="24" Grid.ColumnSpan="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
         <DatePicker x:Name="dateDatePicker" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Height="30"/>
-        <ComboBox x:Name="durationComboBox" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="146"/>
         <Menu x:Name="startTimeMenu" Margin="8,0,44,19" Grid.Column="1" Grid.Row="2" Background="{x:Null}" FontSize="16">
-            <MenuItem Header="Select Time">
-                <MenuItem Header="1:">
-                        <MenuItem Header="00">
-                            <MenuItem Header="AM"/>
-                            <MenuItem Header="PM"/>
-                        </MenuItem>
-                        <MenuItem Header="15">
-                            <MenuItem Header="AM"/>
-                            <MenuItem Header="PM"/>
-                        </MenuItem>
-                        <MenuItem Header="30">
-                            <MenuItem Header="AM"/>
-                            <MenuItem Header="PM"/>
-                        </MenuItem>
-                        <MenuItem Header="45">
-                            <MenuItem Header="AM"/>
-                            <MenuItem Header="PM"/>
-                        </MenuItem>
-                    </MenuItem>
-                <MenuItem Header="2:">
+            <MenuItem x:Name="selectItemMenuItem" Header="Select Time">
+                <MenuItem Header="1:" Click="TimeSelected">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:45"/>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="2:">
+                    <MenuItem Header="00">
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:00"/>
+                    </MenuItem>
+                    <MenuItem Header="15">
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:15"/>
+                    </MenuItem>
+                    <MenuItem Header="30">
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:30"/>
+                    </MenuItem>
+                    <MenuItem Header="45">
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="3:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="4:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="16:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="16:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="4:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="4:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="5:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="6:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="7:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="8:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="9:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="10:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="11:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:45"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="12:">
                     <MenuItem Header="00">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:00"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:00"/>
                     </MenuItem>
                     <MenuItem Header="15">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:15"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:15"/>
                     </MenuItem>
                     <MenuItem Header="30">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:30"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:30"/>
                     </MenuItem>
                     <MenuItem Header="45">
-                        <MenuItem Header="AM"/>
-                        <MenuItem Header="PM"/>
+                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:45"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:45"/>
                     </MenuItem>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Menu x:Name="durationTimeMenu" Margin="8,4,44,60" Grid.Column="1" Grid.Row="3" Background="{x:Null}" FontSize="16">
+            <MenuItem x:Name="selectDurationMenuItem" Header="Duration">
+                <MenuItem Header="1:" >
+                    <MenuItem Header="00" Click="DurationSelected" Tag="1:00"/>
+                    <MenuItem Header="15" Click="DurationSelected" Tag="1:15"/>
+                    <MenuItem Header="30" Click="DurationSelected" Tag="1:30"/>
+                    <MenuItem Header="45" Click="DurationSelected" Tag="1:45"/>
+                </MenuItem>
+                <MenuItem Header="2:">
+                    <MenuItem Header="00" Click="DurationSelected" Tag="2:00"/>
+                    <MenuItem Header="15" Click="DurationSelected" Tag="2:15"/>
+                    <MenuItem Header="30" Click="DurationSelected" Tag="2:30"/>
+                    <MenuItem Header="45" Click="DurationSelected" Tag="2:45"/>
+                </MenuItem>
+                <MenuItem Header="3:">
+                    <MenuItem Header="00" Click="DurationSelected" Tag="3:00"/>
+                    <MenuItem Header="15" Click="DurationSelected" Tag="3:15"/>
+                    <MenuItem Header="30" Click="DurationSelected" Tag="3:30"/>
                 </MenuItem>
             </MenuItem>
         </Menu>

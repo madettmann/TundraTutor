@@ -39,7 +39,8 @@ namespace TutorWindows
                    userCreds.Tutees.Any(userF => userF.Username == Username1.Text && userF.Password == Password1.Password) ||
                    userCreds.Faculties.Any(userF => userF.Username == Username1.Text && userF.Password == Password1.Password));
         }
-
+        string type;
+        
         public Login()
         {
             InitializeComponent();
@@ -47,11 +48,25 @@ namespace TutorWindows
             Username1.Focus();
 
             userCreds = new TutoringDB.TutorDatabaseEntities();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Username1.Text == "admin" && Password1.Password == "admin") ///////Needs to be un-hardcoded
+            if (userCreds.Tutors.Any(user => user.UserName == Username1.Text))
+            {
+                type = "tutor";
+            }
+            else if (userCreds.Tutees.Any(user => user.Username == Username1.Text))
+            {
+                type = "tutee";
+            }
+            else if (userCreds.Faculties.Any(user => user.Username == Username1.Text))
+            {
+                type = "faculty";
+            }
+
+            if (Username1.Text == "admin" && Password1.Password == "admin")
             {
                 LaunchPage lp = new LaunchPage();
                 lp.Show();
@@ -79,6 +94,7 @@ namespace TutorWindows
                 Label3.Content = "";
                 TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
                 user.UserName = Username1.Text;
+                user.Type = type;
                 userCreds.CurrentUsers.Load();
                 if(userCreds.CurrentUsers.Count() > 0)
                 {
