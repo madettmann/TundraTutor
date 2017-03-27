@@ -89,5 +89,10 @@ namespace TutorWindows
             selectDurationMenuItem.Header = timeSpan.TimeOfDay;
             durationTimeMenu.Tag = "true";
         }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
