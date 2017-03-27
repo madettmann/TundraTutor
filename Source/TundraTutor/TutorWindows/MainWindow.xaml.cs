@@ -134,5 +134,13 @@ namespace TutorWindows
             AddBusy addBusyWindow = new AddBusy();
             addBusyWindow.ShowDialog();
         }
+
+        private void CustomWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Width = SystemParameters.WorkArea.Width;
+            this.Height = SystemParameters.WorkArea.Height;
+            this.Left = SystemParameters.WorkArea.Left;
+            this.Top = SystemParameters.WorkArea.Top;
+        }
     }
 }
