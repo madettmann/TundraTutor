@@ -35,7 +35,7 @@ namespace TutorWindows
 
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
-            if (durationTimeMenu.Tag == "true" && startTimeMenu.Tag == "true") {
+            if ((string)durationTimeMenu.Tag == "true" && (string)startTimeMenu.Tag == "true") {
                 db.BusyTimes.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.BusyTime tempBusyTime = new TutoringDB.BusyTime();
