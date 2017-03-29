@@ -99,12 +99,12 @@
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0"/>
-                    <GradientStop Color="#FF32CDF0" Offset="1"/>
+                    <GradientStop Color="#FFB4E9F5" Offset="0.962"/>
                     <GradientStop Color="#FFE5F8FC" Offset="0.128"/>
                     <GradientStop Color="#FFFBFEFE" Offset="0.06"/>
-                    <GradientStop Color="#FFC4F0F9" Offset="0.376"/>
-                    <GradientStop Color="#FF95E4F6" Offset="0.684"/>
-                    <GradientStop Color="#FF76DDF4" Offset="0.876"/>
+                    <GradientStop Color="#FFE2EFF1" Offset="0.272"/>
+                    <GradientStop Color="#FFE2FAFF" Offset="0.54"/>
+                    <GradientStop Color="#FFCEF7FF" Offset="0.753"/>
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -118,12 +118,12 @@
                         <Border.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="White" Offset="0"/>
-                                <GradientStop Color="#FF32CDF0" Offset="1"/>
+                                <GradientStop Color="#FFB4E9F5" Offset="0.962"/>
                                 <GradientStop Color="#FFE5F8FC" Offset="0.128"/>
                                 <GradientStop Color="#FFFBFEFE" Offset="0.06"/>
-                                <GradientStop Color="#FFC4F0F9" Offset="0.376"/>
-                                <GradientStop Color="#FF95E4F6" Offset="0.684"/>
-                                <GradientStop Color="#FF76DDF4" Offset="0.876"/>
+                                <GradientStop Color="#FFE2EFF1" Offset="0.272"/>
+                                <GradientStop Color="#FFE2FAFF" Offset="0.54"/>
+                                <GradientStop Color="#FFCEF7FF" Offset="0.753"/>
                             </LinearGradientBrush>
                         </Border.Background>
                         <Grid>
