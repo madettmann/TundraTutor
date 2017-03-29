@@ -22,7 +22,6 @@ namespace TutorWindows
         List<string> months;
         int selectedMonth;
         int currYear;
-        string user;
         bool finished;
 
         enum MonthCounter { January = 1, February, March, April, May, June, July, August, September, October, November, December };

@@ -58,7 +58,7 @@ namespace TundraControls
             TutoringDB.TutorDatabaseEntities tutorSchedule = new TutoringDB.TutorDatabaseEntities();
 
             tutorSchedule.TutorTuteeCourseAppointments
-                .Where(apt => (apt.Tutee.Username == user.Username || apt.Tutor.UserName == user.Username) && apt.Appointment.Date.Month == CurrentDate.Month)
+                .Where(apt => (apt.Tutee.Username == user.Username || apt.Tutor.UserName == user.Username) && apt.Appointment.Date.Month == targetDate.Month)
                 .OrderBy(apt => apt.Appointment.Date)
                 .ThenBy(apt => apt.Appointment.Time)
                 .Load();
@@ -79,7 +79,7 @@ namespace TundraControls
 
                 //Add appointments from database to calendar
                 var dayAppointments = from i in tutorSchedule.TutorTuteeCourseAppointments
-                                      where i.Appointment.Date.Day == day.Date.Day
+                                      where ( i.Appointment.Date.Month == d.Date.Month && i.Appointment.Date.Day == d.Date.Day )
                                       orderby i.Appointment.Time
                                       select i;
                 day.appointmentList = new ObservableCollection<Appointment>();

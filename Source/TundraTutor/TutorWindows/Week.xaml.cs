@@ -22,8 +22,8 @@ namespace TutorWindows
 
         public Week()
         {
-            Application.Current.MainWindow.Width = SystemParameters.WorkArea.Width;
-            Application.Current.MainWindow.Height = SystemParameters.WorkArea.Height;
+            Width = SystemParameters.WorkArea.Width;
+            Height = SystemParameters.WorkArea.Height;
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             finished = true;
