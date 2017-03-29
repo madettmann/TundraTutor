@@ -40,10 +40,6 @@ namespace TutorWindows
 
             InitializeComponent();
 
-            StreamReader getUser = new StreamReader("..\\..\\..\\Temp\\CurrentUser.txt");
-            user = getUser.ReadLine();
-            getUser.Close();
-
             finished = true;
 
             monthLabel.Content = months.FirstOrDefault(w => w == DateTime.Today.ToString("MMMM"));
@@ -108,7 +104,8 @@ namespace TutorWindows
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
         {
-            AddAppointment newAppt = new AddAppointment();
+            //AddAppointment newAppt = new AddAppointment();
+            ScheduleAppointment newAppt = new ScheduleAppointment();
             newAppt.ShowDialog();
         }
 

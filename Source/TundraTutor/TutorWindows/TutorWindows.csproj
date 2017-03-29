@@ -93,6 +93,9 @@
     <Compile Include="Manual.xaml.cs">
       <DependentUpon>Manual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleAppointment.xaml.cs">
+      <DependentUpon>ScheduleAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Week.xaml.cs">
       <DependentUpon>Week.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ScheduleAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Week.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +179,19 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TutoringDB.Appointment.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.BusyTime.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Cours.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.CurrentUser.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Faculty.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.FacultyCours.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Tutee.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TuteeBusyTime.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.Tutor.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorBusyTime.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorConfirmationRequest.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorDatabaseEntities.datasource" />
+    <None Include="Properties\DataSources\TutoringDB.TutorTuteeCourseAppointment.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
