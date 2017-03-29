@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAppointment.xaml.cs">
+      <DependentUpon>AddAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddBusy.xaml.cs">
       <DependentUpon>AddBusy.xaml</DependentUpon>
     </Compile>
@@ -108,8 +111,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddAppointment.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="AddBusy.xaml">
       <SubType>Designer</SubType>
@@ -132,9 +135,6 @@
     </Compile>
     <Compile Include="AddAccount.xaml.cs">
       <DependentUpon>AddAccount.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddAppointment.xaml.cs">
-      <DependentUpon>AddAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
