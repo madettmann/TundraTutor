@@ -110,7 +110,7 @@ namespace TutorWindows
                 
                 MainWindow monthView = new MainWindow();
                 monthView.Show();
-                this.Hide();
+                this.Close();
             }
             else
             {
