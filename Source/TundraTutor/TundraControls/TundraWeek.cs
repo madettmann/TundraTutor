@@ -18,7 +18,7 @@ namespace TundraControls
         public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register("CurrentTime", typeof(TimeSpan), typeof(TundraWeek));
         bool isTutor;
 
-        TutoringDB.Tutee user;
+        TutoringDB.CurrentUser user;
 
         public DateTime CurrentDate
         {
@@ -39,10 +39,18 @@ namespace TundraControls
             CurrentDate = DateTime.Today;
             CurrentTime = DateTime.Today.TimeOfDay;
 
-            user = new TutoringDB.Tutee();
-            user.Username = "jim";
-
             DayNames = new ObservableCollection<string> { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+
+            //Get the current user
+            user = new TutoringDB.CurrentUser();
+            var readUser = new TutoringDB.TutorDatabaseEntities();
+            readUser.CurrentUsers.Load();
+            var userList = from i in readUser.CurrentUsers select i;
+            TutoringDB.Tutee oneUser = new TutoringDB.Tutee();
+            foreach (var element in userList) { oneUser.Username = element.UserName; }
+            user.UserName = oneUser.Username;
+
+            
 
             times = new ObservableCollection<Timeslot>();
             BuildWeek( CurrentDate );
@@ -56,24 +64,46 @@ namespace TundraControls
             TutoringDB.TutorDatabaseEntities tutorAppointments = new TutoringDB.TutorDatabaseEntities();
             TutoringDB.TutorDatabaseEntities tutorBusyTime = new TutoringDB.TutorDatabaseEntities();
 
+            //Align day names
+            int dow = (int)startDate.DayOfWeek;
+            switch (dow)
+            {
+                case 1:
+                    DayNames = new ObservableCollection<string> { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+                    break;
+                case 2:
+                    DayNames = new ObservableCollection<string> { "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon" };
+                    break;
+                case 3:
+                    DayNames = new ObservableCollection<string> { "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue" };
+                    break;
+                case 4:
+                    DayNames = new ObservableCollection<string> { "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed" };
+                    break;
+                case 5:
+                    DayNames = new ObservableCollection<string> { "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu" };
+                    break;
+                case 6:
+                    DayNames = new ObservableCollection<string> { "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"};
+                    break;
+                default:
+                    break;
+
+            };
+
             //Load appointments
             tutorAppointments.TutorTuteeCourseAppointments
-                .Where(apt => (apt.Tutee.Username == user.Username || apt.Tutor.UserName == user.Username) && apt.Appointment.Date.Month == CurrentDate.Month
-                                && (apt.Appointment.Date >= CurrentDate && apt.Appointment.Date <= endDate))
-                .OrderBy(apt => apt.Appointment.Date)
-                .ThenBy(apt => apt.Appointment.Time)
                 .Load();
 
-            //Load busy times
+            isTutor = user.Type == "tutor";
+            //Load busy times <----------- this might have the same problem as appointments (being non-user-specific) - LOOK HERE IF SO!
+            if(isTutor)
             tutorBusyTime.TutorBusyTimes
                 .Where(busy => busy.BusyTime.Date >= startDate && busy.BusyTime.Date <= endDate)
                 .OrderBy(busy => busy.BusyTime.Date)
                 .ThenBy(busy => busy.BusyTime.Time)
                 .Load();
-            isTutor = true;
-
-            //If there were none in tutor, check tutee
-            if (tutorBusyTime.TuteeBusyTimes.Count() == 0) // <----Will this work??????????
+            else
             {
                 tutorBusyTime.TuteeBusyTimes
                 .Where(busy => busy.BusyTime.Date >= startDate && busy.BusyTime.Date <= endDate)
@@ -82,18 +112,20 @@ namespace TundraControls
                 .Load();
                 isTutor = false;
             }
-            
 
-            DateTime d = CurrentDate;
+            //Set the first day to generate
+            DateTime d = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             TimeSpan t = new TimeSpan(08, 00, 00);
 
             //24 timeslots (08:00 to 20:00) * 7 days in a week
             for (int box = 0; box < 168; box++)
             {
-                Timeslot time = new Timeslot(d, t, ( t < CurrentTime && d == CurrentDate ) || d < CurrentDate);
+                Timeslot time = new Timeslot(d, t, (( t < CurrentTime && d == CurrentDate ) || d < CurrentDate) );
+
                 //Add appointments from database to weekview
                 var dayAppointments = from i in tutorAppointments.TutorTuteeCourseAppointments
-                                      where i.Appointment.Date.Day == time.Date.Day && i.Appointment.Time == time.Time
+                                      where ( i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName )
+                                            && i.Appointment.Date.Day == time.Date.Day && i.Appointment.Time == time.Time
                                       orderby i.Appointment.Time
                                       select i;
 
@@ -105,7 +137,7 @@ namespace TundraControls
                 //Must assign timeinfo to either the busy or appointment, depending
 
                 //Add whether the time is busy or not (although it never will be if there's an appointment but ... whatever)
-                time.Busy = new ObservableCollection<TutoringDB.BusyTime>();
+                time.Busy = new ObservableCollection<Busy>();
                 if (isTutor)
                 {
                     var dayBusy = from i in tutorBusyTime.TutorBusyTimes
@@ -113,7 +145,7 @@ namespace TundraControls
                                   select i;
                     foreach (var bus in dayBusy)
                     {
-                        time.Busy.Add(new TutoringDB.BusyTime());//Add new constructor to busy? Or no?
+                        time.Busy.Add(new Busy());//Add new constructor to busy? Or no?
                     }
                 }
                 else
@@ -123,20 +155,24 @@ namespace TundraControls
                                   select i;
                     foreach (var bus in dayBusy)
                     {
-                        time.Busy.Add(new TutoringDB.BusyTime());//Add new constructor to busy? Or no?
+                        time.Busy.Add(new Busy());//Add new constructor to busy? Or no?
                     }
                 }
 
+                times.Add(time);
+
                 //Increment time
-                if(t == new TimeSpan(20, 00, 00))
+                if(t.Hours == 20)
                 {
                     d.AddDays(1);
                     t = new TimeSpan(08, 00, 00);
                 }
                 else
                 {
-                    t = t.Add(new TimeSpan(00, 00, 30));
+                    t = t.Add(new TimeSpan(00, 30, 00));
                 }
+
+
             }
         }
 
