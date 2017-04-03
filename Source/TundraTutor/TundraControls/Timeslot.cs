@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using TutoringDB;
 
 namespace TundraControls
 {
@@ -14,7 +13,7 @@ namespace TundraControls
         private DateTime date;
         private TimeSpan time;
         private ObservableCollection<Appointment> appointment;
-        private ObservableCollection<TutoringDB.BusyTime> busy;
+        private ObservableCollection<Busy> busy;
         private bool isPassed;
         private string timeInfo;
 
@@ -22,9 +21,10 @@ namespace TundraControls
         public TimeSpan Time { get => time; set { time = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Time")); } }
         public ObservableCollection<Appointment >Appointment { get => appointment; set { appointment = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Appointment")); } }
         public bool IsPassed { get => isPassed; set { isPassed = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("IsPassed")); } }
-        public ObservableCollection<BusyTime> Busy { get => busy; set { busy = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Busy")); } }
+        public ObservableCollection<Busy> Busy { get => busy; set { busy = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Busy")); } }
         public string TimeInfo { get => timeInfo; set { timeInfo = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("TimeInfo")); } }
         //Has to return either the appointment or busy info
         //Need to create a busy class
+        public int BusyOrAppt { get { if (appointment.Count > 0) return 2; else if (busy.Count > 0) return 1; else return 0; } }
     }
 }

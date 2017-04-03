@@ -48,7 +48,10 @@ namespace TutorWindows
             Username1.Focus();
 
             userCreds = new TutoringDB.TutorDatabaseEntities();
-            
+            userCreds.CurrentUsers.Load();
+            var index = userCreds.CurrentUsers.FirstOrDefault();
+            if(index != null) userCreds.CurrentUsers.Remove(index);
+            userCreds.SaveChanges();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

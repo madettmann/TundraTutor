@@ -10,10 +10,15 @@ namespace TundraControls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string info = (string)value;
-            if (string.IsNullOrEmpty(info)) return null;
-            else if (info == "X") return new SolidColorBrush(Color.FromRgb(255, 0, 0));
-            else return new SolidColorBrush(Color.FromRgb(0, 124, 255));
+            int type = (int)value;
+            switch (type) { 
+                case 1:
+                    return new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                case 2:
+                    return new SolidColorBrush(Color.FromRgb(0, 124, 255));
+                default:
+                    return new SolidColorBrush(Color.FromRgb(240, 240, 240));
+                    };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
