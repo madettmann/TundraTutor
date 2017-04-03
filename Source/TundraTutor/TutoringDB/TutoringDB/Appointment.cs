@@ -24,6 +24,7 @@ namespace TutoringDB
         public System.DateTime Date { get; set; }
         public System.TimeSpan Time { get; set; }
         public Nullable<System.TimeSpan> Duration { get; set; }
+        public bool IsStart { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }

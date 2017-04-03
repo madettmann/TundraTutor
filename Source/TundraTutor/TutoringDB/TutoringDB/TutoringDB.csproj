@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>TutoringTables.tt</DependentUpon>
+    </Compile>
     <Compile Include="Appointment.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
@@ -97,6 +100,9 @@
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
     <Compile Include="TutorConfirmationRequest.cs">
+      <DependentUpon>TutoringTables.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TutorCourse.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
     <Compile Include="TutoringTables.Context.cs">
