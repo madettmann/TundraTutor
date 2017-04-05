@@ -44,6 +44,12 @@ namespace TutorWindows
         public Login()
         {
             InitializeComponent();
+            TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
+            db.TutorCourses.Load();
+            db.Tutors.Load();
+            TutoringDB.TutorCourse tc = new TutoringDB.TutorCourse();
+            tc.Cours = db.Courses.FirstOrDefault();
+            tc.Tutor = db.Tutors.FirstOrDefault();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             Username1.Focus();
 

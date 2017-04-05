@@ -90,10 +90,17 @@ namespace TutorWindows
         {
             db.Courses.Load();
             db.Tutors.Load();
+            //db.TutorCourses.Load();
+            //TutoringDB.Cours c = new TutoringDB.Cours();
+            //c = courseComboBox.SelectedItem as TutoringDB.Cours;
+            //var tutors = from i in db.TutorCourses
+            //             where (i.Cours == c)
+            //             select (i.Tutor);
             System.Windows.Data.CollectionViewSource tutorViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tutorViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // tutorViewSource.Source = [generic data source]
             tutorViewSource.Source = db.Tutors.Local;
+            //tutorViewSource.Source = tutors.ToList();
             System.Windows.Data.CollectionViewSource coursViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("coursViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // coursViewSource.Source = [generic data source]
