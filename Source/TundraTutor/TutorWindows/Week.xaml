@@ -156,7 +156,7 @@
                     <TextBlock Text="19:30" Grid.Row="23"/>
                 </Border>
             </Grid>
-            <control:TundraWeek x:Name="calendar" Grid.Column="1" />
+            <control:TundraWeek x:Name="week" Grid.Column="1" />
         </Grid>
 
     </Grid>

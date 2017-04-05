@@ -12,23 +12,20 @@ namespace TundraControls
 {
     public class TundraWeek : Control
     {
+        //Fields
+        private List<Appointment> appointmentBlocks;
+        private List<Busy> busyBlocks;
+        private TutoringDB.CurrentUser user;
+        private bool isTutor;
+        private DateTime CurrentDate { get => (DateTime)GetValue(CurrentDateProperty); set => SetValue(CurrentDateProperty, value); }
+        private TimeSpan CurrentTime { get => (TimeSpan)GetValue(CurrentTimeProperty); set => SetValue(CurrentTimeProperty, value); }
+
+        //Properties
         public ObservableCollection<Timeslot> times { get; set; }
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraWeek));
         public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register("CurrentTime", typeof(TimeSpan), typeof(TundraWeek));
-        private List<Appointment> appointmentBlocks;
-        private List<Busy> busyBlocks;
-        bool isTutor;
-
-        TutoringDB.CurrentUser user;
-
-        public DateTime CurrentDate
-        {
-            get { return (DateTime)GetValue(CurrentDateProperty);}
-            set { SetValue(CurrentDateProperty, value);}
-        }
-
-        public TimeSpan CurrentTime { get => (TimeSpan)GetValue(CurrentTimeProperty); set => SetValue(CurrentTimeProperty, value); }
+        
 
         static TundraWeek()
         {
@@ -41,7 +38,7 @@ namespace TundraControls
             CurrentDate = DateTime.Today;
             CurrentTime = DateTime.Today.TimeOfDay;
 
-            DayNames = new ObservableCollection<string> { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+            
 
             //Get the current user
             user = new TutoringDB.CurrentUser();
@@ -67,6 +64,7 @@ namespace TundraControls
             #region Day Name Labeling
 
             //Align day names
+            DayNames = new ObservableCollection<string> { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
             int dow = (int)startDate.DayOfWeek;
             switch (dow)
             {
@@ -105,6 +103,12 @@ namespace TundraControls
                                                                 "Sun " + dateString(startDate.AddDays(2)), "Mon " + dateString(startDate.AddDays(3)),
                                                                 "Tue " + dateString(startDate.AddDays(4)), "Wed " + dateString(startDate.AddDays(5)),
                                                                 "Thu " + dateString(endDate) };
+                    break;
+                case 6:
+                    DayNames = new ObservableCollection<string> { "Sat " + dateString(startDate), "Sun " + dateString(startDate.AddDays(1)),
+                                                                "Mon " + dateString(startDate.AddDays(2)), "Tue " + dateString(startDate.AddDays(3)),
+                                                                "Wed " + dateString(startDate.AddDays(4)), "Thu " + dateString(startDate.AddDays(5)),
+                                                                "Fri " + dateString(endDate) };
                     break;
                 default:
                     break;

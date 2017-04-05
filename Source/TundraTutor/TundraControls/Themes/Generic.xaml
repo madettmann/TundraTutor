@@ -160,65 +160,65 @@
                             <!-- Resize grid to be inserted here -->
                             <Grid x:Name="resizeGrid">
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="top"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="top"
+                                    Margin="5,0,5,0" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            x:Name="bottom"
-            Height="5"
-            VerticalAlignment="Bottom"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    x:Name="bottom"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="5,0,5,0" />     
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Margin="0,5,0,5"
-            Width="5"
-            x:Name="left"/>
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    x:Name="left"/>
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            Margin="0,5,0,5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="right" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="right" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Width="5"
-            Height="5"
-            x:Name="bottomLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Width="5"
+                                    Height="5"
+                                    x:Name="bottomLeft" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Bottom"
-            Height="5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="bottomRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Bottom"
+                                    Height="5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="bottomRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Right"
-            Width="5"
-            Height="5"
-            VerticalAlignment="Top"
-            x:Name="topRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Right"
+                                    Width="5"
+                                    Height="5"
+                                    VerticalAlignment="Top"
+                                    x:Name="topRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Width="6"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="topLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Width="6"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="topLeft" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -294,65 +294,65 @@
                             <!-- Resize grid to be inserted here -->
                             <Grid x:Name="resizeGrid">
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="top"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="top"
+                                    Margin="5,0,5,0" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            x:Name="bottom"
-            Height="5"
-            VerticalAlignment="Bottom"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    x:Name="bottom"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="5,0,5,0" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Margin="0,5,0,5"
-            Width="5"
-            x:Name="left"/>
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    x:Name="left"/>
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            Margin="0,5,0,5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="right" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="right" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Width="5"
-            Height="5"
-            x:Name="bottomLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Width="5"
+                                    Height="5"
+                                    x:Name="bottomLeft" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Bottom"
-            Height="5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="bottomRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Bottom"
+                                    Height="5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="bottomRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Right"
-            Width="5"
-            Height="5"
-            VerticalAlignment="Top"
-            x:Name="topRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Right"
+                                    Width="5"
+                                    Height="5"
+                                    VerticalAlignment="Top"
+                                    x:Name="topRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Width="6"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="topLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Width="6"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="topLeft" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -374,7 +374,7 @@
                             <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top">                              
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0" FontSize="16"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
@@ -458,7 +458,7 @@
                             <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top">                              
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0" FontSize="16"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
@@ -472,26 +472,6 @@
                                     <DataTemplate>
                                         <!--Box-->
                                         <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0">
-                                            <!--<Border.Style>
-                                                <Style TargetType="{x:Type Border}">
-                                                    <Style.Triggers>
-                                                        -->
-                                            <!--Current Day-->
-                                            <!--
-                                                        <DataTrigger Binding="{Binding IsToday}" Value="true">
-                                                            <Setter Property="Border.Background">
-                                                                <Setter.Value>
-                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                                        <GradientStop Color="#FF1EA6C8" Offset="0"/>
-                                                                        <GradientStop Color="#FF0691B3" Offset="1"/>
-                                                                    </LinearGradientBrush>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>-->
-                                            <!--Day Number-->
                                             <StackPanel Background="{Binding BusyOrAppt, Converter={StaticResource TimeInfoColorConverter}}">
                                                 <TextBlock Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Text="{Binding TimeInfo}"/>
                                             </StackPanel>
