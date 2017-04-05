@@ -44,11 +44,20 @@ namespace TutorWindows
         public Login()
         {
             InitializeComponent();
+            TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
+            db.TutorCourses.Load();
+            db.Tutors.Load();
+            TutoringDB.TutorCourse tc = new TutoringDB.TutorCourse();
+            tc.Cours = db.Courses.FirstOrDefault();
+            tc.Tutor = db.Tutors.FirstOrDefault();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             Username1.Focus();
 
             userCreds = new TutoringDB.TutorDatabaseEntities();
-            
+            userCreds.CurrentUsers.Load();
+            var index = userCreds.CurrentUsers.FirstOrDefault();
+            if(index != null) userCreds.CurrentUsers.Remove(index);
+            userCreds.SaveChanges();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -107,7 +116,7 @@ namespace TutorWindows
                 
                 MainWindow monthView = new MainWindow();
                 monthView.Show();
-                this.Hide();
+                this.Close();
             }
             else
             {

@@ -84,9 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddAppointment.xaml.cs">
-      <DependentUpon>AddAppointment.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddBusy.xaml.cs">
       <DependentUpon>AddBusy.xaml</DependentUpon>
     </Compile>
@@ -109,10 +106,6 @@
     <Page Include="AddAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddAppointment.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="AddBusy.xaml">
       <SubType>Designer</SubType>
@@ -217,6 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="TundraTutorLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
