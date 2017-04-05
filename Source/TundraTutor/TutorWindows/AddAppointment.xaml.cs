@@ -15,24 +15,51 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DisplayTables;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using TutoringDB;
 
 namespace TutorWindows
 {
-    /// <summary>
-    /// Interaction logic for AddBusy.xaml
-    /// </summary>
-    public partial class AddBusy : TundraControls.CustomWindow
+    public class TutorCourseList : INotifyPropertyChanged
+    {
+        
+        private ObservableCollection<TutoringDB.Cours> courseList;
+        private ObservableCollection<TutoringDB.Tutor> tutorlist;
+        private TutoringDB.Cours chosenCourse;
+        
+        public ObservableCollection<Cours> CourseList { get => courseList; set { courseList = value; NotifyPropertyChanged("CourseList"); }  }
+        public ObservableCollection<Tutor> Tutorlist { get => tutorlist; set { tutorlist = value; NotifyPropertyChanged("TutorList"); }  }
+        public Cours ChosenCourse { get => chosenCourse; set { chosenCourse = value; NotifyPropertyChanged("ChosenCourse"); } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string propertyName)
+        {
+
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+
+    public partial class AddAppointment : TundraControls.CustomWindow
     {
         private DateTime timeSelected;
         private DateTime timeSpan;
         TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
+        TutorCourseList info;
         
-        public AddBusy()
+        public AddAppointment()
         {
+            DataContext = info;
             InitializeComponent();
             dateDatePicker.DisplayDate = DateTime.Today;
+            ///////////////////////////Need to add initialization of the obs.col.s///////////////////////////////////////////
         }
 
+        //////////////Needs to be totally redone//////////////////////////////////
         private void submitButton_Click(object sender, RoutedEventArgs e)
         {
             if ((string)durationTimeMenu.Tag == "true" && (string)startTimeMenu.Tag == "true") {
@@ -88,11 +115,6 @@ namespace TutorWindows
             timeSpan = Convert.ToDateTime(m.Tag);
             selectDurationMenuItem.Header = timeSpan.TimeOfDay;
             durationTimeMenu.Tag = "true";
-        }
-
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

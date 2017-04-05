@@ -17,7 +17,7 @@ namespace TundraControls
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraCalendar));
         private TutoringDB.TutorDatabaseEntities readUser;
-        private TutoringDB.CurrentUser user;
+        private TutoringDB.Tutee user;
 
         public event EventHandler<DayChangedEventArgs> DayChanged;
 
@@ -40,14 +40,12 @@ namespace TundraControls
             DayNames = new ObservableCollection<string> { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
             //Get the current user
-            user = new TutoringDB.CurrentUser();
+            user = new TutoringDB.Tutee();
             readUser = new TutoringDB.TutorDatabaseEntities();
             readUser.CurrentUsers.Load();
             var userList = from i in readUser.CurrentUsers select i;
-            TutoringDB.Tutee oneUser = new TutoringDB.Tutee();
-            foreach (var element in userList) { oneUser.Username = element.UserName; }
-            user.UserName = oneUser.Username;
-
+            foreach (var oneUser in userList) { user.Username = oneUser.UserName; }
+            
             Days = new ObservableCollection<Day>();
             BuildCalendar(DateTime.Today);
         }
@@ -56,14 +54,13 @@ namespace TundraControls
         {
             Days.Clear();
             
-            //
-            //BUSIES AND APPOINTMENTS NEED TO BE STORED IN BLOCKS OF 30 MINUTES FOR THIS TO WORK
-            //
 
             TutoringDB.TutorDatabaseEntities tutorSchedule = new TutoringDB.TutorDatabaseEntities();
 
-            //Putting any conditions on the following appears to have no effect whatsoever, and all appointments will always be loaded for some reason
             tutorSchedule.TutorTuteeCourseAppointments
+                .Where(apt => (apt.Tutee.Username == user.Username || apt.Tutor.UserName == user.Username) && apt.Appointment.Date.Month == CurrentDate.Month)
+                .OrderBy(apt => apt.Appointment.Date)
+                .ThenBy(apt => apt.Appointment.Time)
                 .Load();
 
             //Calculate when the first day of the month is and work out an 
@@ -80,13 +77,11 @@ namespace TundraControls
                 day.PropertyChanged += day_Changed;
                 day.IsToday = d == DateTime.Today;
 
-                //Add appointments from database to calendar, filter out unecessary ones
+                //Add appointments from database to calendar
                 var dayAppointments = from i in tutorSchedule.TutorTuteeCourseAppointments
-                                      where ( i.Appointment.Date.Month == d.Date.Month && i.Appointment.Date.Day == d.Date.Day 
-                                      && (i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName))
+                                      where i.Appointment.Date.Day == day.Date.Day
                                       orderby i.Appointment.Time
                                       select i;
-
                 day.appointmentList = new ObservableCollection<Appointment>();
                 foreach (var appointment in dayAppointments) day.appointmentList.Add(new Appointment(appointment.Tutor.FirstName + appointment.Tutor.LastName,
                                                                                        appointment.Tutor.FirstName + appointment.Tutor.LastName,
