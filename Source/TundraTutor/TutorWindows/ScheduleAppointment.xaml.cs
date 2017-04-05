@@ -40,7 +40,7 @@ namespace TutorWindows
                 db.Appointments.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.Appointment tempAppointment = new TutoringDB.Appointment();
-                tempAppointment.Date = dateDatePicker.DisplayDate;
+                tempAppointment.Date = (DateTime)dateDatePicker.SelectedDate;
                 tempAppointment.Time = timeSelected.TimeOfDay;
                 tempAppointment.Id = db.Appointments.Count();
                 tempAppointment.Duration = timeSpan.TimeOfDay;
@@ -117,7 +117,6 @@ namespace TutorWindows
                 db.TutorTuteeCourseAppointments.Load();
                 TutoringDB.TutorTuteeCourseAppointment joiner = new TutoringDB.TutorTuteeCourseAppointment();
                 joiner.AppointmentId = tempAppointment.Id;
-                //joiner.Appointment = tempAppointment;
                 TutoringDB.Tutee tutee = db.Tutees.Where(i => i.Username == db.CurrentUsers.FirstOrDefault().UserName).First();
                 joiner.TuteeId = tutee.Id;
                 joiner.Id = db.TutorTuteeCourseAppointments.Count();

@@ -16,6 +16,8 @@ namespace TundraControls
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraWeek));
         public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register("CurrentTime", typeof(TimeSpan), typeof(TundraWeek));
+        private List<Appointment> appointmentBlocks;
+        private List<Busy> busyBlocks;
         bool isTutor;
 
         TutoringDB.CurrentUser user;
@@ -61,9 +63,8 @@ namespace TundraControls
             times.Clear();
 
             DateTime endDate = startDate.AddDays(7);
-            TutoringDB.TutorDatabaseEntities tutorAppointments = new TutoringDB.TutorDatabaseEntities();
-            TutoringDB.TutorDatabaseEntities tutorBusyTime = new TutoringDB.TutorDatabaseEntities();
 
+            #region Day Name Labeling
             //Align day names
             int dow = (int)startDate.DayOfWeek;
             switch (dow)
@@ -90,6 +91,12 @@ namespace TundraControls
                     break;
 
             };
+            #endregion
+
+            #region Database Loading
+
+            TutoringDB.TutorDatabaseEntities tutorAppointments = new TutoringDB.TutorDatabaseEntities();
+            TutoringDB.TutorDatabaseEntities tutorBusyTime = new TutoringDB.TutorDatabaseEntities();
 
             //Load appointments
             tutorAppointments.TutorTuteeCourseAppointments
@@ -110,55 +117,108 @@ namespace TundraControls
                 .OrderBy(busy => busy.BusyTime.Date)
                 .ThenBy(busy => busy.BusyTime.Time)
                 .Load();
-                isTutor = false;
             }
+
+            //Add appointments from database to a var, filter out unecessary ones
+            var dayAppointments = from i in tutorAppointments.TutorTuteeCourseAppointments
+                                  where ( (i.Appointment.Date.Month == startDate.Date.Month || i.Appointment.Date.Month == startDate.Date.Month + 1 )
+                                  && (i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName))
+                                  orderby i.Appointment.Date, i.Appointment.Time
+                                  select i;
+
+            //List for use in blocking
+            List<Busy> busyList = new List<Busy>();
+            //Add busies from database to a var, filter out unecessary ones
+            if (isTutor)
+            {
+                var busies = from i in tutorBusyTime.TutorBusyTimes
+                             where (i.BusyTime.Date.Month == startDate.Date.Month || i.BusyTime.Date.Month == startDate.Date.Month + 1)
+                                    && (i.Tutor.UserName == user.UserName)
+                             orderby i.BusyTime.Date, i.BusyTime.Time
+                             select i;
+                //Add all the busies to a list (to avoid type conflict)
+                foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration));
+            }
+            else
+            {
+                var busies = from i in tutorBusyTime.TuteeBusyTimes
+                             where (i.BusyTime.Date.Month == startDate.Date.Month || i.BusyTime.Date.Month == startDate.Date.Month + 1)
+                                    && (i.Tutee.Username == user.UserName)
+                             orderby i.BusyTime.Date, i.BusyTime.Time
+                             select i;
+                //Add all the busies to a list (to avoid type conflict)
+                foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration));
+            }
+#endregion
+
+            
+
+            #region Time Blocking
+            //Keep track of the busies and appts as time blocks
+            appointmentBlocks = new List<Appointment>();
+            busyBlocks = new List<Busy>();
+
+            
+
+            //Break the appts into 30-minute blocks
+            foreach (var appt in dayAppointments)
+            {
+                //Note the start time
+                TimeSpan startTime = appt.Appointment.Time;
+                //Add the appointment
+                appointmentBlocks.Add(new Appointment(appt.Tutor.FirstName + appt.Tutor.LastName,
+                                                      appt.Tutee.FirstName + appt.Tutee.LastName,
+                                                      appt.Appointment.Time, "Not Implemented"));
+                //Find how many 30-minute timeslots the appointment takes up
+                int numMore = (appt.Appointment.Duration.Value.Hours * 2) + (appt.Appointment.Duration.Value.Minutes / 30) - 1;
+                for (int i = 0; i < numMore; i++)
+                {
+                    //Add the appointment in 30-minute blocks to the list
+                    appointmentBlocks.Add(new Appointment(appt.Tutor.FirstName + appt.Tutor.LastName,
+                                                      appt.Tutee.FirstName + appt.Tutee.LastName,
+                                                      startTime.Add(new TimeSpan(00, 30, 00)), "Not Implemented"));
+
+                }
+            }
+
+            //Break the busies into 30-minute blocks
+            foreach (var oneBusy in busyList)
+            {
+                //Note the start time
+                TimeSpan startTime = oneBusy.Time;
+                //Add the appointment
+                busyBlocks.Add(new Busy(oneBusy.Time, new TimeSpan(00,30,00)));
+                //Find how many 30-minute timeslots the appointment takes up
+                int numMore = (oneBusy.Duration.Hours * 2) + (oneBusy.Duration.Minutes / 30) - 1;
+                for (int i = 0; i < numMore; i++)
+                {
+                    //Add the appointment in 30-minute blocks to the list
+                    busyBlocks.Add(new Busy(startTime.Add(new TimeSpan(00,30,00)), new TimeSpan(00, 30, 00)));
+
+                }
+            }
+
+            #endregion
 
             //Set the first day to generate
             DateTime d = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             TimeSpan t = new TimeSpan(08, 00, 00);
 
+            #region Week Generation
             //24 timeslots (08:00 to 20:00) * 7 days in a week
             for (int box = 0; box < 168; box++)
             {
                 Timeslot time = new Timeslot(d, t, (( t < CurrentTime && d == CurrentDate ) || d < CurrentDate) );
 
-                //Add appointments from database to weekview
-                var dayAppointments = from i in tutorAppointments.TutorTuteeCourseAppointments
-                                      where ( i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName )
-                                            && i.Appointment.Date.Day == time.Date.Day && i.Appointment.Time == time.Time
-                                      orderby i.Appointment.Time
-                                      select i;
+                //Add appointments to weekview
+                time.Appointment = new ObservableCollection<Appointment>();
+                foreach (var appt in appointmentBlocks) if(appt.time == t) time.Appointment.Add(appt);
 
-                time.Appointment = new ObservableCollection<Appointment>(); //Might not need to, to check null after adding the busy time
-                foreach (var appt in dayAppointments)
-                {
-                    time.Appointment.Add(new Appointment(appt.Tutor.UserName, appt.Tutee.Username, appt.Appointment.Time, "Not implemented"));
-                }
-                //Must assign timeinfo to either the busy or appointment, depending
-
-                //Add whether the time is busy or not (although it never will be if there's an appointment but ... whatever)
+                //Add busy to weekview
                 time.Busy = new ObservableCollection<Busy>();
-                if (isTutor)
-                {
-                    var dayBusy = from i in tutorBusyTime.TutorBusyTimes
-                                  where i.BusyTime.Time == time.Date.TimeOfDay
-                                  select i;
-                    foreach (var bus in dayBusy)
-                    {
-                        time.Busy.Add(new Busy());//Add new constructor to busy? Or no?
-                    }
-                }
-                else
-                {
-                    var dayBusy = from i in tutorBusyTime.TuteeBusyTimes
-                                  where i.BusyTime.Time == time.Date.TimeOfDay
-                                  select i;
-                    foreach (var bus in dayBusy)
-                    {
-                        time.Busy.Add(new Busy());//Add new constructor to busy? Or no?
-                    }
-                }
+                foreach (var oneBusy in busyBlocks) if (oneBusy.Time == t) time.Busy.Add(oneBusy);
 
+                //Add timeslot to the collection so it appears in the weekview
                 times.Add(time);
 
                 //Increment time
@@ -174,6 +234,7 @@ namespace TundraControls
 
 
             }
+#endregion
         }
 
         private static int DayOfWeekNumber(DayOfWeek dow)
