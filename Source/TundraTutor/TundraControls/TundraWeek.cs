@@ -62,30 +62,49 @@ namespace TundraControls
         {
             times.Clear();
 
-            DateTime endDate = startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6);
 
             #region Day Name Labeling
+
             //Align day names
             int dow = (int)startDate.DayOfWeek;
             switch (dow)
             {
+                case 0:
+                    DayNames = new ObservableCollection<string> { "Sun " + dateString(startDate), "Mon " + dateString(startDate.AddDays(1)),
+                                                                "Tue " + dateString(startDate.AddDays(2)), "Wed " + dateString(startDate.AddDays(3)),
+                                                                "Thu " + dateString(startDate.AddDays(4)), "Fri " + dateString(startDate.AddDays(5)),
+                                                                "Sat " + dateString(endDate) };
+                    break;
                 case 1:
-                    DayNames = new ObservableCollection<string> { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+                    DayNames = new ObservableCollection<string> { "Mon " + dateString(startDate), "Tue " + dateString(startDate.AddDays(1)),
+                                                                "Wed " + dateString(startDate.AddDays(2)), "Thu " + dateString(startDate.AddDays(3)),
+                                                                "Fri " + dateString(startDate.AddDays(4)), "Sat " + dateString(startDate.AddDays(5)),
+                                                                "Sun " + dateString(endDate) };
                     break;
                 case 2:
-                    DayNames = new ObservableCollection<string> { "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon" };
+                    DayNames = new ObservableCollection<string> { "Tue " + dateString(startDate), "Wed " + dateString(startDate.AddDays(1)),
+                                                                "Thu " + dateString(startDate.AddDays(2)), "Fri " + dateString(startDate.AddDays(3)),
+                                                                "Sat " + dateString(startDate.AddDays(4)), "Sun " + dateString(startDate.AddDays(5)),
+                                                                "Mon " + dateString(endDate) };
                     break;
                 case 3:
-                    DayNames = new ObservableCollection<string> { "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue" };
+                    DayNames = new ObservableCollection<string> { "Wed " + dateString(startDate), "Thu " + dateString(startDate.AddDays(1)),
+                                                                "Fri " + dateString(startDate.AddDays(2)), "Sat " + dateString(startDate.AddDays(3)),
+                                                                "Sun " + dateString(startDate.AddDays(4)), "Mon " + dateString(startDate.AddDays(5)),
+                                                                "Tue " + dateString(endDate) };
                     break;
                 case 4:
-                    DayNames = new ObservableCollection<string> { "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed" };
+                    DayNames = new ObservableCollection<string> { "Thu " + dateString(startDate), "Fri " + dateString(startDate.AddDays(1)),
+                                                                "Sat " + dateString(startDate.AddDays(2)), "Sun " + dateString(startDate.AddDays(3)),
+                                                                "Mon " + dateString(startDate.AddDays(4)), "Tue " + dateString(startDate.AddDays(5)),
+                                                                "Wed " + dateString(endDate) };
                     break;
                 case 5:
-                    DayNames = new ObservableCollection<string> { "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu" };
-                    break;
-                case 6:
-                    DayNames = new ObservableCollection<string> { "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"};
+                    DayNames = new ObservableCollection<string> { "Fri " + dateString(startDate), "Sat " + dateString(startDate.AddDays(1)),
+                                                                "Sun " + dateString(startDate.AddDays(2)), "Mon " + dateString(startDate.AddDays(3)),
+                                                                "Tue " + dateString(startDate.AddDays(4)), "Wed " + dateString(startDate.AddDays(5)),
+                                                                "Thu " + dateString(endDate) };
                     break;
                 default:
                     break;
@@ -103,7 +122,7 @@ namespace TundraControls
                 .Load();
 
             isTutor = user.Type == "tutor";
-            //Load busy times <----------- this might have the same problem as appointments (being non-user-specific) - LOOK HERE IF SO!
+            //Load busy times <---------------- SOMETIMES BUSIES JUST DON'T GET SHOWN ... TRY JIM (IF STILL APPLICABLE)
             if(isTutor)
             tutorBusyTime.TutorBusyTimes
                 .Where(busy => busy.BusyTime.Date >= startDate && busy.BusyTime.Date <= endDate)
@@ -137,7 +156,7 @@ namespace TundraControls
                              orderby i.BusyTime.Date, i.BusyTime.Time
                              select i;
                 //Add all the busies to a list (to avoid type conflict)
-                foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration));
+                foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
             else
             {
@@ -147,11 +166,9 @@ namespace TundraControls
                              orderby i.BusyTime.Date, i.BusyTime.Time
                              select i;
                 //Add all the busies to a list (to avoid type conflict)
-                foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration));
+                foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
 #endregion
-
-            
 
             #region Time Blocking
             //Keep track of the busies and appts as time blocks
@@ -168,7 +185,7 @@ namespace TundraControls
                 //Add the appointment
                 appointmentBlocks.Add(new Appointment(appt.Tutor.FirstName + appt.Tutor.LastName,
                                                       appt.Tutee.FirstName + appt.Tutee.LastName,
-                                                      appt.Appointment.Time, "Not Implemented"));
+                                                      appt.Appointment.Time, "Not Implemented", appt.Appointment.Date));
                 //Find how many 30-minute timeslots the appointment takes up
                 int numMore = (appt.Appointment.Duration.Value.Hours * 2) + (appt.Appointment.Duration.Value.Minutes / 30) - 1;
                 for (int i = 0; i < numMore; i++)
@@ -176,7 +193,7 @@ namespace TundraControls
                     //Add the appointment in 30-minute blocks to the list
                     appointmentBlocks.Add(new Appointment(appt.Tutor.FirstName + appt.Tutor.LastName,
                                                       appt.Tutee.FirstName + appt.Tutee.LastName,
-                                                      startTime.Add(new TimeSpan(00, 30, 00)), "Not Implemented"));
+                                                      startTime.Add(new TimeSpan(00, (i+1)*30, 00)), "Not Implemented", appt.Appointment.Date));
 
                 }
             }
@@ -187,13 +204,13 @@ namespace TundraControls
                 //Note the start time
                 TimeSpan startTime = oneBusy.Time;
                 //Add the appointment
-                busyBlocks.Add(new Busy(oneBusy.Time, new TimeSpan(00,30,00)));
+                busyBlocks.Add(new Busy(oneBusy.Time, new TimeSpan(00,30,00), oneBusy.Date));
                 //Find how many 30-minute timeslots the appointment takes up
                 int numMore = (oneBusy.Duration.Hours * 2) + (oneBusy.Duration.Minutes / 30) - 1;
                 for (int i = 0; i < numMore; i++)
                 {
                     //Add the appointment in 30-minute blocks to the list
-                    busyBlocks.Add(new Busy(startTime.Add(new TimeSpan(00,30,00)), new TimeSpan(00, 30, 00)));
+                    busyBlocks.Add(new Busy(startTime.Add(new TimeSpan(00,(i+1)*30,00)), new TimeSpan(00, 30, 00), oneBusy.Date));
 
                 }
             }
@@ -212,19 +229,19 @@ namespace TundraControls
 
                 //Add appointments to weekview
                 time.Appointment = new ObservableCollection<Appointment>();
-                foreach (var appt in appointmentBlocks) if(appt.time == t) time.Appointment.Add(appt);
+                foreach (var appt in appointmentBlocks) if(appt.time == t && appt.Date == d) time.Appointment.Add(appt);
 
                 //Add busy to weekview
                 time.Busy = new ObservableCollection<Busy>();
-                foreach (var oneBusy in busyBlocks) if (oneBusy.Time == t) time.Busy.Add(oneBusy);
+                foreach (var oneBusy in busyBlocks) if (oneBusy.Time == t && oneBusy.Date == d) time.Busy.Add(oneBusy);
 
                 //Add timeslot to the collection so it appears in the weekview
                 times.Add(time);
 
                 //Increment time
-                if(t.Hours == 20)
+                if(t.Hours == 19 && t.Minutes == 30)
                 {
-                    d.AddDays(1);
+                    d = d.AddDays(1);
                     t = new TimeSpan(08, 00, 00);
                 }
                 else
@@ -234,12 +251,39 @@ namespace TundraControls
 
 
             }
-#endregion
+            
+            #endregion
+
+            #region Times Rearranging
+
+            //Necessary because the times goe left -> right -> down rather than up -> down -> left
+            List<Timeslot> timeflipper = new List<Timeslot>();
+            for (int i = 0; i < 24; i++)
+            {
+                for (int box = 0; box < 7; box++)
+                {
+                    timeflipper.Add(times.ElementAt(i + (24 * box)));
+                }
+            }
+            times.Clear();
+            //Enjoy your newly rearranged times collection!
+            foreach (var box in timeflipper)
+            {
+                times.Add(box);
+            }
+
+
+            #endregion
         }
 
         private static int DayOfWeekNumber(DayOfWeek dow)
         {
             return Convert.ToInt32(dow.ToString("D"));
+        }
+
+        private string dateString(DateTime date)
+        {
+            return date.Month.ToString() + "/" + date.Day.ToString();
         }
     }
 }

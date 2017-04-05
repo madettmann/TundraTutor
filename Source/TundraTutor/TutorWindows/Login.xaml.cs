@@ -114,7 +114,7 @@ namespace TutorWindows
             }
             else
             {
-                Label3.Content = "Incorrect username or passowrd";
+                Label3.Content = "Incorrect username or password";
             }
         }
 

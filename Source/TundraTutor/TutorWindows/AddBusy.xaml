@@ -61,7 +61,7 @@
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
                         <MenuItem Header="AM" Click="TimeSelected" Background="White" Margin="-1" Tag="4:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="4:30" Background="White" Margin="-1"/>
+                        <MenuItem Header="PM" Click="TimeSelected" Tag="16:30" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="5:" Background="White" Margin="-1">
