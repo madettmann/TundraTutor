@@ -90,6 +90,9 @@
     <Compile Include="AddBusy.xaml.cs">
       <DependentUpon>AddBusy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentInfo.xaml.cs">
+      <DependentUpon>AppointmentInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Automatic.xaml.cs">
       <DependentUpon>Automatic.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddBusy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppointmentInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

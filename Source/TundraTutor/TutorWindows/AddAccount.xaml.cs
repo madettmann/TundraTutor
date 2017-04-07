@@ -31,6 +31,8 @@ namespace TutorWindows
         {
             TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
             db.Tutees.Load();
+            db.Tutors.Load();
+            db.Faculties.Load();
             int numTutees = db.Tutees.Count();
 
             if(firstNameTextBox.Text != "" &&
@@ -52,6 +54,11 @@ namespace TutorWindows
                 db.Tutees.Add(temp);
                 db.SaveChanges();
                 this.Close();
+                Label1.Text = "";
+            }
+            else
+            {
+                Label1.Text = "Completely fill out form";
             }
         }
 
