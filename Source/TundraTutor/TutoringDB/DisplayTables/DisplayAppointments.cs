@@ -27,7 +27,7 @@ namespace DisplayTables
                 .Load();
 
             //specify DataSource for appointmentBindingSource
-            appointmentBindingSource.DataSource = dbcontext.Appointments.Local;
+            appointmentBindingSource.DataSource = dbcontext.Faculties.Local;
         }
 
         private void appointmentBindingNavigatorSaveItem_Click(object sender, EventArgs e)

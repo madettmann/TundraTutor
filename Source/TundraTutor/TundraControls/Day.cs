@@ -21,6 +21,7 @@ namespace TundraControls
         public string AppointmentInfo2 { get => appointmentInfo2; set => appointmentInfo2 = value; }
 
         public ObservableCollection<Appointment> appointmentList;
+        //private int numAppointments;
 
         public int NumAppointments => appointmentList.Count;
 

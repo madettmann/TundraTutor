@@ -267,96 +267,170 @@
                     <MenuItem Header="15" Click="DurationSelected" Tag="3:15" Background="White" Margin="-1"/>
                     <MenuItem Header="30" Click="DurationSelected" Tag="3:30" Background="White" Margin="-1"/>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="3:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="15:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="4:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="4:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="16:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="4:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="16:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="4:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="4:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="4:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="4:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="5:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="5:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="17:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="5:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="17:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="5:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="17:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="5:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="17:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="6:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
-                     </MenuItem>
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="6:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="18:00" Background="White" Margin="-1"/>
+                    </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="6:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="18:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
-                     </MenuItem>
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="6:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="18:30" Background="White" Margin="-1"/>
+                    </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="6:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="18:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="7:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="7:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="19:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="7:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="19:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="7:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="19:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
-                     </MenuItem>
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="7:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="19:45" Background="White" Margin="-1"/>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="8:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="8:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="20:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="8:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="20:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="8:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="20:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="8:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="20:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="9:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="9:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="21:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="9:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="21:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="9:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="21:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="9:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="21:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="10:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="10:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="22:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="10:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="22:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="10:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="22:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="10:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="22:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="11:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="11:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="23:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="11:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="23:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="11:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="23:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="11:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="23:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="12:" Background="White" Margin="-1">
                     <MenuItem Header="00" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="0:00"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="12:00" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="15" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="0:15"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="12:15" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="30" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="0:30"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="12:30" Background="White" Margin="-1"/>
                     </MenuItem>
                     <MenuItem Header="45" Background="White" Margin="-1">
+                        <MenuItem Header="AM" Click="DurationSelected" Background="White" Margin="-1" Tag="0:45"/>
+                        <MenuItem Header="PM" Click="DurationSelected" Tag="12:45" Background="White" Margin="-1"/>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>

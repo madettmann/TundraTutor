@@ -103,6 +103,7 @@ namespace TutorWindows
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
         {
+            //AddAppointment newAppt = new AddAppointment();
             ScheduleAppointment newAppt = new ScheduleAppointment();
             newAppt.ShowDialog();
         }

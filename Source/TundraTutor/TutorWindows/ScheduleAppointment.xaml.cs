@@ -40,7 +40,7 @@ namespace TutorWindows
                 db.Appointments.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.Appointment tempAppointment = new TutoringDB.Appointment();
-                tempAppointment.Date = (DateTime)dateDatePicker.SelectedDate;
+                tempAppointment.Date = dateDatePicker.DisplayDate;
                 tempAppointment.Time = timeSelected.TimeOfDay;
                 tempAppointment.Id = db.Appointments.Count();
                 tempAppointment.Duration = timeSpan.TimeOfDay;
@@ -90,17 +90,10 @@ namespace TutorWindows
         {
             db.Courses.Load();
             db.Tutors.Load();
-            //db.TutorCourses.Load();
-            //TutoringDB.Cours c = new TutoringDB.Cours();
-            //c = courseComboBox.SelectedItem as TutoringDB.Cours;
-            //var tutors = from i in db.TutorCourses
-            //             where (i.Cours == c)
-            //             select (i.Tutor);
             System.Windows.Data.CollectionViewSource tutorViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tutorViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // tutorViewSource.Source = [generic data source]
             tutorViewSource.Source = db.Tutors.Local;
-            //tutorViewSource.Source = tutors.ToList();
             System.Windows.Data.CollectionViewSource coursViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("coursViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // coursViewSource.Source = [generic data source]
@@ -109,12 +102,12 @@ namespace TutorWindows
 
         private void TundraButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((string)durationTimeMenu.Tag == "true" && (string)startTimeMenu.Tag == "true")
+            if (durationTimeMenu.Tag == "true" && startTimeMenu.Tag == "true")
             {
                 db.Appointments.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.Appointment tempAppointment = new TutoringDB.Appointment();
-                tempAppointment.Date = (DateTime)dateDatePicker.SelectedDate;
+                tempAppointment.Date = dateDatePicker.DisplayDate;
                 tempAppointment.Time = timeSelected.TimeOfDay;
                 tempAppointment.Id = db.Appointments.Count();
                 tempAppointment.Duration = timeSpan.TimeOfDay;
