@@ -21,6 +21,9 @@
         <control:TundraButton x:Name="Accept_" Content="Accept" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Grid.Row="2" VerticalContentAlignment="Center"/>
         <control:TundraButton x:Name="Deny" Content="Deny" HorizontalAlignment="Right" Margin="297,5,0,0" VerticalAlignment="Center" Width="75" Grid.Row="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         <TextBlock x:Name="Pending" HorizontalAlignment="Left" Margin="36,17,0,0" TextWrapping="Wrap" Text="Pending Tutors" VerticalAlignment="Top" FontSize="16"/>
+        <ListBox Grid.Column="1" HorizontalAlignment="Right" Height="410" Grid.Row="1" VerticalAlignment="Top" Width="380" HorizontalContentAlignment="Right" VerticalContentAlignment="Top"/>
+        <Label x:Name="Recommend_Tutor" Content="Recommend Tutor" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <control:TundraButton x:Name="Apply" Content="Apply" Grid.Column="1" HorizontalAlignment="Left" Margin="295,15,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </control:CustomWindow>

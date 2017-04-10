@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="AppointmentInfo" x:Class="TutorWindows.AppointmentInfo"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="Appointment" x:Class="TutorWindows.AppointmentInfo"
         Title="Appointment Info" Height="325.333" Width="334.447">
     <Grid>
         <Grid.ColumnDefinitions>
