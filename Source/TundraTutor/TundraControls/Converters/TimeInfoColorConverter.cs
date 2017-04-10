@@ -16,6 +16,8 @@ namespace TundraControls.Converters
                     return new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 case 2:
                     return new SolidColorBrush(Color.FromRgb(0, 124, 255));
+                case 3:
+                    return new SolidColorBrush(Color.FromArgb(50, 255, 0, 0));
                 default:
                     return new SolidColorBrush(Color.FromRgb(240, 240, 240));
                     };

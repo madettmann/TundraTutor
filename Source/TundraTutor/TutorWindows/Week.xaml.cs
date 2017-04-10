@@ -5,8 +5,8 @@ namespace TutorWindows
 {
     public partial class Week : TundraControls.CustomWindow
     {
-        bool finished;
-        DateTime selectedDate;
+        private bool finished;
+        private DateTime selectedDate;
 
         public Week()
         {
@@ -68,6 +68,18 @@ namespace TutorWindows
             this.Height = SystemParameters.WorkArea.Height;
             this.Left = SystemParameters.WorkArea.Left;
             this.Top = SystemParameters.WorkArea.Top;
+        }
+
+        private void week_TimeClick(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("Clicked" + week.SelectedDate.ToShortDateString() + " " + week.SelectedTime.ToString());
+            week.markTime(week.SelectedIndex);
+        }
+
+        private void saveChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+            week.saveMarked();
+            refreshWeek(0);
         }
     }
 }

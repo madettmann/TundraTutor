@@ -128,5 +128,15 @@ namespace TutorWindows
         {
             MessageBox.Show("No use helping you...");
         }
+
+        private void calendar_DayClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void calendar_DayClick_1(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Clicked " + calendar.SelectedDate.ToShortDateString());
+        }
     }
 }

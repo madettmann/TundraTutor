@@ -30,7 +30,7 @@
                 <Menu Background="White" FontSize="24">
                     <MenuItem Header="Actions" Background="White" FontSize="24" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
                         <MenuItem x:Name="appointmentButton" Header="Make an Appointment" Background="White" Margin="-1" Click="appointmentButton_Click_1"/>
-                        <MenuItem Header="Add Busy Time" Background="White" Margin="-1" Click="MenuItem_Click"/>
+                        <MenuItem Header="Manually Add Busy Time" Background="White" Margin="-1" Click="MenuItem_Click"/>
                         <MenuItem Header="Find a Tutor" Background="White" Margin="-1"/>
                     </MenuItem>
                 </Menu>
@@ -50,7 +50,7 @@
             </control:TundraButton>
 
         </Grid>
-        <control:TundraCalendar x:Name="calendar" DayChanged="calendar_DayChanged" Grid.Row="3" />
+        <control:TundraCalendar x:Name="calendar" DayChanged="calendar_DayChanged" Grid.Row="3" DayClick="calendar_DayClick_1" />
 
     </Grid>
 </control:CustomWindow>

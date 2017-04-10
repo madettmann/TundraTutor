@@ -8,37 +8,66 @@ using System.Linq;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Collections.Generic;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+
 namespace TundraControls
 {
     public class TundraWeek : Control
     {
-        //Fields
+        #region Fields
         private List<Appointment> appointmentBlocks;
         private List<Busy> busyBlocks;
         private TutoringDB.CurrentUser user;
         private bool isTutor;
         private DateTime CurrentDate { get => (DateTime)GetValue(CurrentDateProperty); set => SetValue(CurrentDateProperty, value); }
         private TimeSpan CurrentTime { get => (TimeSpan)GetValue(CurrentTimeProperty); set => SetValue(CurrentTimeProperty, value); }
+        private TimeSpan selectedTime;
+        private DateTime selectedDate;
+        private int selectedIndex;
+        #endregion
 
-        //Properties
+        #region Properties
         public ObservableCollection<Timeslot> times { get; set; }
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraWeek));
         public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register("CurrentTime", typeof(TimeSpan), typeof(TundraWeek));
-        
+        public TimeSpan SelectedTime { get => selectedTime; set => selectedTime = value; }
+        public DateTime SelectedDate { get => selectedDate; set => selectedDate = value; }
+        public int SelectedIndex { get => selectedIndex; set => selectedIndex = value; }
+        #endregion
 
+
+        #region Events 
+        //Command that listens to each timeslot and wait for a click on them - assigned in constructor
+        public ICommand timeClickedCommand { get; private set; }
+        //Event for exposing timeClick
+        public static RoutedEvent TimeClickEvent = EventManager.RegisterRoutedEvent("TimeClick", RoutingStrategy.Bubble,    
+                                                                                    typeof(RoutedEventHandler), typeof(TundraCalendar));
+        //Event handler for TimeClickEvent
+        public event RoutedEventHandler TimeClick { add => AddHandler(TimeClickEvent, value); remove => RemoveHandler(TimeClickEvent, value); }
+        #endregion
+
+        //For style
         static TundraWeek()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TundraWeek), new FrameworkPropertyMetadata(typeof(TundraWeek)));
         }
 
+        //Constructor
         public TundraWeek()
         {
             DataContext = this;
             CurrentDate = DateTime.Today;
             CurrentTime = DateTime.Today.TimeOfDay;
 
-            
+            CurrentDate = DateTime.Today;
+            //Executes the onCurrentTimeClicked method (to expose event), see bottom of file for implementation
+            timeClickedCommand = new RelayCommand<object>(onCurrentTimeClicked); //Relay command is a common implementation
+                                                                               //of the abstract ICommand type; I'm using
+                                                                               //the version contained in the MVVMLightLibs NuGet 
+                                                                               //package - it is very similar to the 
+                                                                               //standard implementation popularized by MS on MSDN
 
             //Get the current user
             user = new TutoringDB.CurrentUser();
@@ -55,6 +84,7 @@ namespace TundraControls
             BuildWeek( CurrentDate );
         }
 
+        //Builds the weekview
         public void BuildWeek(DateTime startDate)
         {
             times.Clear();
@@ -280,11 +310,74 @@ namespace TundraControls
             #endregion
         }
 
+        //Marks individual times, for use in busy scheduling
+        public void markTime(int index)
+        {
+            if (times.ElementAt(index).Marked) times.ElementAt(index).Marked = false;
+            else times.ElementAt(index).Marked = true;
+        }
+
+        //Saves the times marked as busy by the user to the database (in 30-minute chunks)
+        public void saveMarked()
+        {
+            TutoringDB.TutorDatabaseEntities addBusy = new TutoringDB.TutorDatabaseEntities();
+
+            foreach (var time in times)
+            {
+                if (time.Marked)
+                {
+                    TutoringDB.BusyTime tempBusy = new TutoringDB.BusyTime();
+                    tempBusy.Id = addBusy.BusyTimes.Count();
+                    tempBusy.Time = time.Time;
+                    tempBusy.Date = time.Date;
+                    tempBusy.Duration = new TimeSpan(00, 30, 00);
+                    addBusy.BusyTimes.Add(tempBusy);
+                    if (isTutor)
+                    {
+                        addBusy.Tutors.Load();
+                        addBusy.TutorBusyTimes.Load();
+                        TutoringDB.TutorBusyTime newBusy = new TutoringDB.TutorBusyTime();
+                        newBusy.BusyTimesId = tempBusy.Id;
+                        TutoringDB.Tutor tempTutor = addBusy.Tutors.Where(i => i.UserName == addBusy.CurrentUsers.FirstOrDefault().UserName).First();
+                        newBusy.TutorId = tempTutor.Id;
+                        newBusy.Id = addBusy.TutorBusyTimes.Count();
+                        addBusy.TutorBusyTimes.Add(newBusy); 
+                    }
+                    else
+                    {
+                        addBusy.Tutees.Load();
+                        addBusy.TuteeBusyTimes.Load();
+                        TutoringDB.TuteeBusyTime newBusy = new TutoringDB.TuteeBusyTime();
+                        newBusy.BusyTimeId = tempBusy.Id;
+                        TutoringDB.Tutee tempTutee = addBusy.Tutees.Where(i => i.Username == addBusy.CurrentUsers.FirstOrDefault().UserName).First();
+                        newBusy.TuteeId = tempTutee.Id;
+                        newBusy.Id = addBusy.TuteeBusyTimes.Count();
+                        addBusy.TuteeBusyTimes.Add(newBusy);
+                    }
+                    addBusy.SaveChanges();
+                }
+            }
+            
+        }
+
+        //Handler to raise the click event via TimeClick outside the control
+        private void onCurrentTimeClicked(object obj)
+        {
+            //Records the selected, time, date and index in times
+            selectedTime = (obj as Timeslot).Time;
+            selectedDate = (obj as Timeslot).Date;
+            selectedIndex = times.IndexOf(obj as Timeslot);
+            //Raises the TimeClick event to expose time click to the parent window
+            RaiseEvent(new RoutedEventArgs(TimeClickEvent));
+        }
+
+        //Finding number of Day of Week
         private static int DayOfWeekNumber(DayOfWeek dow)
         {
             return Convert.ToInt32(dow.ToString("D"));
         }
 
+        //ToString for just dates - mostly for testing purposes, MessageBox.Show() etc.
         private string dateString(DateTime date)
         {
             return date.Month.ToString() + "/" + date.Day.ToString();

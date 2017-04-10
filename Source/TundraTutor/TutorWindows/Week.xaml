@@ -29,17 +29,18 @@
                 <Menu Background="White" FontSize="24">
                     <MenuItem Header="Actions" Background="White" FontSize="24" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
                         <MenuItem x:Name="appointmentButton" Header="Make an Appointment" Background="White" Margin="-1" Click="appointmentButton_Click_1"/>
-                        <MenuItem Header="Modify Schedule" Background="White" Margin="-1"/>
-                        <MenuItem Header="Find a Tutor" Background="White" Margin="-1"/>
+                        <MenuItem Header="Modify Base Schedule" Background="White" Margin="-1"/>
                     </MenuItem>
                 </Menu>
             </ToolBar>
             <control:TundraButton Name="prevButton" Margin="0,0,5,7" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                 <TextBlock Text="Previous Week" FontSize="24" HorizontalAlignment="Right"/>
             </control:TundraButton>
-            <Label Name="monthLabel" Content="{Binding}" Grid.Column="2" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24"/>
-            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="3" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="127" Grid.ColumnSpan="2">
+            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="2" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="127" Grid.ColumnSpan="2">
                 <TextBlock Text="Next Week" FontSize="24"/>
+            </control:TundraButton>
+            <control:TundraButton Name="saveChangesButton" Grid.Column="3" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24" Click="saveChangesButton_Click">
+                <TextBlock Text="Save Changes to Schedule"/>
             </control:TundraButton>
             <control:TundraButton Name="monthButton" Grid.Row="0" Grid.Column="4" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="monthButton_Click">
                 <TextBlock Text="View Current Month" FontSize="24"/>
@@ -156,7 +157,7 @@
                     <TextBlock Text="19:30" Grid.Row="23"/>
                 </Border>
             </Grid>
-            <control:TundraWeek x:Name="week" Grid.Column="1" />
+            <control:TundraWeek x:Name="week" Grid.Column="1" TimeClick="week_TimeClick" />
         </Grid>
 
     </Grid>
