@@ -17,3 +17,4 @@ namespace TundraControls
         public DateTime Date { get => date; set => date = value; }
     }
 }
+
