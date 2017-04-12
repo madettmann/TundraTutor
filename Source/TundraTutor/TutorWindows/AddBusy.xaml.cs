@@ -39,7 +39,7 @@ namespace TutorWindows
                 db.BusyTimes.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.BusyTime tempBusyTime = new TutoringDB.BusyTime();
-                tempBusyTime.Date = dateDatePicker.DisplayDate;
+                tempBusyTime.Date = (DateTime)dateDatePicker.SelectedDate;
                 tempBusyTime.Time = timeSelected.TimeOfDay;
                 tempBusyTime.Id = db.BusyTimes.Count();
                 tempBusyTime.Duration = timeSpan.TimeOfDay;

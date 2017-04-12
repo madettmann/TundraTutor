@@ -40,7 +40,7 @@ namespace TutorWindows
                 db.Appointments.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.Appointment tempAppointment = new TutoringDB.Appointment();
-                tempAppointment.Date = dateDatePicker.DisplayDate;
+                tempAppointment.Date = (DateTime)dateDatePicker.SelectedDate;
                 tempAppointment.Time = timeSelected.TimeOfDay;
                 tempAppointment.Id = db.Appointments.Count();
                 tempAppointment.Duration = timeSpan.TimeOfDay;
@@ -102,12 +102,12 @@ namespace TutorWindows
 
         private void TundraButton_Click(object sender, RoutedEventArgs e)
         {
-            if (durationTimeMenu.Tag == "true" && startTimeMenu.Tag == "true")
+            if ((string)durationTimeMenu.Tag == "true" && (string)startTimeMenu.Tag == "true")
             {
                 db.Appointments.Load();
                 db.CurrentUsers.Load();
                 TutoringDB.Appointment tempAppointment = new TutoringDB.Appointment();
-                tempAppointment.Date = dateDatePicker.DisplayDate;
+                tempAppointment.Date = (DateTime)dateDatePicker.SelectedDate;
                 tempAppointment.Time = timeSelected.TimeOfDay;
                 tempAppointment.Id = db.Appointments.Count();
                 tempAppointment.Duration = timeSpan.TimeOfDay;

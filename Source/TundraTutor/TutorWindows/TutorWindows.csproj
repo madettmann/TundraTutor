@@ -84,20 +84,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddAppointment.xaml.cs">
-      <DependentUpon>AddAppointment.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddBusy.xaml.cs">
       <DependentUpon>AddBusy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppointmentInfo.xaml.cs">
-      <DependentUpon>AppointmentInfo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Automatic.xaml.cs">
       <DependentUpon>Automatic.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FacultyView.xaml.cs">
-      <DependentUpon>FacultyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manual.xaml.cs">
       <DependentUpon>Manual.xaml</DependentUpon>
@@ -116,23 +107,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddAppointment.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="AddBusy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AppointmentInfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Automatic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FacultyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,6 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="TundraTutorLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
