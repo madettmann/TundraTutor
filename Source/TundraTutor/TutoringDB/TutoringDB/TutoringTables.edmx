@@ -59,6 +59,14 @@
           <Property Name="FacultyId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="StartEnd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="TuteeBusyTimes">
           <Key>
             <PropertyRef Name="Id" />
@@ -118,6 +126,15 @@
           <Property Name="AppointmentId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="Confirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TutorTuteeNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TutorId" Type="int" />
+          <Property Name="TuteeId" Type="int" />
+          <Property Name="Message" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="AppointmentFK">
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="1" />
@@ -203,6 +220,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tutee">
+          <End Role="Tutees" Type="Self.Tutees" Multiplicity="0..1" />
+          <End Role="TutorTuteeNotification" Type="Self.TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TuteeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor">
+          <End Role="Tutors" Type="Self.Tutors" Multiplicity="0..1" />
+          <End Role="TutorTuteeNotification" Type="Self.TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="TuteeFK">
           <End Role="Tutees" Type="Self.Tutees" Multiplicity="1" />
           <End Role="TutorTuteeCourseAppointments" Type="Self.TutorTuteeCourseAppointments" Multiplicity="*" />
@@ -270,12 +311,14 @@
           <EntitySet Name="CurrentUser" EntityType="Self.CurrentUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FacultyCourses" EntityType="Self.FacultyCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StartEnd" EntityType="Self.StartEnd" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TuteeBusyTimes" EntityType="Self.TuteeBusyTimes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tutees" EntityType="Self.Tutees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TutorBusyTimes" EntityType="Self.TutorBusyTimes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TutorConfirmationRequest" EntityType="Self.TutorConfirmationRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tutors" EntityType="Self.Tutors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TutorTuteeCourseAppointments" EntityType="Self.TutorTuteeCourseAppointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TutorTuteeNotification" EntityType="Self.TutorTuteeNotification" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="AppointmentFK" Association="Self.AppointmentFK">
             <End Role="Appointments" EntitySet="Appointments" />
             <End Role="TutorTuteeCourseAppointments" EntitySet="TutorTuteeCourseAppointments" />
@@ -303,6 +346,14 @@
           <AssociationSet Name="FacultyFK" Association="Self.FacultyFK">
             <End Role="Faculty" EntitySet="Faculty" />
             <End Role="FacultyCourses" EntitySet="FacultyCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutee" Association="Self.FK_Tutee">
+            <End Role="Tutees" EntitySet="Tutees" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor" Association="Self.FK_Tutor">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotification" />
           </AssociationSet>
           <AssociationSet Name="TuteeFK" Association="Self.TuteeFK">
             <End Role="Tutees" EntitySet="Tutees" />
@@ -407,6 +458,7 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="TuteeBusyTimes" Relationship="Self.TuteeFK2" FromRole="Tutees" ToRole="TuteeBusyTimes" />
           <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="Self.TuteeFK" FromRole="Tutees" ToRole="TutorTuteeCourseAppointments" />
+          <NavigationProperty Name="TutorTuteeNotifications" Relationship="TutorDatabaseModel.FK_Tutee" FromRole="Tutee" ToRole="TutorTuteeNotification" />
         </EntityType>
         <EntityType Name="TutorBusyTime">
           <Key>
@@ -443,6 +495,7 @@
           <NavigationProperty Name="TutorBusyTimes" Relationship="Self.TutorFK2" FromRole="Tutors" ToRole="TutorBusyTimes" />
           <NavigationProperty Name="TutorConfirmationRequests" Relationship="Self.TutorFK3" FromRole="Tutors" ToRole="TutorConfirmationRequest" />
           <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="Self.TutorFK" FromRole="Tutors" ToRole="TutorTuteeCourseAppointments" />
+          <NavigationProperty Name="TutorTuteeNotifications" Relationship="TutorDatabaseModel.FK_Tutor" FromRole="Tutor" ToRole="TutorTuteeNotification" />
         </EntityType>
         <EntityType Name="TutorTuteeCourseAppointment">
           <Key>
@@ -664,6 +717,16 @@
             <End Role="TutorTuteeCourseAppointments" EntitySet="TutorTuteeCourseAppointments" />
           </AssociationSet>
           <EntitySet Name="CurrentUsers" EntityType="TutorDatabaseModel.CurrentUser" />
+          <EntitySet Name="StartEnds" EntityType="TutorDatabaseModel.StartEnd" />
+          <EntitySet Name="TutorTuteeNotifications" EntityType="TutorDatabaseModel.TutorTuteeNotification" />
+          <AssociationSet Name="FK_Tutee" Association="TutorDatabaseModel.FK_Tutee">
+            <End Role="Tutee" EntitySet="Tutees" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor" Association="TutorDatabaseModel.FK_Tutor">
+            <End Role="Tutor" EntitySet="Tutors" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotifications" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CurrentUser">
           <Key>
@@ -673,6 +736,49 @@
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="StartEnd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TutorTuteeNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TutorId" Type="Int32" />
+          <Property Name="TuteeId" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.FK_Tutee" FromRole="TutorTuteeNotification" ToRole="Tutee" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_Tutor" FromRole="TutorTuteeNotification" ToRole="Tutor" />
+        </EntityType>
+        <Association Name="FK_Tutee">
+          <End Type="TutorDatabaseModel.Tutee" Role="Tutee" Multiplicity="0..1" />
+          <End Type="TutorDatabaseModel.TutorTuteeNotification" Role="TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TuteeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor">
+          <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="0..1" />
+          <End Type="TutorDatabaseModel.TutorTuteeNotification" Role="TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -801,6 +907,25 @@
               <MappingFragment StoreEntitySet="CurrentUser">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StartEnds">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.StartEnd">
+              <MappingFragment StoreEntitySet="StartEnd">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorTuteeNotifications">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorTuteeNotification">
+              <MappingFragment StoreEntitySet="TutorTuteeNotification">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
