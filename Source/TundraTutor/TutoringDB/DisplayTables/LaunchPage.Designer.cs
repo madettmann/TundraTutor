@@ -34,6 +34,7 @@
             this.displayFacultyButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.displayBusyTimesButton = new System.Windows.Forms.Button();
+            this.startEndButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tutorsbutton
@@ -96,11 +97,22 @@
             this.displayBusyTimesButton.UseVisualStyleBackColor = true;
             this.displayBusyTimesButton.Click += new System.EventHandler(this.displayBusyTimesButton_Click);
             // 
+            // startEndButton
+            // 
+            this.startEndButton.Location = new System.Drawing.Point(13, 188);
+            this.startEndButton.Name = "startEndButton";
+            this.startEndButton.Size = new System.Drawing.Size(120, 23);
+            this.startEndButton.TabIndex = 6;
+            this.startEndButton.Text = "Set Start/End Date";
+            this.startEndButton.UseVisualStyleBackColor = true;
+            this.startEndButton.Click += new System.EventHandler(this.startEndButton_Click);
+            // 
             // LaunchPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.startEndButton);
             this.Controls.Add(this.displayBusyTimesButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.displayFacultyButton);
@@ -121,5 +133,6 @@
         private System.Windows.Forms.Button displayFacultyButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button displayBusyTimesButton;
+        private System.Windows.Forms.Button startEndButton;
     }
 }

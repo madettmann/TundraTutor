@@ -37,5 +37,7 @@ namespace TutoringDB
         public virtual DbSet<Tutor> Tutors { get; set; }
         public virtual DbSet<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }
         public virtual DbSet<CurrentUser> CurrentUsers { get; set; }
+        public virtual DbSet<StartEnd> StartEnds { get; set; }
+        public virtual DbSet<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
     }
 }

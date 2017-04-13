@@ -29,6 +29,10 @@
         <AssociationConnector Association="TutorDatabaseModel.TutorFK3" ManuallyRouted="false" />
         <AssociationConnector Association="TutorDatabaseModel.TutorFK" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TutorDatabaseModel.CurrentUser" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.StartEnd" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorTuteeNotification" Width="1.5" PointX="9" PointY="7.875" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutee" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
