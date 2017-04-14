@@ -29,17 +29,18 @@
                 <Menu Background="White" FontSize="24">
                     <MenuItem Header="Actions" Background="White" FontSize="24" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
                         <MenuItem x:Name="appointmentButton" Header="Make an Appointment" Background="White" Margin="-1" Click="appointmentButton_Click_1"/>
-                        <MenuItem Header="Modify Schedule" Background="White" Margin="-1"/>
-                        <MenuItem Header="Find a Tutor" Background="White" Margin="-1"/>
+                        <MenuItem Header="Modify Base Schedule" Background="White" Margin="-1"/>
                     </MenuItem>
                 </Menu>
             </ToolBar>
             <control:TundraButton Name="prevButton" Margin="0,0,5,7" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                 <TextBlock Text="Previous Week" FontSize="24" HorizontalAlignment="Right"/>
             </control:TundraButton>
-            <Label Name="monthLabel" Content="{Binding}" Grid.Column="2" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24"/>
-            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="3" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="127" Grid.ColumnSpan="2">
+            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="2" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="127" Grid.ColumnSpan="2">
                 <TextBlock Text="Next Week" FontSize="24"/>
+            </control:TundraButton>
+            <control:TundraButton Name="saveChangesButton" Grid.Column="3" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24" Click="saveChangesButton_Click">
+                <TextBlock Text="Save Changes to Schedule"/>
             </control:TundraButton>
             <control:TundraButton Name="monthButton" Grid.Row="0" Grid.Column="4" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="monthButton_Click">
                 <TextBlock Text="View Current Month" FontSize="24"/>
@@ -49,7 +50,115 @@
             </control:TundraButton>
 
         </Grid>
-        <control:TundraWeek x:Name="calendar" Grid.Row="3" />
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="49*"/>
+                <ColumnDefinition Width="711*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height =".3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                    <RowDefinition Height ="*"/>
+                </Grid.RowDefinitions>
+                <Border BorderBrush="DarkGray" Grid.Row="2" BorderThickness="1" Grid.RowSpan="3">
+                    <TextBlock Text="8:00" Grid.Row="0"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="3" BorderThickness="1">
+                    <TextBlock Text="8:30" Grid.Row="1"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="4" BorderThickness="1">
+                    <TextBlock Text="9:00" Grid.Row="2"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="5" BorderThickness="1">
+                    <TextBlock Text="9:30" Grid.Row="3"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="6" BorderThickness="1">
+                    <TextBlock Text="10:00" Grid.Row="4"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="7" BorderThickness="1">
+                    <TextBlock Text="10:30" Grid.Row="5"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="8" BorderThickness="1">
+                    <TextBlock Text="11:00" Grid.Row="6"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="9" BorderThickness="1">
+                    <TextBlock Text="11:30" Grid.Row="7"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="10" BorderThickness="1">
+                    <TextBlock Text="12:00" Grid.Row="8"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="11" BorderThickness="1">
+                    <TextBlock Text="12:30" Grid.Row="9"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="12" BorderThickness="1">
+                    <TextBlock Text="13:00" Grid.Row="10"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="13" BorderThickness="1">
+                    <TextBlock Text="13:30" Grid.Row="11"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="14" BorderThickness="1">
+                    <TextBlock Text="14:00" Grid.Row="12"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="15" BorderThickness="1">
+                    <TextBlock Text="14:30" Grid.Row="13"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="16" BorderThickness="1">
+                    <TextBlock Text="15:00" Grid.Row="14"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="17" BorderThickness="1">
+                    <TextBlock Text="15:30" Grid.Row="15"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="18" BorderThickness="1">
+                    <TextBlock Text="16:00" Grid.Row="16"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="19" BorderThickness="1">
+                    <TextBlock Text="16:30" Grid.Row="17"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="20" BorderThickness="1">
+                    <TextBlock Text="17:00" Grid.Row="18"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="21" BorderThickness="1">
+                    <TextBlock Text="17:30" Grid.Row="19"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="22" BorderThickness="1">
+                    <TextBlock Text="18:00" Grid.Row="20"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="23" BorderThickness="1">
+                    <TextBlock Text="18:30" Grid.Row="21"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="24" BorderThickness="1">
+                    <TextBlock Text="19:00" Grid.Row="22"/>
+                </Border>
+                <Border BorderBrush="DarkGray" Grid.Row="25" BorderThickness="1">
+                    <TextBlock Text="19:30" Grid.Row="23"/>
+                </Border>
+            </Grid>
+            <control:TundraWeek x:Name="week" Grid.Column="1" TimeClick="week_TimeClick" />
+        </Grid>
 
     </Grid>
 </control:CustomWindow>

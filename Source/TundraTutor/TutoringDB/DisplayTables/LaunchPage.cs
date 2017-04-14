@@ -20,7 +20,7 @@ namespace DisplayTables
         private void tutorsbutton_Click(object sender, EventArgs e)
         {
             DisplayTutors f = new DisplayTutors();
-            f.Show();
+            f.ShowDialog();
         }
 
         private void tuteesbutton_Click(object sender, EventArgs e)
@@ -38,19 +38,25 @@ namespace DisplayTables
         private void displayFacultyButton_Click(object sender, EventArgs e)
         {
             DisplayFaculty f = new DisplayFaculty();
-            f.Show();
+            f.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             DisplayAppointments f = new DisplayAppointments();
-            f.Show();
+            f.ShowDialog();
         }
 
         private void displayBusyTimesButton_Click(object sender, EventArgs e)
         {
             BusyTime f = new BusyTime();
-            f.Show();
+            f.ShowDialog();
+        }
+
+        private void startEndButton_Click(object sender, EventArgs e)
+        {
+            SetStartEnd f = new SetStartEnd();
+            f.ShowDialog();
         }
     }
 }

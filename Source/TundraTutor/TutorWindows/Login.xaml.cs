@@ -48,7 +48,10 @@ namespace TutorWindows
             Username1.Focus();
 
             userCreds = new TutoringDB.TutorDatabaseEntities();
-            
+            userCreds.CurrentUsers.Load();
+            var index = userCreds.CurrentUsers.FirstOrDefault();
+            if(index != null) userCreds.CurrentUsers.Remove(index);
+            userCreds.SaveChanges();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -104,22 +107,14 @@ namespace TutorWindows
                 }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-                if (user.Type == "tutor" || user.Type == "tutee")
-                {
-                    MainWindow monthView = new MainWindow();
-                    monthView.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    FacultyView faculty = new FacultyView();
-                    faculty.Show();
-                    this.Hide();
-                }
+                
+                MainWindow monthView = new MainWindow();
+                monthView.Show();
+                this.Close();
             }
             else
             {
-                Label3.Content = "Incorrect username or passowrd";
+                Label3.Content = "Incorrect username or password";
             }
         }
 

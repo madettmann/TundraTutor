@@ -10,6 +10,8 @@
     <Converters:AppointmentConverter x:Key="AppointmentConverter"></Converters:AppointmentConverter>
     <Converters:AppointmentsVisibilityConverter x:Key="AppointmentsVisibilityConverter"></Converters:AppointmentsVisibilityConverter>
     <Converters:AppointmentsVisibilityConverter2 x:Key="AppointmentsVisibilityConverter2"></Converters:AppointmentsVisibilityConverter2>
+    <Converters:TimeInfoColorConverter x:Key="TimeInfoColorConverter"></Converters:TimeInfoColorConverter>
+    <!--<Converters:AppointmentVisibilityConverter x:Key="AppointmentVisiblityConverter"></Converters:AppointmentVisibilityConverter>-->
 
     <!--Menu Style-->
     <Style TargetType="{x:Type local:TundraToolbar}">
@@ -158,65 +160,65 @@
                             <!-- Resize grid to be inserted here -->
                             <Grid x:Name="resizeGrid">
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="top"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="top"
+                                    Margin="5,0,5,0" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            x:Name="bottom"
-            Height="5"
-            VerticalAlignment="Bottom"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    x:Name="bottom"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="5,0,5,0" />     
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Margin="0,5,0,5"
-            Width="5"
-            x:Name="left"/>
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    x:Name="left"/>
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            Margin="0,5,0,5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="right" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="right" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Width="5"
-            Height="5"
-            x:Name="bottomLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Width="5"
+                                    Height="5"
+                                    x:Name="bottomLeft" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Bottom"
-            Height="5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="bottomRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Bottom"
+                                    Height="5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="bottomRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Right"
-            Width="5"
-            Height="5"
-            VerticalAlignment="Top"
-            x:Name="topRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Right"
+                                    Width="5"
+                                    Height="5"
+                                    VerticalAlignment="Top"
+                                    x:Name="topRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Width="6"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="topLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Width="6"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="topLeft" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -292,65 +294,65 @@
                             <!-- Resize grid to be inserted here -->
                             <Grid x:Name="resizeGrid">
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="top"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="top"
+                                    Margin="5,0,5,0" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            x:Name="bottom"
-            Height="5"
-            VerticalAlignment="Bottom"
-            Margin="5,0,5,0" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    x:Name="bottom"
+                                    Height="5"
+                                    VerticalAlignment="Bottom"
+                                    Margin="5,0,5,0" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Margin="0,5,0,5"
-            Width="5"
-            x:Name="left"/>
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    x:Name="left"/>
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            Margin="0,5,0,5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="right" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    Margin="0,5,0,5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="right" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Width="5"
-            Height="5"
-            x:Name="bottomLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Width="5"
+                                    Height="5"
+                                    x:Name="bottomLeft" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            VerticalAlignment="Bottom"
-            Height="5"
-            Width="5"
-            HorizontalAlignment="Right"
-            x:Name="bottomRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    VerticalAlignment="Bottom"
+                                    Height="5"
+                                    Width="5"
+                                    HorizontalAlignment="Right"
+                                    x:Name="bottomRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Right"
-            Width="5"
-            Height="5"
-            VerticalAlignment="Top"
-            x:Name="topRight" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Right"
+                                    Width="5"
+                                    Height="5"
+                                    VerticalAlignment="Top"
+                                    x:Name="topRight" />
                                 <Rectangle
-            Stroke="{x:Null}"
-            Fill="Transparent"
-            HorizontalAlignment="Left"
-            Width="6"
-            VerticalAlignment="Top"
-            Height="5"
-            x:Name="topLeft" />
+                                    Stroke="{x:Null}"
+                                    Fill="Transparent"
+                                    HorizontalAlignment="Left"
+                                    Width="6"
+                                    VerticalAlignment="Top"
+                                    Height="5"
+                                    x:Name="topLeft" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -372,7 +374,7 @@
                             <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top">                              
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF91E9FD"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0" FontSize="16"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
@@ -381,12 +383,13 @@
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
-                            <ItemsControl ItemsSource="{Binding Days}">
+                            <ItemsControl ItemsSource="{Binding Days}" DockPanel.Dock="Top">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <!--Box-->
                                         <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0">
-                                            <Border Name="InnerBorder"  BorderBrush="{Binding Path=Notes, Converter={StaticResource DayBorderColorConverter}}" BorderThickness="2">
+                                            <Border Name="InnerBorder"  BorderBrush="{Binding Path=Notes, 
+                                                        Converter={StaticResource DayBorderColorConverter}}" BorderThickness="2">
                                                 <Border.Style>
                                                     <Style TargetType="{x:Type Border}">
                                                         <Style.Triggers>
@@ -401,31 +404,53 @@
                                                                     </Setter.Value>
                                                                 </Setter>
                                                             </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsTargetMonth}" Value="false">
+                                                                <Setter Property="Border.Background">
+                                                                    <Setter.Value>
+                                                                        <SolidColorBrush Color="#FF98BEC9"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
                                                 </Border.Style>
                                                 <!--Day Number-->
-                                                <StackPanel>
-                                                    <DockPanel>
-                                                        <!--day numbers do not show up unless the boxes are properly stretched ... dunno what else to say...-->
-                                                        <TextBlock TextAlignment="Left"  Text="{Binding Date, Converter={StaticResource DateConverter}, ConverterParameter=DAY}" FontSize="14" Margin="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Foreground="#FF191919">
-                                                            <TextBlock.Style>
-                                                                <Style TargetType="{x:Type TextBlock}">
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding IsTargetMonth}" Value="false">
-                                                                            <Setter Property="TextBlock.Foreground" Value="Gray"></Setter>
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </TextBlock.Style>
-                                                        </TextBlock>
-                                                    </DockPanel>
-                                                    <StackPanel>
-                                                        <TextBlock Background="Red" Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Visibility="{Binding NumAppointments, Converter={StaticResource AppointmentsVisibilityConverter}}" Text="{Binding AppointmentInfo}"/>
-                                                        <TextBlock Background="Red" Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Visibility="{Binding NumAppointments, Converter={StaticResource AppointmentsVisibilityConverter2}}" Text="{Binding AppointmentInfo2}"/>
-                                                        <!--<TextBlock Text="filler" Background="#FFFFF300" Margin="0,2,0,2" Padding="5,5,5,5" FontSize="12"/>-->
-                                                    </StackPanel>
-                                                </StackPanel>
+                                                <local:TundraButton Command="{Binding Path=DataContext.dayClickedCommand, 
+                                                                          RelativeSource={RelativeSource FindAncestor, 
+                                                                          AncestorType={x:Type ItemsControl}}}"
+                                                                          CommandParameter="{Binding}" VerticalContentAlignment="Top" 
+                                                                          VerticalAlignment="Top">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="3*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <DockPanel VerticalAlignment="Top" Grid.Row="0">
+                                                            <TextBlock TextAlignment="Left"  Text="{Binding Date, Converter={StaticResource DateConverter}, 
+                                                                           ConverterParameter=DAY}" FontSize="14" Margin="5,5,5,5" HorizontalAlignment="Stretch" 
+                                                                           VerticalAlignment="Top" Grid.Row="0" Foreground="#FF191919">
+                                                                <TextBlock.Style>
+                                                                    <Style TargetType="{x:Type TextBlock}">
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding IsTargetMonth}" Value="false">
+                                                                                <Setter Property="TextBlock.Foreground" Value="Gray"></Setter>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </TextBlock.Style>
+                                                            </TextBlock>
+                                                        </DockPanel>
+                                                        <!--Appointments-->
+                                                        <StackPanel VerticalAlignment="Stretch" Grid.Row="1" MinHeight="750">
+                                                            <TextBlock Background="Red" Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" 
+                                                                           Visibility="{Binding NumAppointments, Converter={StaticResource 
+                                                                           AppointmentsVisibilityConverter}}" Text="{Binding AppointmentInfo}"/>
+                                                            <TextBlock Background="Red" Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" 
+                                                                           Visibility="{Binding NumAppointments, Converter={StaticResource 
+                                                                           AppointmentsVisibilityConverter2}}" Text="{Binding AppointmentInfo2}"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </local:TundraButton>
                                             </Border>
                                         </Border>
                                     </DataTemplate>
@@ -456,7 +481,7 @@
                             <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top">                              
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF91E9FD"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0" FontSize="16"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
@@ -469,30 +494,14 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <!--Box-->
-                                        <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0">
-                                            <!--<Border.Style>
-                                                <Style TargetType="{x:Type Border}">
-                                                    <Style.Triggers>
-                                                        -->
-                                            <!--Current Day-->
-                                            <!--
-                                                        <DataTrigger Binding="{Binding IsToday}" Value="true">
-                                                            <Setter Property="Border.Background">
-                                                                <Setter.Value>
-                                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                                        <GradientStop Color="#FF1EA6C8" Offset="0"/>
-                                                                        <GradientStop Color="#FF0691B3" Offset="1"/>
-                                                                    </LinearGradientBrush>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>-->
-                                            <!--Day Number-->
-                                            <StackPanel>
-                                                <TextBlock Background="Red" Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Visibility="{Binding Appointment, Converter={StaticResource AppointmentVisibilityConverter}}" Text="{Binding TimeInfo}"/>
-                                            </StackPanel>
+                                        <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0" 
+                                                Background="{Binding BusyOrAppt, Converter={StaticResource TimeInfoColorConverter}}">
+                                            <local:TundraButton Command="{Binding Path=DataContext.timeClickedCommand, 
+                                                                          RelativeSource={RelativeSource FindAncestor, 
+                                                                          AncestorType={x:Type ItemsControl}}}"
+                                                                          CommandParameter="{Binding}">
+                                                <TextBlock Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Text="{Binding TimeInfo}"/>
+                                            </local:TundraButton>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -508,24 +517,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--Time Picker-->
-    <Style TargetType="{x:Type local:TundraTimePicker}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Margin" Value="7,0,7,7"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="DarkGray"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+
 </ResourceDictionary>

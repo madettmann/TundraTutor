@@ -84,6 +84,9 @@
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartEnd.cs">
+      <DependentUpon>TutoringTables.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tutee.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
@@ -115,6 +118,9 @@
       <DependentUpon>TutoringTables.edmx</DependentUpon>
     </Compile>
     <Compile Include="TutorTuteeCourseAppointment.cs">
+      <DependentUpon>TutoringTables.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TutorTuteeNotification.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
   </ItemGroup>
