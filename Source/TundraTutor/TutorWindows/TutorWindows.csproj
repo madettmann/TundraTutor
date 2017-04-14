@@ -93,6 +93,9 @@
     <Compile Include="BaseSchedule.xaml.cs">
       <DependentUpon>BaseSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FacultyView.xaml.cs">
+      <DependentUpon>FacultyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manual.xaml.cs">
       <DependentUpon>Manual.xaml</DependentUpon>
     </Compile>
