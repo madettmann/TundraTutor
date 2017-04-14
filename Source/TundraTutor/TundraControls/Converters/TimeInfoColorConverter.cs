@@ -19,7 +19,7 @@ namespace TundraControls.Converters
                 case 3:
                     return new SolidColorBrush(Color.FromArgb(50, 255, 0, 0));
                 default:
-                    return new SolidColorBrush(Color.FromRgb(240, 240, 240));
+                    return new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
                     };
         }
 

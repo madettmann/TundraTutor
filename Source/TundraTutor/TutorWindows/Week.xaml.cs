@@ -81,5 +81,11 @@ namespace TutorWindows
             week.saveMarked();
             refreshWeek(0);
         }
+
+        private void modSchedButton_Click(object sender, RoutedEventArgs e)
+        {
+            BaseSchedule modSched = new BaseSchedule();
+            modSched.ShowDialog();
+        }
     }
 }

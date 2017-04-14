@@ -33,6 +33,13 @@
         <EntityTypeShape EntityType="TutorDatabaseModel.TutorTuteeNotification" Width="1.5" PointX="9" PointY="7.875" />
         <AssociationConnector Association="TutorDatabaseModel.FK_Tutee" />
         <AssociationConnector Association="TutorDatabaseModel.FK_Tutor" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.BaseSchedule" Width="1.5" PointX="6" PointY="10.125" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorCourse" Width="1.5" PointX="8" PointY="2.625" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Busy" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutee2" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutor2" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Course" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutor1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
