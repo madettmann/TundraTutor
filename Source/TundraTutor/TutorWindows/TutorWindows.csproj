@@ -90,6 +90,9 @@
     <Compile Include="Automatic.xaml.cs">
       <DependentUpon>Automatic.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FacultyView.xaml.cs">
+      <DependentUpon>FacultyView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manual.xaml.cs">
       <DependentUpon>Manual.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
     <Page Include="Automatic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FacultyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
