@@ -15,33 +15,39 @@ namespace TundraControls
 {
     public class TundraCalendar : Control
     {
-        //Fields
+        #region Fields
         private TutoringDB.TutorDatabaseEntities readUser;
         private TutoringDB.CurrentUser user;
         private DateTime selectedDate;
         private int selectedIndex;
+        #endregion
 
-        //Properties
+        #region Properties
         public ObservableCollection<Day> Days { get; set; }
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraCalendar));
         public DateTime CurrentDate{ get => (DateTime)GetValue(CurrentDateProperty); set => SetValue(CurrentDateProperty, value); }
         public DateTime SelectedDate { get => selectedDate; set => selectedDate = value; }
         public int SelectedIndex { get => selectedIndex; set => selectedIndex = value; }
+        #endregion
 
-        //Events
+        #region Events
         public ICommand dayClickedCommand { get; private set; }
         public event EventHandler<DayChangedEventArgs> DayChanged;
         public static RoutedEvent DayClickEvent = EventManager.RegisterRoutedEvent("DayClick", RoutingStrategy.Bubble, 
                                                                                     typeof(RoutedEventHandler), typeof(TundraCalendar));
         public event RoutedEventHandler DayClick { add => AddHandler(DayClickEvent, value); remove => RemoveHandler(DayClickEvent, value); }
-        
+        #endregion
+
 
         static TundraCalendar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TundraCalendar), new FrameworkPropertyMetadata(typeof(TundraCalendar)));
         }
 
+        /// <summary>
+        /// Constructor for calendar
+        /// </summary>
         public TundraCalendar()
         {
             DataContext = this;
@@ -68,7 +74,10 @@ namespace TundraControls
         }
 
         
-
+        /// <summary>
+        /// Builds the calendar for the selected month
+        /// </summary>
+        /// <param name="targetDate">Month for which to generate the calendar</param>
         public void BuildCalendar(DateTime targetDate)
         {
             Days.Clear();
@@ -105,7 +114,7 @@ namespace TundraControls
                 foreach (var appointment in dayAppointments) day.appointmentList.Add(new Appointment(appointment.Tutor.FirstName + appointment.Tutor.LastName,
                                                                                        appointment.Tutor.FirstName + appointment.Tutor.LastName,
                                                                                        appointment.Appointment.Time,
-                                                                                       "Not Implemented"));
+                                                                                       appointment.Cours.CourseNumber.ToString()));
 
 
                 if (day.NumAppointments > 0)
@@ -125,6 +134,7 @@ namespace TundraControls
             }
         }
 
+        //No longer used - should probably dispose of
         private void day_Changed(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "Notes") return;
@@ -133,6 +143,10 @@ namespace TundraControls
             DayChanged(this, new DayChangedEventArgs(sender as Day));   
         }
 
+        /// <summary>
+        /// Intercepts a click on a day of the month
+        /// </summary>
+        /// <param name="obj">The day clicked</param>
         private void onCurrentDayClicked(object obj)
         {
             selectedDate = (obj as Day).Date;
@@ -140,12 +154,18 @@ namespace TundraControls
             RaiseEvent(new RoutedEventArgs(DayClickEvent));
         }
 
+        /// <summary>
+        /// Returns day of week number
+        /// </summary>
+        /// <param name="dow">Day of week to convert</param>
+        /// <returns></returns>
         private static int DayOfWeekNumber(DayOfWeek dow)
         {
             return Convert.ToInt32(dow.ToString("D"));
         }
     }
 
+    //No longer used - should probably dispose of
     public class DayChangedEventArgs : EventArgs
     {
         public Day Day { get; private set; }

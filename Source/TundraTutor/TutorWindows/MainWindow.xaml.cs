@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 
@@ -38,6 +39,12 @@ namespace TutorWindows
 
             nextButton.Click += (o, e) => refreshCalendar(1);
             prevButton.Click += (o, e) => refreshCalendar(2);
+
+            TutoringDB.TutorDatabaseEntities reset = new TutoringDB.TutorDatabaseEntities();
+            reset.BusyTimes.Load();
+            reset.BaseSchedules.Load();
+            foreach(var item in reset.BusyTimes) { reset.BusyTimes.Remove(item); }
+            foreach(var item in reset.BaseSchedules) { reset.BaseSchedules.Remove(item); }
             
         }
 

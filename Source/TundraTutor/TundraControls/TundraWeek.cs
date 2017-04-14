@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Collections.Generic;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
@@ -54,7 +52,9 @@ namespace TundraControls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TundraWeek), new FrameworkPropertyMetadata(typeof(TundraWeek)));
         }
 
-        //Constructor
+        /// <summary>
+        /// Constructor for week
+        /// </summary>
         public TundraWeek()
         {
             DataContext = this;
@@ -84,7 +84,10 @@ namespace TundraControls
             BuildWeek( CurrentDate );
         }
 
-        //Builds the weekview
+        /// <summary>
+        /// Generates the selected week in the TundraWeek control
+        /// </summary>
+        /// <param name="startDate">First day of the selected week</param>
         public void BuildWeek(DateTime startDate)
         {
             times.Clear();
@@ -172,6 +175,8 @@ namespace TundraControls
                 .Load();
             }
 
+            tutorBusyTime.BaseSchedules.Load();
+
             //Add appointments from database to a var, filter out unecessary ones
             var dayAppointments = from i in tutorAppointments.TutorTuteeCourseAppointments
                                   where ( (i.Appointment.Date.Month == startDate.Date.Month || i.Appointment.Date.Month == startDate.Date.Month + 1 )
@@ -184,22 +189,32 @@ namespace TundraControls
             //Add busies from database to a var, filter out unecessary ones
             if (isTutor)
             {
+                var baseBusies = from i in tutorBusyTime.BaseSchedules
+                           where i.Tutor.UserName == user.UserName
+                           select i;
                 var busies = from i in tutorBusyTime.TutorBusyTimes
                              where (i.BusyTime.Date.Month == startDate.Date.Month || i.BusyTime.Date.Month == startDate.Date.Month + 1)
                                     && (i.Tutor.UserName == user.UserName)
                              orderby i.BusyTime.Date, i.BusyTime.Time
                              select i;
                 //Add all the busies to a list (to avoid type conflict)
+                foreach (var onebusy in baseBusies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, 
+                                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014, 1, 5)).TotalDays)));
                 foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
             else
             {
+                var baseBusies = from i in tutorBusyTime.BaseSchedules
+                                 where i.Tutee.Username == user.UserName
+                                 select i;
                 var busies = from i in tutorBusyTime.TuteeBusyTimes
                              where (i.BusyTime.Date.Month == startDate.Date.Month || i.BusyTime.Date.Month == startDate.Date.Month + 1)
                                     && (i.Tutee.Username == user.UserName)
                              orderby i.BusyTime.Date, i.BusyTime.Time
                              select i;
                 //Add all the busies to a list (to avoid type conflict)
+                foreach (var onebusy in baseBusies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, 
+                                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014,1,5)).TotalDays)));
                 foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
 #endregion
@@ -219,7 +234,9 @@ namespace TundraControls
                 //Add the appointment
                 appointmentBlocks.Add(new Appointment(appt.Tutor.FirstName + appt.Tutor.LastName,
                                                       appt.Tutee.FirstName + appt.Tutee.LastName,
-                                                      appt.Appointment.Time, "Not Implemented", appt.Appointment.Date));
+                                                      appt.Appointment.Time, appt.Cours.CourseNumber.ToString() + " with " 
+                                                                        + appt.Tutor.FirstName + " " + appt.Tutor.LastName, 
+                                                      appt.Appointment.Date));
                 //Find how many 30-minute timeslots the appointment takes up
                 int numMore = (appt.Appointment.Duration.Value.Hours * 2) + (appt.Appointment.Duration.Value.Minutes / 30) - 1;
                 for (int i = 0; i < numMore; i++)
@@ -227,7 +244,8 @@ namespace TundraControls
                     //Add the appointment in 30-minute blocks to the list
                     appointmentBlocks.Add(new Appointment(appt.Tutor.FirstName + appt.Tutor.LastName,
                                                       appt.Tutee.FirstName + appt.Tutee.LastName,
-                                                      startTime.Add(new TimeSpan(00, (i+1)*30, 00)), "Not Implemented", appt.Appointment.Date));
+                                                      startTime.Add(new TimeSpan(00, (i+1)*30, 00)), 
+                                                      "--", appt.Appointment.Date));
 
                 }
             }
@@ -310,14 +328,19 @@ namespace TundraControls
             #endregion
         }
 
-        //Marks individual times, for use in busy scheduling
+        /// <summary>
+        /// Marks individual times, for use in busy scheduling
+        /// </summary>
+        /// <param name="index">Index of the time within the ItemsControl (use SelectedIndex property)</param>
         public void markTime(int index)
         {
             if (times.ElementAt(index).Marked) times.ElementAt(index).Marked = false;
             else times.ElementAt(index).Marked = true;
         }
 
-        //Saves the times marked as busy by the user to the database (in 30-minute chunks)
+        /// <summary>
+        /// Saves the times marked as busy by the user to the database (in 30-minute chunks)
+        /// </summary>
         public void saveMarked()
         {
             TutoringDB.TutorDatabaseEntities addBusy = new TutoringDB.TutorDatabaseEntities();
@@ -360,7 +383,10 @@ namespace TundraControls
             
         }
 
-        //Handler to raise the click event via TimeClick outside the control
+        /// <summary>
+        /// Intercepts a click on a time of the week
+        /// </summary>
+        /// <param name="obj">The time clicked</param>
         private void onCurrentTimeClicked(object obj)
         {
             //Records the selected, time, date and index in times
@@ -371,13 +397,21 @@ namespace TundraControls
             RaiseEvent(new RoutedEventArgs(TimeClickEvent));
         }
 
-        //Finding number of Day of Week
+        /// <summary>
+        /// Returns day of week number
+        /// </summary>
+        /// <param name="dow">Day of week to convert</param>
+        /// <returns></returns>
         private static int DayOfWeekNumber(DayOfWeek dow)
         {
             return Convert.ToInt32(dow.ToString("D"));
         }
 
-        //ToString for just dates - mostly for testing purposes, MessageBox.Show() etc.
+        /// <summary>
+        /// ToString for just dates
+        /// </summary>
+        /// <param name="date">DateTime to convert</param>
+        /// <returns></returns>
         private string dateString(DateTime date)
         {
             return date.Month.ToString() + "/" + date.Day.ToString();
