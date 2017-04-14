@@ -58,6 +58,7 @@ namespace TutorWindows
                             select (i.Faculty.First_Name);
             var courseNames = from i in db.FacultyCourses.Local
                               select (i.Cours.CourseName);
+            string 
             facultyCoursViewSource.Source = "Name: " + facultyNames.ElementAt(0) + "\n Course: " + courseNames.ElementAt(0);
         }
         private void CustomWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
