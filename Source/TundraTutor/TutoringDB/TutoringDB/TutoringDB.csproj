@@ -68,6 +68,9 @@
     <Compile Include="Appointment.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
+    <Compile Include="BaseSchedule.cs">
+      <DependentUpon>TutoringTables.tt</DependentUpon>
+    </Compile>
     <Compile Include="BusyTime.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
@@ -100,6 +103,9 @@
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
     <Compile Include="TutorConfirmationRequest.cs">
+      <DependentUpon>TutoringTables.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TutorCourse.cs">
       <DependentUpon>TutoringTables.tt</DependentUpon>
     </Compile>
     <Compile Include="TutoringTables.Context.cs">

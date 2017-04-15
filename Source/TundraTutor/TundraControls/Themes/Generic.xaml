@@ -475,42 +475,337 @@
                 <ControlTemplate>
                     <Border>
                         <DockPanel>
-                            <TextBlock Text="{Binding Date}" />
-                            <Grid Height="30" DockPanel.Dock="Top">
-                            </Grid>
-                            <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top">                              
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0" FontSize="16"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Rows="1" Columns="7" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                            <ItemsControl ItemsSource="{Binding times}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <!--Box-->
-                                        <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0" 
-                                                Background="{Binding BusyOrAppt, Converter={StaticResource TimeInfoColorConverter}}">
-                                            <local:TundraButton Command="{Binding Path=DataContext.timeClickedCommand, 
-                                                                          RelativeSource={RelativeSource FindAncestor, 
-                                                                          AncestorType={x:Type ItemsControl}}}"
-                                                                          CommandParameter="{Binding}">
-                                                <TextBlock Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Text="{Binding TimeInfo}"/>
-                                            </local:TundraButton>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="24*"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Date}" Grid.Column="1"/>
+                                    <Grid Height="30" DockPanel.Dock="Top" Grid.Column="1">
+                                    </Grid>
+                                    <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top" Grid.Column="1">                              
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center" Text="{Binding}" Background="#FF9AF0F0" FontSize="16"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="1" Columns="7" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+
+                                        </Grid.RowDefinitions>
+                                        <Border BorderBrush="DarkGray" Grid.Row="0" BorderThickness="1">
+                                            <TextBlock Text="8:00" Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                         </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Rows="24" Columns="7" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
+                                        <Border BorderBrush="DarkGray" Grid.Row="1" BorderThickness="1">
+                                            <TextBlock Text="8:30" Grid.Row="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="2" BorderThickness="1">
+                                            <TextBlock Text="9:00" Grid.Row="2" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="3" BorderThickness="1">
+                                            <TextBlock Text="9:30" Grid.Row="3" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="4" BorderThickness="1">
+                                            <TextBlock Text="10:00" Grid.Row="4" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="5" BorderThickness="1">
+                                            <TextBlock Text="10:30" Grid.Row="5" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="6" BorderThickness="1">
+                                            <TextBlock Text="11:00" Grid.Row="6" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="7" BorderThickness="1">
+                                            <TextBlock Text="11:30" Grid.Row="7" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="8" BorderThickness="1">
+                                            <TextBlock Text="12:00" Grid.Row="8" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="9" BorderThickness="1">
+                                            <TextBlock Text="12:30" Grid.Row="9" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="10" BorderThickness="1">
+                                            <TextBlock Text="13:00" Grid.Row="10" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="11" BorderThickness="1">
+                                            <TextBlock Text="13:30" Grid.Row="11" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="12" BorderThickness="1">
+                                            <TextBlock Text="14:00" Grid.Row="12" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="13" BorderThickness="1">
+                                            <TextBlock Text="14:30" Grid.Row="13" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="14" BorderThickness="1">
+                                            <TextBlock Text="15:00" Grid.Row="14" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="15" BorderThickness="1">
+                                            <TextBlock Text="15:30" Grid.Row="15" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="16" BorderThickness="1">
+                                            <TextBlock Text="16:00" Grid.Row="16" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="17" BorderThickness="1">
+                                            <TextBlock Text="16:30" Grid.Row="17" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="18" BorderThickness="1">
+                                            <TextBlock Text="17:00" Grid.Row="18" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="19" BorderThickness="1">
+                                            <TextBlock Text="17:30" Grid.Row="19" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="20" BorderThickness="1">
+                                            <TextBlock Text="18:00" Grid.Row="20" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="21" BorderThickness="1">
+                                            <TextBlock Text="18:30" Grid.Row="21" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="22" BorderThickness="1">
+                                            <TextBlock Text="19:00" Grid.Row="22" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="23" BorderThickness="1">
+                                            <TextBlock Text="19:30" Grid.Row="23" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </Grid>
+                                    <ItemsControl ItemsSource="{Binding times}" Grid.Column="1">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <!--Box-->
+                                                <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0" 
+                                                        Background="{Binding BusyOrAppt, Converter={StaticResource TimeInfoColorConverter}}">
+                                                    <local:TundraButton Command="{Binding Path=DataContext.timeClickedCommand, 
+                                                                                  RelativeSource={RelativeSource FindAncestor, 
+                                                                                  AncestorType={x:Type ItemsControl}}}"
+                                                                                  CommandParameter="{Binding}">
+                                                        <TextBlock Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Text="{Binding TimeInfo}"/>
+                                                    </local:TundraButton>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="24" Columns="7" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+                            </Grid>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Scheduler-->
+    <Style TargetType="{x:Type local:TundraScheduler}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <DockPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="28*"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Date}" Grid.Column="1"/>
+                                    <Grid Height="30" DockPanel.Dock="Top" Grid.Column="1">
+                                    </Grid>
+                                    <ItemsControl ItemsSource="{Binding DayNames}" DockPanel.Dock="Top" Grid.Column="1">                              
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0" Background="#FF97E0E8" >
+                                                    <local:TundraButton Command="{Binding Path=DataContext.DOWClickedCommand, 
+                                                                                  RelativeSource={RelativeSource FindAncestor, 
+                                                                                  AncestorType={x:Type ItemsControl}}}"
+                                                                                  CommandParameter="{Binding}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                                        <TextBlock TextAlignment="Center" Text="{Binding}" FontSize="16"/>
+                                                    </local:TundraButton>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="1" Columns="7" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+                                            <RowDefinition Height ="*"/>
+
+                                        </Grid.RowDefinitions>
+                                        <Border BorderBrush="DarkGray" Grid.Row="0" BorderThickness="1">
+                                            <TextBlock Text="8:00" Grid.Row="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="1" BorderThickness="1">
+                                            <TextBlock Text="8:30" Grid.Row="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="2" BorderThickness="1">
+                                            <TextBlock Text="9:00" Grid.Row="2" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="3" BorderThickness="1">
+                                            <TextBlock Text="9:30" Grid.Row="3" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="4" BorderThickness="1">
+                                            <TextBlock Text="10:00" Grid.Row="4" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="5" BorderThickness="1">
+                                            <TextBlock Text="10:30" Grid.Row="5" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="6" BorderThickness="1">
+                                            <TextBlock Text="11:00" Grid.Row="6" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="7" BorderThickness="1">
+                                            <TextBlock Text="11:30" Grid.Row="7" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="8" BorderThickness="1">
+                                            <TextBlock Text="12:00" Grid.Row="8" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="9" BorderThickness="1">
+                                            <TextBlock Text="12:30" Grid.Row="9" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="10" BorderThickness="1">
+                                            <TextBlock Text="13:00" Grid.Row="10" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="11" BorderThickness="1">
+                                            <TextBlock Text="13:30" Grid.Row="11" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="12" BorderThickness="1">
+                                            <TextBlock Text="14:00" Grid.Row="12" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="13" BorderThickness="1">
+                                            <TextBlock Text="14:30" Grid.Row="13" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="14" BorderThickness="1">
+                                            <TextBlock Text="15:00" Grid.Row="14" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="15" BorderThickness="1">
+                                            <TextBlock Text="15:30" Grid.Row="15" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="16" BorderThickness="1">
+                                            <TextBlock Text="16:00" Grid.Row="16" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="17" BorderThickness="1">
+                                            <TextBlock Text="16:30" Grid.Row="17" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="18" BorderThickness="1">
+                                            <TextBlock Text="17:00" Grid.Row="18" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="19" BorderThickness="1">
+                                            <TextBlock Text="17:30" Grid.Row="19" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="20" BorderThickness="1">
+                                            <TextBlock Text="18:00" Grid.Row="20" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="21" BorderThickness="1">
+                                            <TextBlock Text="18:30" Grid.Row="21" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="22" BorderThickness="1">
+                                            <TextBlock Text="19:00" Grid.Row="22" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <Border BorderBrush="DarkGray" Grid.Row="23" BorderThickness="1">
+                                            <TextBlock Text="19:30" Grid.Row="23" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        </Border>
+                                    </Grid>
+                                    <ItemsControl ItemsSource="{Binding times}" Grid.Column="1">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <!--Box-->
+                                                <Border BorderBrush="#FF191919" BorderThickness="1" Padding="0" 
+                                                        Background="{Binding BusyOrAppt, Converter={StaticResource TimeInfoColorConverter}}">
+                                                    <local:TundraButton Command="{Binding Path=DataContext.timeClickedCommand, 
+                                                                                  RelativeSource={RelativeSource FindAncestor, 
+                                                                                  AncestorType={x:Type ItemsControl}}}"
+                                                                                  CommandParameter="{Binding}">
+                                                        <TextBlock Margin="0,2,0,2" Padding="5,10,5,10" FontSize="12" Text="{Binding TimeInfo}"/>
+                                                    </local:TundraButton>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="24" Columns="7" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Grid>
+                            </Grid>
                         </DockPanel>
                     </Border>
                 </ControlTemplate>

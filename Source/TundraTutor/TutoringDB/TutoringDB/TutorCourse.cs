@@ -12,15 +12,13 @@ namespace TutoringDB
     using System;
     using System.Collections.Generic;
     
-    public partial class TutorTuteeNotification
+    public partial class TutorCourse
     {
         public int Id { get; set; }
-        public Nullable<int> TutorId { get; set; }
-        public Nullable<int> TuteeId { get; set; }
-        public string Message { get; set; }
-        public string Type { get; set; }
+        public int TutorId { get; set; }
+        public int CourseId { get; set; }
     
-        public virtual Tutee Tutee { get; set; }
+        public virtual Cours Cours { get; set; }
         public virtual Tutor Tutor { get; set; }
     }
 }

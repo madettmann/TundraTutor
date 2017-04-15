@@ -6,7 +6,7 @@ namespace TundraControls
     {
 
         public Appointment()
-            : this("John Doe", "Jinkies McGee", new TimeSpan(0, 0, 0), "CS-125")
+            : this("Unknown Tutor", "Unknown Tutee", new TimeSpan(0, 0, 0), "Unknown Course")
         {
         }
 
