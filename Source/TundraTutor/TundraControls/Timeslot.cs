@@ -16,7 +16,7 @@ namespace TundraControls
         private ObservableCollection<Appointment> appointment;
         private ObservableCollection<Busy> busy;
         private bool isPassed;
-        private bool marked;
+        private int marked;
 
         //Properties
         public DateTime Date { get => date; set { date = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Date")); } }
@@ -25,8 +25,8 @@ namespace TundraControls
         public bool IsPassed { get => isPassed; set { isPassed = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("IsPassed")); } }
         public ObservableCollection<Busy> Busy { get => busy; set { busy = value; if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Busy")); } }
         public string TimeInfo { get { if (appointment.Count > 0) return appointment[0].courseCode; else return ""; } }
-        public bool Marked { get => marked; set { marked = value; PropertyChanged(this, new PropertyChangedEventArgs("Marked")); PropertyChanged(this, new PropertyChangedEventArgs("BusyOrAppt")); } }
-        public int BusyOrAppt { get { if (Marked) return 3; else if (appointment.Count > 0) return 2; else if (busy.Count > 0) return 1; else return 0; } }
+        public int Marked { get => marked; set { marked = value; PropertyChanged(this, new PropertyChangedEventArgs("Marked")); PropertyChanged(this, new PropertyChangedEventArgs("BusyOrAppt")); } }
+        public int BusyOrAppt { get { if (Marked == 2) return 4; if (Marked == 1) return 3; else if (appointment.Count > 0) return 2; else if (busy.Count > 0) return 1; else return 0; } }
 
         
     }
