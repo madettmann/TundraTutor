@@ -6,19 +6,17 @@
     <!--Main Grid-->
     <Grid Margin="0,-8,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="457*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="473*"/>
         </Grid.RowDefinitions>
         <!--Page-topping toolbar-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="59*"/>
-                <ColumnDefinition Width="97*"/>
-                <ColumnDefinition Width="47*"/>
-                <ColumnDefinition Width="63*"/>
-                <ColumnDefinition Width="97*"/>
-                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="260*"/>
+                <ColumnDefinition Width="251*"/>
+                <ColumnDefinition Width="174*"/>
+                <ColumnDefinition Width="75*"/>
             </Grid.ColumnDefinitions>
             <ToolBar Background="{x:Null}" Height="43" VerticalAlignment="Top" Margin="-15,-5,0,-12" Grid.Row="0" Grid.Column="0" Style="{DynamicResource TundraToolbar}">
                 <Menu Background="White" FontSize="24">
@@ -35,22 +33,40 @@
                     </MenuItem>
                 </Menu>
             </ToolBar>
-            <control:TundraButton Name="prevButton" Margin="0,0,5,7" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                <TextBlock Text="Previous Month" FontSize="24" HorizontalAlignment="Right"/>
-            </control:TundraButton>
-            <Label Name="monthLabel" Content="{Binding}" Grid.Column="2" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24"/>
-            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="3" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="127" Grid.ColumnSpan="2">
-                <TextBlock Text="Next Month" FontSize="24"/>
-            </control:TundraButton>
-            <control:TundraButton Name="weekButton" Grid.Row="0" Grid.Column="4" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="weekButton_Click">
+            <Label Name="monthLabel" Content="{Binding}" Grid.Column="1" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24" Grid.ColumnSpan="2"/>
+            <control:TundraButton Name="weekButton" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="weekButton_Click" Margin="0" Grid.ColumnSpan="2" Width="198">
                 <TextBlock Text="View Current Week" FontSize="24"/>
             </control:TundraButton>
-            <control:TundraButton Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,7,7" Width="33" Grid.ColumnSpan="2" Click="TundraButton_Click">
+            <ToolBar Background="{x:Null}" Grid.Column="2" Style="{DynamicResource TundraToolbar}">
+                <Menu Background="White" FontSize="24" Margin="-20,0,0,0">
+                    <MenuItem Header="Notifications">
+                        <MenuItem ItemsSource="{Binding Notifications}" FontSize="16">
+                            <MenuItem.ItemTemplate>
+                                <DataTemplate>
+                                    <MenuItem Header="{Binding Message}"/>
+                                </DataTemplate>
+                            </MenuItem.ItemTemplate>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+            </ToolBar>
+            <control:TundraButton Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" Margin="0,0,7,7" Width="33" Click="TundraButton_Click">
                 <TextBlock Text="Help"/>
             </control:TundraButton>
-
         </Grid>
-        <control:TundraCalendar x:Name="calendar" DayChanged="calendar_DayChanged" Grid.Row="3" DayClick="calendar_DayClick_1" />
-
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <control:TundraButton Name="prevButton" Grid.Column="0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <Image Source="LeftArrow.png"/>
+            </control:TundraButton>
+            <control:TundraCalendar x:Name="calendar" Grid.Column="1" DayClick="calendar_DayClick_1" />
+            <control:TundraButton Name="nextButton" Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <Image Source="RightArrow.png"/>
+            </control:TundraButton>
+        </Grid>
     </Grid>
 </control:CustomWindow>

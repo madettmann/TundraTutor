@@ -41,6 +41,8 @@ namespace TutorWindows
         {
             for (int box = scheduler.SelectedIndex; box < 168; box+=7)
             {
+                if (scheduler.times[box].BusyOrAppt != 1 
+                    && scheduler.times[box].BusyOrAppt != 2)
                 scheduler.markTime(box);
             }
         }
