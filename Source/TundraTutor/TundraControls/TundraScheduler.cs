@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using System.Data.Entity.Core.Objects;
 
 namespace TundraControls
 {
@@ -167,8 +168,17 @@ namespace TundraControls
         /// <param name="index">Index of the time within the ItemsControl (use SelectedIndex property)</param>
         public void markTime(int index)
         {
-            if (times.ElementAt(index).Marked) times.ElementAt(index).Marked = false;
-            else times.ElementAt(index).Marked = true;
+            if (times.ElementAt(index).Marked > 0)
+            {
+                times.ElementAt(index).Marked = 0;
+            }
+            else
+            {
+                if (times.ElementAt(index).Busy.Count > 0)
+                    times.ElementAt(index).Marked = 2;
+                else
+                    times.ElementAt(index).Marked = 1;
+            }
         }
 
         /// <summary>
@@ -177,41 +187,185 @@ namespace TundraControls
         public void saveMarked()
         {
             TutoringDB.TutorDatabaseEntities addBusy = new TutoringDB.TutorDatabaseEntities();
+            //addBusy.StartEnds.Load();
+            DateTime start = (DateTime)addBusy.StartEnds.FirstOrDefault().StartDate;
 
             foreach (var time in times)
             {
-                if (time.Marked)
+                if (time.Marked == 1)
                 {
                     TutoringDB.BusyTime tempBusy = new TutoringDB.BusyTime();
-                    addBusy.BaseSchedules.Load();
-                    addBusy.BusyTimes.Load();
-                    tempBusy.Id = addBusy.BusyTimes.Count();
+                    addBusy.BaseSchedules.Where(baseS => (baseS.Tutor.UserName == user.UserName || baseS.Tutee.Username == user.UserName)
+                                                          && baseS.BusyTime.Date == time.Date
+                                                          && baseS.BusyTime.Time == time.Time).Load();
+                    addBusy.BusyTimes.Where(bus => bus.Date == time.Date && bus.Time == time.Time).Load();
                     tempBusy.Time = time.Time;
                     tempBusy.Date = time.Date;
                     tempBusy.Duration = new TimeSpan(00, 30, 00);
                     addBusy.BusyTimes.Add(tempBusy);
                     if (isTutor)
                     {
-                        addBusy.Tutors.Load();
-                        addBusy.BaseSchedules.Load();
+                        //addBusy.Tutors.Where(tut => tut.UserName == user.UserName).Load();
+                        //addBusy.BaseSchedules.Where(baseS => baseS.Tutor.UserName == user.UserName).Load();
+                        //addBusy.TutorBusyTimes.Where(bus => bus.Tutor.UserName == user.UserName
+                        //                                    && bus.BusyTime.Date == time.Date
+                        //                                    && bus.BusyTime.Time == time.Time).Load();
+                        //addBusy.BusyTimes.Where(bus => bus.Date == time.Date && bus.Time == time.Time).Load();
+
                         TutoringDB.BaseSchedule modSched = new TutoringDB.BaseSchedule();
-                        modSched.Id = addBusy.BaseSchedules.Count();
                         modSched.BusyTimeId = tempBusy.Id;
                         TutoringDB.Tutor tempTutor = addBusy.Tutors.Where(i => i.UserName == addBusy.CurrentUsers.FirstOrDefault().UserName).First();
                         modSched.TutorId = tempTutor.Id;
                         addBusy.BaseSchedules.Add(modSched);
+
+                        addBusy.SaveChanges();
+
+                        //var busies = from i in addBusy.TutorBusyTimes
+                        //             where i.BusyTime.Time == time.Time && i.Tutor.UserName == user.UserName
+                        //             select i;
+
+
+                        int difference = DayOfWeekNumber(time.Date.DayOfWeek) - DayOfWeekNumber(start.DayOfWeek);
+                        start = start.AddDays(difference);
+
+                        for (DateTime i = start; i < (DateTime)addBusy.StartEnds.FirstOrDefault().EndDate; i = i.AddDays(7))
+                        {
+                            //addBusy.BusyTimes.Where(bus => bus.Date == time.Date && bus.Time == time.Time).Load();
+                            i = i.AddHours(-i.TimeOfDay.Hours); i = i.AddMinutes(-i.TimeOfDay.Minutes); i = i.AddSeconds(-i.TimeOfDay.Seconds);
+
+                            var busies = addBusy.TutorBusyTimes.Where(bus => bus.BusyTime.Date == time.Date
+                                                                      && bus.BusyTime.Time == time.Time
+                                                                      && bus.TutorId == tempTutor.Id).ToList();
+                            //from bus in addBusy.TuteeBusyTimes
+                            //where bus.BusyTime.Time == time.Time && bus.Tutee.Username == user.UserName && bus.BusyTime.Date == time.Date
+                            //select i;
+                            if (busies.Count == 0)
+                            {
+                                TutoringDB.BusyTime newBusy = new TutoringDB.BusyTime();
+                                newBusy.Date = i;
+                                newBusy.Time = time.Time;
+                                TutoringDB.TutorBusyTime newLink = new TutoringDB.TutorBusyTime();
+                                newLink.BusyTimesId = newBusy.Id;
+                                newLink.TutorId = addBusy.Tutors.Where(tut => tut.UserName == user.UserName).FirstOrDefault().Id;
+
+                                addBusy.BusyTimes.Add(newBusy);
+                                addBusy.TutorBusyTimes.Add(newLink);
+                            }
+                            addBusy.SaveChanges();
+                        }
                     }
                     else
                     {
-                        addBusy.Tutees.Load();
-                        addBusy.BaseSchedules.Load();
+                        //addBusy.Tutees.Where(tut => tut.Username == user.UserName).Load();
+                        //addBusy.BaseSchedules.Where(baseS => baseS.Tutee.Username == user.UserName).Load();
+                        //addBusy.TuteeBusyTimes.Where(bus => bus.Tutee.Username == user.UserName 
+                        //                                    && bus.BusyTime.Date == time.Date 
+                        //                                    && bus.BusyTime.Time == time.Time).Load();
+                        //addBusy.BusyTimes.Where(bus => bus.Date == time.Date && bus.Time == time.Time).Load();
+
                         TutoringDB.BaseSchedule modSched = new TutoringDB.BaseSchedule();
-                        modSched.Id = addBusy.BaseSchedules.Count();
                         modSched.BusyTimeId = tempBusy.Id;
                         TutoringDB.Tutee tempTutee = addBusy.Tutees.Where(i => i.Username == addBusy.CurrentUsers.FirstOrDefault().UserName).First();
                         modSched.TuteeId = tempTutee.Id;
-                        
                         addBusy.BaseSchedules.Add(modSched);
+
+                        addBusy.SaveChanges();
+
+                        //var busies = from i in addBusy.TuteeBusyTimes
+                        //             where i.BusyTime.Time == time.Time && i.Tutee.Username == user.UserName
+                        //             select i;
+
+                        int difference = DayOfWeekNumber(time.Date.DayOfWeek) - DayOfWeekNumber(start.DayOfWeek);
+                        start = start.AddDays(difference);
+
+                        for (DateTime i = start; i < (DateTime)addBusy.StartEnds.FirstOrDefault().EndDate; i = i.AddDays(7))
+                        {
+                            //addBusy.BusyTimes.Where(bus => bus.Date == time.Date && bus.Time == time.Time).Load();
+                            i = i.AddHours(-i.TimeOfDay.Hours); i = i.AddMinutes(-i.TimeOfDay.Minutes); i = i.AddSeconds(-i.TimeOfDay.Seconds);
+
+                            var busies = addBusy.TuteeBusyTimes.Where(bus => bus.BusyTime.Date == time.Date
+                                                                      && bus.BusyTime.Time == time.Time
+                                                                      && bus.TuteeId == tempTutee.Id).ToList();
+                            //from bus in addBusy.TuteeBusyTimes
+                            //where bus.BusyTime.Time == time.Time && bus.Tutee.Username == user.UserName && bus.BusyTime.Date == time.Date
+                            //select i;
+                            if (busies.Count == 0)
+                            {
+                                TutoringDB.BusyTime newBusy = new TutoringDB.BusyTime();
+                                newBusy.Date = i;
+                                newBusy.Time = time.Time;
+                                TutoringDB.TuteeBusyTime newLink = new TutoringDB.TuteeBusyTime();
+                                newLink.BusyTimeId = newBusy.Id;
+                                newLink.TuteeId = addBusy.Tutees.Where(tut => tut.Username == user.UserName).FirstOrDefault().Id;
+
+                                addBusy.BusyTimes.Add(newBusy);
+                                addBusy.TuteeBusyTimes.Add(newLink);
+                            }
+                            addBusy.SaveChanges();
+                        }
+                    }
+                    //addBusy.SaveChanges();
+                }
+
+                if (time.Marked == 2)
+                {
+                    addBusy.BusyTimes.Where(bus => bus.Date == time.Date && bus.Time == time.Time).Load();
+                    if (isTutor)
+                    {
+                        addBusy.TutorBusyTimes.Where(tutBus => tutBus.Tutor.UserName == user.UserName
+                                                     && tutBus.BusyTime.Date == time.Date
+                                                     && tutBus.BusyTime.Time == time.Time).Load();
+                        var tutBusies = from i in addBusy.TutorBusyTimes
+                                        where i.Tutor.UserName == user.UserName &&
+                                              i.BusyTime.Date.DayOfWeek == time.Date.DayOfWeek &&
+                                              i.BusyTime.Time == time.Time
+                                        select i;
+                        foreach (var oneBusy in tutBusies)
+                        {
+                            addBusy.TutorBusyTimes.Remove(oneBusy);
+                            var busies = from i in addBusy.BusyTimes
+                                         where oneBusy.BusyTime == i
+                                         select i;
+                            var toRemove = busies.FirstOrDefault();
+                            if (toRemove != null) addBusy.BusyTimes.Remove(toRemove);
+
+                        }
+
+                        var baseBusies = from i in addBusy.BaseSchedules
+                                         where i.Tutor.UserName == user.UserName
+                                               && i.BusyTime.Time == time.Time
+                                               && i.BusyTime.Date == time.Date
+                                         select i;
+                        addBusy.BaseSchedules.Remove(baseBusies.FirstOrDefault());
+                    }
+                    else
+                    {
+                        addBusy.TuteeBusyTimes.Where(tutBus => tutBus.Tutee.Username == user.UserName
+                                                     && tutBus.BusyTime.Date == time.Date
+                                                     && tutBus.BusyTime.Time == time.Time).Load();
+                        var tutBusies = from i in addBusy.TuteeBusyTimes
+                                        where i.Tutee.Username == user.UserName &&
+                                              //i.BusyTime.Date.DayOfWeek == time.Date.DayOfWeek &&
+                                              DbFunctions.DiffDays(time.Date, i.BusyTime.Date) % 7 == 0 &&
+                                              i.BusyTime.Time == time.Time
+                                        select i;
+                        foreach (var oneBusy in tutBusies)
+                        {
+                            addBusy.TuteeBusyTimes.Remove(oneBusy);
+                            var busies = from i in addBusy.BusyTimes
+                                         where oneBusy.BusyTime == i
+                                         select i;
+                            var toRemove = busies.FirstOrDefault();
+                            if(toRemove != null) addBusy.BusyTimes.Remove(toRemove);
+                            
+                        }
+
+                        var baseBusies = from i in addBusy.BaseSchedules
+                                         where i.Tutee.Username == user.UserName
+                                               && i.BusyTime.Time == time.Time
+                                               && i.BusyTime.Date == time.Date
+                                         select i;
+                        addBusy.BaseSchedules.Remove(baseBusies.FirstOrDefault());
                     }
                     addBusy.SaveChanges();
                 }

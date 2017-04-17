@@ -87,6 +87,9 @@
     <Compile Include="AddBusy.xaml.cs">
       <DependentUpon>AddBusy.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentInfo.xaml.cs">
+      <DependentUpon>AppointmentInfo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Automatic.xaml.cs">
       <DependentUpon>Automatic.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,7 @@
     <Compile Include="Manual.xaml.cs">
       <DependentUpon>Manual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Notification.cs" />
     <Compile Include="ScheduleAppointment.xaml.cs">
       <DependentUpon>ScheduleAppointment.xaml</DependentUpon>
     </Compile>
@@ -111,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddBusy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppointmentInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +228,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LeftArrow.png" />
+    <Resource Include="RightArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
