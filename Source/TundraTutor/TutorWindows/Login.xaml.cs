@@ -107,9 +107,18 @@ namespace TutorWindows
                 }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-                
-                MainWindow monthView = new MainWindow();
-                monthView.Show();
+                if(user.Type == "faculty")
+                {
+                    FacultyView faculty = new FacultyView();
+                    faculty.Show();
+                    
+                }
+                else
+                {
+                    MainWindow monthView = new MainWindow();
+                    monthView.Show();
+                   
+                }
                 this.Close();
             }
             else
