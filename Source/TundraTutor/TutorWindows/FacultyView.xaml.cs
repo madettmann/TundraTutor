@@ -44,22 +44,52 @@ namespace TutorWindows
             temp.Id = db.FacultyCourses.Count();
             db.FacultyCourses.Add(temp);
             db.SaveChanges();
+            //bool end = false;
+            //int count = 0;
+            //TutoringDB.Faculty tempf = new TutoringDB.Faculty();
+            //tempf = db.Faculties.Where(i => i.Username == db.CurrentUsers.FirstOrDefault().UserName).FirstOrDefault();
+            //db.FacultyCourses.Where(i => i.FacultyId == tempf.Id).Load();
+            //var courseNames = from i in db.FacultyCourses.Local
+            //                  select (i.Cours.CourseName);
+
             this.Width = SystemParameters.WorkArea.Width;
             this.Height = SystemParameters.WorkArea.Height;
             this.Left = SystemParameters.WorkArea.Left;
             this.Top = SystemParameters.WorkArea.Top;
-            System.Windows.Data.CollectionViewSource facultyCoursViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("facultyCoursViewSource")));
+            //System.Windows.Data.CollectionViewSource facultyCoursViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("facultyCoursViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // facultyCoursViewSource.Source = [generic data source]
             TutoringDB.Faculty tempFaculty = new TutoringDB.Faculty();
             tempFaculty = db.Faculties.Where(i => i.Username == db.CurrentUsers.FirstOrDefault().UserName).FirstOrDefault();
             db.FacultyCourses.Where(i => i.FacultyId == tempFaculty.Id).Load();
-            var facultyNames = from i in db.FacultyCourses.Local
-                            select (i.Faculty.First_Name);
-            var courseNames = from i in db.FacultyCourses.Local
+            int count = db.FacultyCourses.Count();
+            while(count != 0)
+            {
+                db.TutorConfirmationRequests.Where(i => i.CourseId == db.FacultyCourses.ElementAt(count).CourseId).Load();
+                count--;
+            }
+
+
+            var firstNames = from i in db.TutorConfirmationRequests.Local
+                               select (i.Tutor.FirstName);
+            var lastNames = from i in db.TutorConfirmationRequests.Local
+                            select (i.Tutor.LastName);
+            var courseNames = from i in db.TutorConfirmationRequests.Local
                               select (i.Cours.CourseName);
-           tempFaculty.LastName = "Name: " + facultyNames.ElementAt(0) + "\n Course: " + courseNames.ElementAt(0);
-            facultyCoursViewSource.Source = tempFaculty.LastName;
+            //int count = facultyNames.Count();
+            int count2 = firstNames.Count();
+            while (count2 != 0)
+            {
+                string item = "Name: " + firstNames.ElementAt(count2) + " " + lastNames.ElementAt(count2) + "\nCourse: " + courseNames.ElementAt(count2);
+                Pending1.Items.Add(item);
+                count2--;
+            }
+
+            //tempFaculty.LastName = "Name: " + facultyNames + "\n Course: " + courseNames;
+            //facultyCoursViewSource.Source = tempFaculty.LastName;
+
+            //facultyCoursViewSource.Source = facultyNames.FirstOrDefault();
+
         }
         private void CustomWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

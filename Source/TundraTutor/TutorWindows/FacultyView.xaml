@@ -5,11 +5,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:TutoringDB="clr-namespace:TutoringDB;assembly=TutoringDB" mc:Ignorable="d" x:Class="TutorWindows.FacultyView"
         Title="Faculty" Closing="CustomWindow_Closing" Loaded="CustomWindow_Loaded">
 
-    <control:CustomWindow.Resources>
+    <!--<control:CustomWindow.Resources>
         <CollectionViewSource x:Key="facultyCoursViewSource" d:DesignSource="{d:DesignInstance {x:Type TutoringDB:Faculty}, CreateList=True}"/>
-    </control:CustomWindow.Resources>
+    </control:CustomWindow.Resources>-->
 
-    <Grid DataContext="{StaticResource facultyCoursViewSource}">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
             <RowDefinition Height="410*"/>
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox VerticalContentAlignment="Stretch"  Grid.RowSpan="1" Grid.Row="1" Margin="7,0,0,0" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="1" SelectedValuePath="LastName" IsSynchronizedWithCurrentItem="True" />
+        <ListBox x:Name="Pending1" VerticalContentAlignment="Stretch"  Grid.RowSpan="1" Grid.Row="1" Margin="7,0,0,0" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="1"/>
         <control:TundraButton x:Name="Accept_" Content="Accept" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Grid.Row="2" VerticalContentAlignment="Center"/>
         <control:TundraButton x:Name="Deny" Content="Deny" HorizontalAlignment="Right" Margin="297,5,0,0" VerticalAlignment="Center" Width="75" Grid.Row="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
         <TextBlock x:Name="Pending" HorizontalAlignment="Left" Margin="36,17,0,0" TextWrapping="Wrap" Text="Pending Tutors" VerticalAlignment="Top" FontSize="16"/>
@@ -27,5 +27,8 @@
         <Label x:Name="Recommend_Tutor" Content="Recommend Tutor" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
         <control:TundraButton x:Name="Apply" Content="Apply" Grid.Column="1" HorizontalAlignment="Left" Margin="295,15,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
         <!--IsSynchronizedWithCurrentItem="True"-->
+        <!--SelectedValuePath="LastName" IsSynchronizedWithCurrentItem="True"-->
+        <!--DataContext="{StaticResource facultyCoursViewSource}"-->
+        <!--<ListBox VerticalContentAlignment="Stretch"  Grid.RowSpan="1" Grid.Row="1" Margin="7,0,0,0" ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="1"  />-->
     </Grid>
 </control:CustomWindow>
