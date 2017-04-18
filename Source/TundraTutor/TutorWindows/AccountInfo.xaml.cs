@@ -64,70 +64,64 @@ namespace TutorWindows
     {
         UserInfo info;
         private TutoringDB.TutorDatabaseEntities readUser;
-        private TutoringDB.Tutee user;
+        private TutoringDB.CurrentUser user;
 
         public AccountInfo()
         {
             //userName = "jim";
 
             //Get the current user
-            user = new TutoringDB.Tutee();
+            user = new TutoringDB.CurrentUser();
             readUser = new TutoringDB.TutorDatabaseEntities();
             readUser.CurrentUsers.Load();
-            var multipleUsers = from i in readUser.CurrentUsers select i;
-            foreach (var oneUser in multipleUsers) { user.Username = oneUser.UserName; }
+            user = readUser.CurrentUsers.FirstOrDefault();
 
             TutoringDB.TutorDatabaseEntities tutorSchedule = new TutoringDB.TutorDatabaseEntities();
             
 
-            if (tutorSchedule.Tutees.Any(userF => userF.Username == user.Username))
+            if (user.Type.ToLower().Contains("tutee"))
             {
                 tutorSchedule.Tutees
-                    .Where(userF => (userF.Username == user.Username))
+                    .Where(userF => (userF.Username == user.UserName))
                     .Load();
                 var userList = from i in tutorSchedule.Tutees
+                               where i.Username == user.UserName
                                 select i;
-
-                foreach (var tuteeUser in userList) {
+                var tuteeUser = userList.FirstOrDefault();
                     info.UserFullName = tuteeUser.FirstName + " " + tuteeUser.LastName;
                     info.UserUsernameValue = tuteeUser.Username;
                     info.UserYearValue = tuteeUser.Year.ToString();
                     info.UserApprovedValue = "No";
-                }
             }
-            else if (tutorSchedule.Tutors.Any(userF => userF.UserName == user.Username))
+            else if (user.Type.ToLower().Contains("tutor"))
             {
                 tutorSchedule.Tutors
-                    .Where(userF => (userF.UserName == user.Username))
+                    .Where(userF => (userF.UserName == user.UserName))
                     .Load();
                 var userList = from i in tutorSchedule.Tutors
-                                             select i;
+                               where i.UserName == user.UserName
+                               select i;
 
-                foreach (var tutorUser in userList)
-                {
-                    info.UserFullName = tutorUser.FirstName + " " + tutorUser.LastName;
-                    info.UserUsernameValue = tutorUser.UserName;
-                    info.UserYearValue = tutorUser.Year.ToString();
-                    info.UserApprovedValue = tutorUser.Authorized.ToString();
-                }
-                
+                var tutorUser = userList.FirstOrDefault();
+                info.UserFullName = tutorUser.FirstName + " " + tutorUser.LastName;
+                info.UserUsernameValue = tutorUser.UserName;
+                info.UserYearValue = tutorUser.Year.ToString();
+                info.UserApprovedValue = tutorUser.Authorized.ToString();
             }
             else
             {
                 tutorSchedule.Faculties
-                    .Where(fac => fac.Username == user.Username)
+                    .Where(fac => fac.Username == user.UserName)
                     .Load();
                 var userList = from i in tutorSchedule.Faculties
+                               where i.Username == user.UserName
                                select i;
 
-                foreach (var facultyUser in userList)
-                {
-                    info.UserFullName = facultyUser.First_Name + " " + facultyUser.LastName;
-                    info.UserUsernameValue = facultyUser.Username;
-                    info.UserYearValue = "Not applicable";
-                    info.UserApprovedValue = "Can approve or deny requests to tutor";
-                }
-                
+                var facultyUser = userList.FirstOrDefault();
+                info.UserFullName = facultyUser.First_Name + " " + facultyUser.LastName;
+                info.UserUsernameValue = facultyUser.Username;
+                info.UserYearValue = "Not applicable";
+                info.UserApprovedValue = "Can approve or deny requests to tutor";
             }
             info.WrongOldPassword = "";
 
@@ -150,12 +144,20 @@ namespace TutorWindows
             else
             {
                 TutoringDB.TutorDatabaseEntities userCreds = new TutoringDB.TutorDatabaseEntities();
-                bool correctOldPassword = (userCreds.Tutors.Any(userF => userF.UserName == user.Username && userF.Password == oldPasswordBox.Password) ||
-                       userCreds.Tutees.Any(userF => userF.Username == user.Username && userF.Password == oldPasswordBox.Password) ||
-                       userCreds.Faculties.Any(userF => userF.Username == user.Username && userF.Password == oldPasswordBox.Password));
+                bool correctOldPassword = (userCreds.Tutors.Any(userF => userF.UserName == user.UserName && userF.Password == oldPasswordBox.Password) ||
+                       userCreds.Tutees.Any(userF => userF.Username == user.UserName && userF.Password == oldPasswordBox.Password) ||
+                       userCreds.Faculties.Any(userF => userF.Username == user.UserName && userF.Password == oldPasswordBox.Password));
                 if (correctOldPassword)
                 {
-                    info.WrongOldPassword = "Password change successful / NOT IMPLEMENTED";
+                    info.WrongOldPassword = "Password change successful";
+                    if (user.Type.ToLower().Contains("tutee")) userCreds.Tutees.Where(userT => userT.Username == user.UserName)
+                                                               .FirstOrDefault().Password = newPasswordBox.Password;
+                    else if (user.Type.ToLower().Contains("tutor")) userCreds.Tutors.Where(userT => userT.UserName == user.UserName)
+                                                                    .FirstOrDefault().Password = newPasswordBox.Password;
+
+                    else userCreds.Faculties.Where(userT => userT.Username == user.UserName)
+                         .FirstOrDefault().Password = newPasswordBox.Password;
+                    userCreds.SaveChanges();
                 }
                 else
                 {

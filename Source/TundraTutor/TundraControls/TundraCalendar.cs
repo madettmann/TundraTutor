@@ -84,8 +84,6 @@ namespace TundraControls
 
             TutoringDB.TutorDatabaseEntities tutorSchedule = new TutoringDB.TutorDatabaseEntities();
 
-            //Putting any conditions on the following appears to have no effect whatsoever, and all appointments will always be loaded for some reason
-            //Therefore, if you need to filter things out, do so using a var and keywors, as on line 98
             tutorSchedule.TutorTuteeCourseAppointments
                 .Load();
 
