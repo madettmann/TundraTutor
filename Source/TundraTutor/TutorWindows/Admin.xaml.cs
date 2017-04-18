@@ -107,9 +107,9 @@ namespace TutorWindows
 
         private void selectButton_Click(object sender, RoutedEventArgs e)
         {
-            if (userLists.ListSelected == 1) MessageBox.Show(userLists.TutorNames.ElementAt(tutorList.SelectedIndex));
-            else if (userLists.ListSelected == 2) MessageBox.Show(userLists.TuteeNames.ElementAt(tuteeList.SelectedIndex));
-            else if (userLists.ListSelected == 3) MessageBox.Show(userLists.FacultyNames.ElementAt(facultyList.SelectedIndex));
+            //if (userLists.ListSelected == 1) MessageBox.Show(userLists.TutorNames.ElementAt(tutorList.SelectedIndex));
+            //else if (userLists.ListSelected == 2) MessageBox.Show(userLists.TuteeNames.ElementAt(tuteeList.SelectedIndex));
+            //else if (userLists.ListSelected == 3) MessageBox.Show(userLists.FacultyNames.ElementAt(facultyList.SelectedIndex));
             userCreds.CurrentUsers.Load();
             foreach (var curUser in userCreds.CurrentUsers) userCreds.CurrentUsers.Remove(curUser);
             userCreds.SaveChanges();
