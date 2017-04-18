@@ -71,21 +71,23 @@ namespace TutorWindows
 
             if (Username1.Text == "admin" && Password1.Password == "admin")
             {
-                LaunchPage lp = new LaunchPage();
-                lp.Show();
-                TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
-                user.UserName = Username1.Text;
-                user.Type = "admin";
-                userCreds.CurrentUsers.Load();
-                if (userCreds.CurrentUsers.Count() > 0)
-                {
-                    foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
-                    {
-                        userCreds.CurrentUsers.Remove(i);
-                    }
-                }
-                userCreds.CurrentUsers.Add(user);
-                userCreds.SaveChanges();
+                Admin adminWindow = new Admin();
+                adminWindow.ShowDialog();
+                //LaunchPage lp = new LaunchPage();
+                //lp.Show();
+                //TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
+                //user.UserName = Username1.Text;
+                //user.Type = "admin";
+                //userCreds.CurrentUsers.Load();
+                //if (userCreds.CurrentUsers.Count() > 0)
+                //{
+                //    foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
+                //    {
+                //        userCreds.CurrentUsers.Remove(i);
+                //    }
+                //}
+                //userCreds.CurrentUsers.Add(user);
+                //userCreds.SaveChanges();
             }
 
             else if (Username1.Text == "" && Password1.Password == "")
@@ -109,8 +111,8 @@ namespace TutorWindows
                 userCreds.SaveChanges();
                 if(user.Type == "faculty")
                 {
-                    FacultyView faculty = new FacultyView();
-                    faculty.Show();
+                    //FacultyView faculty = new FacultyView();
+                    //faculty.Show();
                     
                 }
                 else
