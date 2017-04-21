@@ -117,7 +117,8 @@ namespace TundraControls
                     }
                     fakeMax = false;
 
-                    Application.Current.MainWindow.DragMove();
+                    //Application.Current.MainWindow.DragMove();
+                    Window.GetWindow(this).DragMove();
                 }
         }
 

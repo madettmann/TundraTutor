@@ -35,6 +35,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.displayBusyTimesButton = new System.Windows.Forms.Button();
             this.startEndButton = new System.Windows.Forms.Button();
+            this.fillFacultyButton = new System.Windows.Forms.Button();
+            this.fillTutorsTutees = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tutorsbutton
@@ -107,11 +110,44 @@
             this.startEndButton.UseVisualStyleBackColor = true;
             this.startEndButton.Click += new System.EventHandler(this.startEndButton_Click);
             // 
+            // fillFacultyButton
+            // 
+            this.fillFacultyButton.Location = new System.Drawing.Point(139, 13);
+            this.fillFacultyButton.Name = "fillFacultyButton";
+            this.fillFacultyButton.Size = new System.Drawing.Size(120, 23);
+            this.fillFacultyButton.TabIndex = 7;
+            this.fillFacultyButton.Text = "Fill Faculty/Courses";
+            this.fillFacultyButton.UseVisualStyleBackColor = true;
+            this.fillFacultyButton.Click += new System.EventHandler(this.fillFacultyButton_Click);
+            // 
+            // fillTutorsTutees
+            // 
+            this.fillTutorsTutees.Location = new System.Drawing.Point(139, 42);
+            this.fillTutorsTutees.Name = "fillTutorsTutees";
+            this.fillTutorsTutees.Size = new System.Drawing.Size(120, 23);
+            this.fillTutorsTutees.TabIndex = 8;
+            this.fillTutorsTutees.Text = "Fill Tutors/Tutees";
+            this.fillTutorsTutees.UseVisualStyleBackColor = true;
+            this.fillTutorsTutees.Click += new System.EventHandler(this.fillTutorsTutees_Click);
+            // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(139, 71);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(120, 23);
+            this.clearButton.TabIndex = 9;
+            this.clearButton.Text = "Clear All";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // LaunchPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.clearButton);
+            this.Controls.Add(this.fillTutorsTutees);
+            this.Controls.Add(this.fillFacultyButton);
             this.Controls.Add(this.startEndButton);
             this.Controls.Add(this.displayBusyTimesButton);
             this.Controls.Add(this.button1);
@@ -134,5 +170,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button displayBusyTimesButton;
         private System.Windows.Forms.Button startEndButton;
+        private System.Windows.Forms.Button fillFacultyButton;
+        private System.Windows.Forms.Button fillTutorsTutees;
+        private System.Windows.Forms.Button clearButton;
     }
 }

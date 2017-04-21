@@ -27,11 +27,11 @@ namespace TutorWindows
 
         public MainWindow()
         {
-            Application.Current.MainWindow.Width = SystemParameters.WorkArea.Width;
-            Application.Current.MainWindow.Height = SystemParameters.WorkArea.Height;
+            //Application.Current.MainWindow.Width = SystemParameters.WorkArea.Width;
+            //Application.Current.MainWindow.Height = SystemParameters.WorkArea.Height;
             //Application.Current.MainWindow.Left = SystemParameters.WorkArea.Left;
             //Application.Current.MainWindow.Top = SystemParameters.WorkArea.Top;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            //WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             notifications = new ObservableCollection<Notification>();
@@ -107,8 +107,10 @@ namespace TutorWindows
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
         {
-            ScheduleAppointment newAppt = new ScheduleAppointment();
-            newAppt.ShowDialog();
+            //ScheduleAppointment newAppt = new ScheduleAppointment();
+            //newAppt.ShowDialog();
+            AddAppointment f = new AddAppointment();
+            f.ShowDialog();
         }
 
         private void infoButton_Click(object sender, RoutedEventArgs e)

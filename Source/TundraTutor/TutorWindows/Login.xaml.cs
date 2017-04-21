@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,12 +103,10 @@ namespace TutorWindows
                 user.Type = type;
                 userCreds.CurrentUsers.Load();
                 if (userCreds.CurrentUsers.Count() > 0)
-                {
                     foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
                     {
                         userCreds.CurrentUsers.Remove(i);
                     }
-                }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
 
