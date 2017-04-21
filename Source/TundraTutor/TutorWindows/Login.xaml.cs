@@ -49,8 +49,8 @@ namespace TutorWindows
 
             userCreds = new TutoringDB.TutorDatabaseEntities();
             userCreds.CurrentUsers.Load();
-            var index = userCreds.CurrentUsers.FirstOrDefault();
-            if(index != null) userCreds.CurrentUsers.Remove(index);
+            var index = userCreds.CurrentUsers.FirstOrDefault(); 
+            if (index != null) userCreds.CurrentUsers.Remove(index);
             userCreds.SaveChanges();
         }
 
@@ -72,7 +72,8 @@ namespace TutorWindows
             if (Username1.Text == "admin" && Password1.Password == "admin")
             {
                 Admin adminWindow = new Admin();
-                adminWindow.ShowDialog();
+                adminWindow.Show();
+                Close();
                 //LaunchPage lp = new LaunchPage();
                 //lp.Show();
                 //TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
@@ -113,7 +114,7 @@ namespace TutorWindows
 
                 MainWindow monthView = new MainWindow();
                 monthView.Show();
-                this.Close();
+                Close();
             }
             else
             {

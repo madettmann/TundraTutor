@@ -1,4 +1,5 @@
-﻿<control:CustomWindow x:Class="TutorWindows.AccountInfo"
+﻿<!--Writtern by Victor-->
+    <control:CustomWindow x:Class="TutorWindows.AccountInfo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"

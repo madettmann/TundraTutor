@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Victor
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -16,6 +17,8 @@ namespace TutorWindows
         bool finished;
         private ObservableCollection<Notification> notifications;
         internal ObservableCollection<Notification> Notifications { get => notifications; set => notifications = value; }
+        TutoringDB.CurrentUser user;
+        TutoringDB.TutorDatabaseEntities readUser;
 
         enum MonthCounter { January = 1, February, March, April, May, June, July, August, September, October, November, December };
         MonthCounter calendarMonth;
@@ -32,6 +35,12 @@ namespace TutorWindows
 
             months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             notifications = new ObservableCollection<Notification>();
+
+            user = new TutoringDB.CurrentUser();
+            readUser = new TutoringDB.TutorDatabaseEntities();
+            readUser.CurrentUsers.Load();
+            var userList = from i in readUser.CurrentUsers select i;
+            user = userList.FirstOrDefault();
 
             InitializeComponent();
 
@@ -93,7 +102,7 @@ namespace TutorWindows
 
         private void CustomWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(finished) Application.Current.Shutdown();
+            if(finished && !user.Type.ToLower().Contains("admin")) Application.Current.Shutdown();
         }
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
@@ -138,6 +147,12 @@ namespace TutorWindows
         private void calendar_DayClick_1(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Clicked " + calendar.SelectedDate.ToShortDateString());
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Credits creditsPage = new Credits();
+            creditsPage.ShowDialog();
         }
     }
 }
