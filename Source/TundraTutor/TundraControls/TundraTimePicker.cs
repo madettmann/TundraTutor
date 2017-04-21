@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿//Written by Victor
+using System.Windows.Controls;
 using System;
 
 namespace TundraControls

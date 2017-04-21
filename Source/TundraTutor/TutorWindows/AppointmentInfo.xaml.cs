@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿//Written by Victor
+using System.Linq;
 using System.Data.Entity;
 using System.Windows;
 using System.ComponentModel;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Written by Victor
+using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 
 namespace TutorWindows
@@ -7,6 +10,8 @@ namespace TutorWindows
     {
         private bool finished;
         private DateTime selectedDate;
+        TutoringDB.CurrentUser user;
+        TutoringDB.TutorDatabaseEntities readUser;
 
         public Week()
         {
@@ -15,6 +20,12 @@ namespace TutorWindows
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             finished = true;
             selectedDate = DateTime.Today;
+
+            user = new TutoringDB.CurrentUser();
+            readUser = new TutoringDB.TutorDatabaseEntities();
+            readUser.CurrentUsers.Load();
+            var userList = from i in readUser.CurrentUsers select i;
+            user = userList.FirstOrDefault();
 
             InitializeComponent();
 
@@ -39,7 +50,7 @@ namespace TutorWindows
 
         private void CustomWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(finished) Application.Current.Shutdown();
+            if(finished && !user.Type.ToLower().Contains("admin")) Application.Current.Shutdown();
         }
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
@@ -102,6 +113,12 @@ namespace TutorWindows
         {
             BaseSchedule modSched = new BaseSchedule();
             modSched.ShowDialog();
+        }
+
+        private void creditsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Credits creditsPage = new Credits();
+            creditsPage.ShowDialog();
         }
     }
 }

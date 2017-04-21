@@ -1,4 +1,5 @@
-﻿using DisplayTables;
+﻿//Written by Victor
+using DisplayTables;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -129,7 +130,7 @@ namespace TutorWindows
 
         private void lofOffButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
 
         private void tutorList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -187,6 +188,22 @@ namespace TutorWindows
                 default:
                     break;
             }
+        }
+
+        private void databaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            LaunchPage lp = new LaunchPage();
+            lp.ShowDialog();
+        }
+
+        private void databaseButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            databaseButton.Foreground = new SolidColorBrush(Colors.Red);
+        }
+
+        private void databaseButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            databaseButton.Foreground = new SolidColorBrush(Colors.Black);
         }
     }
 }

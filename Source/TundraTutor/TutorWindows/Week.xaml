@@ -1,4 +1,5 @@
-﻿<control:CustomWindow x:Class="TutorWindows.Week"
+﻿<!--Written by Victor-->
+    <control:CustomWindow x:Class="TutorWindows.Week"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
@@ -22,6 +23,7 @@
                     <MenuItem Header="User" Background="White" FontSize="24" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center">
                         <MenuItem x:Name="infoButton" Header="Account Info" Background="White" Margin="-1" Click="infoButton_Click"/>
                         <MenuItem x:Name="logoutButton" Header="Log Out" Background="White" Margin="-1" Click="logoutButton_Click"/>
+                        <MenuItem x:Name="creditsButton" Header="Credits" Background="White" Margin="-1" Click="creditsButton_Click"/>
                     </MenuItem>
                 </Menu>
                 <Menu Background="White" FontSize="24">
