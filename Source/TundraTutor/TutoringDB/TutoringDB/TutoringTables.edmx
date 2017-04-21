@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TutorDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Appointments">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,13 +20,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Duration" Type="time" Precision="7" />
+          <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="BaseSchedule">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TutorId" Type="int" />
           <Property Name="TuteeId" Type="int" />
           <Property Name="BusyTimeId" Type="int" />
@@ -53,7 +61,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="First Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
@@ -64,7 +72,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FacultyId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
@@ -73,14 +81,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" />
-          <Property Name="EndDate" Type="datetime" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TuteeBusyTimes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TuteeId" Type="int" Nullable="false" />
           <Property Name="BusyTimeId" Type="int" Nullable="false" />
         </EntityType>
@@ -100,7 +108,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TutorId" Type="int" Nullable="false" />
           <Property Name="BusyTimesId" Type="int" Nullable="false" />
         </EntityType>
@@ -108,7 +116,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TutorId" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
         </EntityType>
@@ -148,7 +156,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TutorId" Type="int" />
           <Property Name="TuteeId" Type="int" />
           <Property Name="Message" Type="nvarchar(max)" />
@@ -238,7 +246,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Busy">
+        <Association Name="FK_BUSY">
           <End Role="BusyTimes" Type="Self.BusyTimes" Multiplicity="0..1" />
           <End Role="BaseSchedule" Type="Self.BaseSchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,19 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutee">
-          <End Role="Tutees" Type="Self.Tutees" Multiplicity="0..1" />
-          <End Role="TutorTuteeNotification" Type="Self.TutorTuteeNotification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorTuteeNotification">
-              <PropertyRef Name="TuteeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tutee2">
+        <Association Name="FK_TUTEE">
           <End Role="Tutees" Type="Self.Tutees" Multiplicity="0..1" />
           <End Role="BaseSchedule" Type="Self.BaseSchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -286,19 +282,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutor">
-          <End Role="Tutors" Type="Self.Tutors" Multiplicity="0..1" />
+        <Association Name="FK_Tutee2">
+          <End Role="Tutees" Type="Self.Tutees" Multiplicity="0..1" />
           <End Role="TutorTuteeNotification" Type="Self.TutorTuteeNotification" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tutors">
+            <Principal Role="Tutees">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="TutorTuteeNotification">
-              <PropertyRef Name="TutorId" />
+              <PropertyRef Name="TuteeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutor1">
+        <Association Name="FK_Tutor">
           <End Role="Tutors" Type="Self.Tutors" Multiplicity="1" />
           <End Role="TutorCourse" Type="Self.TutorCourse" Multiplicity="*" />
           <ReferentialConstraint>
@@ -311,6 +307,18 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tutor2">
+          <End Role="Tutors" Type="Self.Tutors" Multiplicity="0..1" />
+          <End Role="TutorTuteeNotification" Type="Self.TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TUTORS">
           <End Role="Tutors" Type="Self.Tutors" Multiplicity="0..1" />
           <End Role="BaseSchedule" Type="Self.BaseSchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,7 +390,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TutorDatabaseModelStoreContainer">
+        <EntityContainer Name="StoreContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BaseSchedule" EntityType="Self.BaseSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BusyTimes" EntityType="Self.BusyTimes" Schema="dbo" store:Type="Tables" />
@@ -427,7 +436,7 @@
             <End Role="Faculty" EntitySet="Faculty" />
             <End Role="FacultyCourses" EntitySet="FacultyCourses" />
           </AssociationSet>
-          <AssociationSet Name="FK_Busy" Association="Self.FK_Busy">
+          <AssociationSet Name="FK_BUSY" Association="Self.FK_BUSY">
             <End Role="BusyTimes" EntitySet="BusyTimes" />
             <End Role="BaseSchedule" EntitySet="BaseSchedule" />
           </AssociationSet>
@@ -435,23 +444,23 @@
             <End Role="Courses" EntitySet="Courses" />
             <End Role="TutorCourse" EntitySet="TutorCourse" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tutee" Association="Self.FK_Tutee">
-            <End Role="Tutees" EntitySet="Tutees" />
-            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotification" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tutee2" Association="Self.FK_Tutee2">
+          <AssociationSet Name="FK_TUTEE" Association="Self.FK_TUTEE">
             <End Role="Tutees" EntitySet="Tutees" />
             <End Role="BaseSchedule" EntitySet="BaseSchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tutor" Association="Self.FK_Tutor">
-            <End Role="Tutors" EntitySet="Tutors" />
+          <AssociationSet Name="FK_Tutee2" Association="Self.FK_Tutee2">
+            <End Role="Tutees" EntitySet="Tutees" />
             <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotification" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tutor1" Association="Self.FK_Tutor1">
+          <AssociationSet Name="FK_Tutor" Association="Self.FK_Tutor">
             <End Role="Tutors" EntitySet="Tutors" />
             <End Role="TutorCourse" EntitySet="TutorCourse" />
           </AssociationSet>
           <AssociationSet Name="FK_Tutor2" Association="Self.FK_Tutor2">
+            <End Role="Tutors" EntitySet="Tutors" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TUTORS" Association="Self.FK_TUTORS">
             <End Role="Tutors" EntitySet="Tutors" />
             <End Role="BaseSchedule" EntitySet="BaseSchedule" />
           </AssociationSet>
@@ -480,381 +489,156 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TutorDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Appointment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Duration" Type="Time" Precision="7" />
-          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="Self.AppointmentFK" FromRole="Appointments" ToRole="TutorTuteeCourseAppointments" />
-        </EntityType>
-        <EntityType Name="BusyTime">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="TuteeBusyTimes" Relationship="Self.BusyTimeFK2" FromRole="BusyTimes" ToRole="TuteeBusyTimes" />
-          <NavigationProperty Name="TutorBusyTimes" Relationship="Self.BusyTimesFK" FromRole="BusyTimes" ToRole="TutorBusyTimes" />
-          <NavigationProperty Name="BaseSchedules" Relationship="TutorDatabaseModel.FK_Busy" FromRole="BusyTime" ToRole="BaseSchedule" />
-        </EntityType>
-        <EntityType Name="Cours">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CourseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FacultyCourses" Relationship="Self.CourseFK" FromRole="Courses" ToRole="FacultyCourses" />
-          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="Self.CourseFK2" FromRole="Courses" ToRole="TutorTuteeCourseAppointments" />
-          <NavigationProperty Name="TutorConfirmationRequests" Relationship="Self.CourseFK3" FromRole="Courses" ToRole="TutorConfirmationRequest" />
-          <NavigationProperty Name="TutorCourses" Relationship="TutorDatabaseModel.FK_Course" FromRole="Cours" ToRole="TutorCourse" />
-        </EntityType>
-        <EntityType Name="Faculty">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="FacultyCourses" Relationship="Self.FacultyFK" FromRole="Faculty" ToRole="FacultyCourses" />
-        </EntityType>
-        <EntityType Name="FacultyCours">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FacultyId" Type="Int32" Nullable="false" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cours" Relationship="Self.CourseFK" FromRole="FacultyCourses" ToRole="Courses" />
-          <NavigationProperty Name="Faculty" Relationship="Self.FacultyFK" FromRole="FacultyCourses" ToRole="Faculty" />
-        </EntityType>
-        <EntityType Name="TuteeBusyTime">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TuteeId" Type="Int32" Nullable="false" />
-          <Property Name="BusyTimeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BusyTime" Relationship="Self.BusyTimeFK2" FromRole="TuteeBusyTimes" ToRole="BusyTimes" />
-          <NavigationProperty Name="Tutee" Relationship="Self.TuteeFK2" FromRole="TuteeBusyTimes" ToRole="Tutees" />
-        </EntityType>
-        <EntityType Name="Tutee">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="TuteeBusyTimes" Relationship="Self.TuteeFK2" FromRole="Tutees" ToRole="TuteeBusyTimes" />
-          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="Self.TuteeFK" FromRole="Tutees" ToRole="TutorTuteeCourseAppointments" />
-          <NavigationProperty Name="TutorTuteeNotifications" Relationship="TutorDatabaseModel.FK_Tutee" FromRole="Tutee" ToRole="TutorTuteeNotification" />
-          <NavigationProperty Name="BaseSchedules" Relationship="TutorDatabaseModel.FK_Tutee2" FromRole="Tutee" ToRole="BaseSchedule" />
-        </EntityType>
-        <EntityType Name="TutorBusyTime">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TutorId" Type="Int32" Nullable="false" />
-          <Property Name="BusyTimesId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BusyTime" Relationship="Self.BusyTimesFK" FromRole="TutorBusyTimes" ToRole="BusyTimes" />
-          <NavigationProperty Name="Tutor" Relationship="Self.TutorFK2" FromRole="TutorBusyTimes" ToRole="Tutors" />
-        </EntityType>
-        <EntityType Name="TutorConfirmationRequest">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TutorId" Type="Int32" Nullable="false" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cours" Relationship="Self.CourseFK3" FromRole="TutorConfirmationRequest" ToRole="Courses" />
-          <NavigationProperty Name="Tutor" Relationship="Self.TutorFK3" FromRole="TutorConfirmationRequest" ToRole="Tutors" />
-        </EntityType>
-        <EntityType Name="Tutor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Authorized" Type="Boolean" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="TutorBusyTimes" Relationship="Self.TutorFK2" FromRole="Tutors" ToRole="TutorBusyTimes" />
-          <NavigationProperty Name="TutorConfirmationRequests" Relationship="Self.TutorFK3" FromRole="Tutors" ToRole="TutorConfirmationRequest" />
-          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="Self.TutorFK" FromRole="Tutors" ToRole="TutorTuteeCourseAppointments" />
-          <NavigationProperty Name="TutorTuteeNotifications" Relationship="TutorDatabaseModel.FK_Tutor" FromRole="Tutor" ToRole="TutorTuteeNotification" />
-          <NavigationProperty Name="BaseSchedules" Relationship="TutorDatabaseModel.FK_Tutor2" FromRole="Tutor" ToRole="BaseSchedule" />
-          <NavigationProperty Name="TutorCourses" Relationship="TutorDatabaseModel.FK_Tutor1" FromRole="Tutor" ToRole="TutorCourse" />
-        </EntityType>
-        <EntityType Name="TutorTuteeCourseAppointment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TutorId" Type="Int32" Nullable="false" />
-          <Property Name="TuteeId" Type="Int32" Nullable="false" />
-          <Property Name="AppointmentId" Type="Int32" Nullable="false" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Appointment" Relationship="Self.AppointmentFK" FromRole="TutorTuteeCourseAppointments" ToRole="Appointments" />
-          <NavigationProperty Name="Cours" Relationship="Self.CourseFK2" FromRole="TutorTuteeCourseAppointments" ToRole="Courses" />
-          <NavigationProperty Name="Tutee" Relationship="Self.TuteeFK" FromRole="TutorTuteeCourseAppointments" ToRole="Tutees" />
-          <NavigationProperty Name="Tutor" Relationship="Self.TutorFK" FromRole="TutorTuteeCourseAppointments" ToRole="Tutors" />
-        </EntityType>
-        <Association Name="AppointmentFK">
-          <End Role="Appointments" Type="Self.Appointment" Multiplicity="1" />
-          <End Role="TutorTuteeCourseAppointments" Type="Self.TutorTuteeCourseAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Appointments">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorTuteeCourseAppointments">
-              <PropertyRef Name="AppointmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BusyTimeFK2">
-          <End Role="BusyTimes" Type="Self.BusyTime" Multiplicity="1" />
-          <End Role="TuteeBusyTimes" Type="Self.TuteeBusyTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BusyTimes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TuteeBusyTimes">
-              <PropertyRef Name="BusyTimeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BusyTimesFK">
-          <End Role="BusyTimes" Type="Self.BusyTime" Multiplicity="1" />
-          <End Role="TutorBusyTimes" Type="Self.TutorBusyTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BusyTimes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorBusyTimes">
-              <PropertyRef Name="BusyTimesId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CourseFK">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
-          <End Role="FacultyCourses" Type="Self.FacultyCours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FacultyCourses">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CourseFK2">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
-          <End Role="TutorTuteeCourseAppointments" Type="Self.TutorTuteeCourseAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorTuteeCourseAppointments">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CourseFK3">
-          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
-          <End Role="TutorConfirmationRequest" Type="Self.TutorConfirmationRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorConfirmationRequest">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FacultyFK">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="FacultyCourses" Type="Self.FacultyCours" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faculty">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FacultyCourses">
-              <PropertyRef Name="FacultyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TuteeFK2">
-          <End Role="Tutees" Type="Self.Tutee" Multiplicity="1" />
-          <End Role="TuteeBusyTimes" Type="Self.TuteeBusyTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TuteeBusyTimes">
-              <PropertyRef Name="TuteeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TuteeFK">
-          <End Role="Tutees" Type="Self.Tutee" Multiplicity="1" />
-          <End Role="TutorTuteeCourseAppointments" Type="Self.TutorTuteeCourseAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutees">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorTuteeCourseAppointments">
-              <PropertyRef Name="TuteeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TutorFK2">
-          <End Role="Tutors" Type="Self.Tutor" Multiplicity="1" />
-          <End Role="TutorBusyTimes" Type="Self.TutorBusyTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorBusyTimes">
-              <PropertyRef Name="TutorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TutorFK3">
-          <End Role="Tutors" Type="Self.Tutor" Multiplicity="1" />
-          <End Role="TutorConfirmationRequest" Type="Self.TutorConfirmationRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorConfirmationRequest">
-              <PropertyRef Name="TutorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TutorFK">
-          <End Role="Tutors" Type="Self.Tutor" Multiplicity="1" />
-          <End Role="TutorTuteeCourseAppointments" Type="Self.TutorTuteeCourseAppointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutors">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorTuteeCourseAppointments">
-              <PropertyRef Name="TutorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TutorDatabaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
-          <EntitySet Name="BusyTimes" EntityType="Self.BusyTime" />
-          <EntitySet Name="Courses" EntityType="Self.Cours" />
-          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
-          <EntitySet Name="FacultyCourses" EntityType="Self.FacultyCours" />
-          <EntitySet Name="TuteeBusyTimes" EntityType="Self.TuteeBusyTime" />
-          <EntitySet Name="Tutees" EntityType="Self.Tutee" />
-          <EntitySet Name="TutorBusyTimes" EntityType="Self.TutorBusyTime" />
-          <EntitySet Name="TutorConfirmationRequests" EntityType="Self.TutorConfirmationRequest" />
-          <EntitySet Name="Tutors" EntityType="Self.Tutor" />
-          <EntitySet Name="TutorTuteeCourseAppointments" EntityType="Self.TutorTuteeCourseAppointment" />
-          <AssociationSet Name="AppointmentFK" Association="Self.AppointmentFK">
-            <End Role="Appointments" EntitySet="Appointments" />
-            <End Role="TutorTuteeCourseAppointments" EntitySet="TutorTuteeCourseAppointments" />
-          </AssociationSet>
-          <AssociationSet Name="BusyTimeFK2" Association="Self.BusyTimeFK2">
-            <End Role="BusyTimes" EntitySet="BusyTimes" />
-            <End Role="TuteeBusyTimes" EntitySet="TuteeBusyTimes" />
-          </AssociationSet>
-          <AssociationSet Name="BusyTimesFK" Association="Self.BusyTimesFK">
-            <End Role="BusyTimes" EntitySet="BusyTimes" />
-            <End Role="TutorBusyTimes" EntitySet="TutorBusyTimes" />
-          </AssociationSet>
-          <AssociationSet Name="CourseFK" Association="Self.CourseFK">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="FacultyCourses" EntitySet="FacultyCourses" />
-          </AssociationSet>
-          <AssociationSet Name="CourseFK2" Association="Self.CourseFK2">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="TutorTuteeCourseAppointments" EntitySet="TutorTuteeCourseAppointments" />
-          </AssociationSet>
-          <AssociationSet Name="CourseFK3" Association="Self.CourseFK3">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="TutorConfirmationRequest" EntitySet="TutorConfirmationRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FacultyFK" Association="Self.FacultyFK">
-            <End Role="Faculty" EntitySet="Faculties" />
-            <End Role="FacultyCourses" EntitySet="FacultyCourses" />
-          </AssociationSet>
-          <AssociationSet Name="TuteeFK2" Association="Self.TuteeFK2">
-            <End Role="Tutees" EntitySet="Tutees" />
-            <End Role="TuteeBusyTimes" EntitySet="TuteeBusyTimes" />
-          </AssociationSet>
-          <AssociationSet Name="TuteeFK" Association="Self.TuteeFK">
-            <End Role="Tutees" EntitySet="Tutees" />
-            <End Role="TutorTuteeCourseAppointments" EntitySet="TutorTuteeCourseAppointments" />
-          </AssociationSet>
-          <AssociationSet Name="TutorFK2" Association="Self.TutorFK2">
-            <End Role="Tutors" EntitySet="Tutors" />
-            <End Role="TutorBusyTimes" EntitySet="TutorBusyTimes" />
-          </AssociationSet>
-          <AssociationSet Name="TutorFK3" Association="Self.TutorFK3">
-            <End Role="Tutors" EntitySet="Tutors" />
-            <End Role="TutorConfirmationRequest" EntitySet="TutorConfirmationRequests" />
-          </AssociationSet>
-          <AssociationSet Name="TutorFK" Association="Self.TutorFK">
-            <End Role="Tutors" EntitySet="Tutors" />
-            <End Role="TutorTuteeCourseAppointments" EntitySet="TutorTuteeCourseAppointments" />
-          </AssociationSet>
-          <EntitySet Name="CurrentUsers" EntityType="TutorDatabaseModel.CurrentUser" />
-          <EntitySet Name="StartEnds" EntityType="TutorDatabaseModel.StartEnd" />
-          <EntitySet Name="TutorTuteeNotifications" EntityType="TutorDatabaseModel.TutorTuteeNotification" />
-          <AssociationSet Name="FK_Tutee" Association="TutorDatabaseModel.FK_Tutee">
-            <End Role="Tutee" EntitySet="Tutees" />
-            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tutor" Association="TutorDatabaseModel.FK_Tutor">
-            <End Role="Tutor" EntitySet="Tutors" />
-            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotifications" />
-          </AssociationSet>
+          <EntitySet Name="Admins" EntityType="TutorDatabaseModel.Admin" />
+          <EntitySet Name="Appointments" EntityType="TutorDatabaseModel.Appointment" />
           <EntitySet Name="BaseSchedules" EntityType="TutorDatabaseModel.BaseSchedule" />
+          <EntitySet Name="BusyTimes" EntityType="TutorDatabaseModel.BusyTime" />
+          <EntitySet Name="Courses" EntityType="TutorDatabaseModel.Cours" />
+          <EntitySet Name="CurrentUsers" EntityType="TutorDatabaseModel.CurrentUser" />
+          <EntitySet Name="Faculties" EntityType="TutorDatabaseModel.Faculty" />
+          <EntitySet Name="FacultyCourses" EntityType="TutorDatabaseModel.FacultyCours" />
+          <EntitySet Name="StartEnds" EntityType="TutorDatabaseModel.StartEnd" />
+          <EntitySet Name="TuteeBusyTimes" EntityType="TutorDatabaseModel.TuteeBusyTime" />
+          <EntitySet Name="Tutees" EntityType="TutorDatabaseModel.Tutee" />
+          <EntitySet Name="TutorBusyTimes" EntityType="TutorDatabaseModel.TutorBusyTime" />
+          <EntitySet Name="TutorConfirmationRequests" EntityType="TutorDatabaseModel.TutorConfirmationRequest" />
           <EntitySet Name="TutorCourses" EntityType="TutorDatabaseModel.TutorCourse" />
-          <AssociationSet Name="FK_Busy" Association="TutorDatabaseModel.FK_Busy">
+          <EntitySet Name="Tutors" EntityType="TutorDatabaseModel.Tutor" />
+          <EntitySet Name="TutorTuteeCourseAppointments" EntityType="TutorDatabaseModel.TutorTuteeCourseAppointment" />
+          <EntitySet Name="TutorTuteeNotifications" EntityType="TutorDatabaseModel.TutorTuteeNotification" />
+          <AssociationSet Name="AppointmentFK" Association="TutorDatabaseModel.AppointmentFK">
+            <End Role="Appointment" EntitySet="Appointments" />
+            <End Role="TutorTuteeCourseAppointment" EntitySet="TutorTuteeCourseAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BUSY" Association="TutorDatabaseModel.FK_BUSY">
             <End Role="BusyTime" EntitySet="BusyTimes" />
             <End Role="BaseSchedule" EntitySet="BaseSchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tutee2" Association="TutorDatabaseModel.FK_Tutee2">
+          <AssociationSet Name="FK_TUTEE" Association="TutorDatabaseModel.FK_TUTEE">
             <End Role="Tutee" EntitySet="Tutees" />
             <End Role="BaseSchedule" EntitySet="BaseSchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tutor2" Association="TutorDatabaseModel.FK_Tutor2">
+          <AssociationSet Name="FK_TUTORS" Association="TutorDatabaseModel.FK_TUTORS">
             <End Role="Tutor" EntitySet="Tutors" />
             <End Role="BaseSchedule" EntitySet="BaseSchedules" />
+          </AssociationSet>
+          <AssociationSet Name="BusyTimeFK2" Association="TutorDatabaseModel.BusyTimeFK2">
+            <End Role="BusyTime" EntitySet="BusyTimes" />
+            <End Role="TuteeBusyTime" EntitySet="TuteeBusyTimes" />
+          </AssociationSet>
+          <AssociationSet Name="BusyTimesFK" Association="TutorDatabaseModel.BusyTimesFK">
+            <End Role="BusyTime" EntitySet="BusyTimes" />
+            <End Role="TutorBusyTime" EntitySet="TutorBusyTimes" />
+          </AssociationSet>
+          <AssociationSet Name="CourseFK" Association="TutorDatabaseModel.CourseFK">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="FacultyCours" EntitySet="FacultyCourses" />
+          </AssociationSet>
+          <AssociationSet Name="CourseFK2" Association="TutorDatabaseModel.CourseFK2">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="TutorTuteeCourseAppointment" EntitySet="TutorTuteeCourseAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="CourseFK3" Association="TutorDatabaseModel.CourseFK3">
+            <End Role="Cours" EntitySet="Courses" />
+            <End Role="TutorConfirmationRequest" EntitySet="TutorConfirmationRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_Course" Association="TutorDatabaseModel.FK_Course">
             <End Role="Cours" EntitySet="Courses" />
             <End Role="TutorCourse" EntitySet="TutorCourses" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tutor1" Association="TutorDatabaseModel.FK_Tutor1">
+          <AssociationSet Name="FacultyFK" Association="TutorDatabaseModel.FacultyFK">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="FacultyCours" EntitySet="FacultyCourses" />
+          </AssociationSet>
+          <AssociationSet Name="TuteeFK2" Association="TutorDatabaseModel.TuteeFK2">
+            <End Role="Tutee" EntitySet="Tutees" />
+            <End Role="TuteeBusyTime" EntitySet="TuteeBusyTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutee2" Association="TutorDatabaseModel.FK_Tutee2">
+            <End Role="Tutee" EntitySet="Tutees" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="TuteeFK" Association="TutorDatabaseModel.TuteeFK">
+            <End Role="Tutee" EntitySet="Tutees" />
+            <End Role="TutorTuteeCourseAppointment" EntitySet="TutorTuteeCourseAppointments" />
+          </AssociationSet>
+          <AssociationSet Name="TutorFK2" Association="TutorDatabaseModel.TutorFK2">
+            <End Role="Tutor" EntitySet="Tutors" />
+            <End Role="TutorBusyTime" EntitySet="TutorBusyTimes" />
+          </AssociationSet>
+          <AssociationSet Name="TutorFK3" Association="TutorDatabaseModel.TutorFK3">
+            <End Role="Tutor" EntitySet="Tutors" />
+            <End Role="TutorConfirmationRequest" EntitySet="TutorConfirmationRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor" Association="TutorDatabaseModel.FK_Tutor">
             <End Role="Tutor" EntitySet="Tutors" />
             <End Role="TutorCourse" EntitySet="TutorCourses" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tutor2" Association="TutorDatabaseModel.FK_Tutor2">
+            <End Role="Tutor" EntitySet="Tutors" />
+            <End Role="TutorTuteeNotification" EntitySet="TutorTuteeNotifications" />
+          </AssociationSet>
+          <AssociationSet Name="TutorFK" Association="TutorDatabaseModel.TutorFK">
+            <End Role="Tutor" EntitySet="Tutors" />
+            <End Role="TutorTuteeCourseAppointment" EntitySet="TutorTuteeCourseAppointments" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Time" Precision="7" Nullable="false" />
+          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="TutorDatabaseModel.AppointmentFK" FromRole="Appointment" ToRole="TutorTuteeCourseAppointment" />
+        </EntityType>
+        <EntityType Name="BaseSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TutorId" Type="Int32" />
+          <Property Name="TuteeId" Type="Int32" />
+          <Property Name="BusyTimeId" Type="Int32" />
+          <NavigationProperty Name="BusyTime" Relationship="TutorDatabaseModel.FK_BUSY" FromRole="BaseSchedule" ToRole="BusyTime" />
+          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.FK_TUTEE" FromRole="BaseSchedule" ToRole="Tutee" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_TUTORS" FromRole="BaseSchedule" ToRole="Tutor" />
+        </EntityType>
+        <EntityType Name="BusyTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="BaseSchedules" Relationship="TutorDatabaseModel.FK_BUSY" FromRole="BusyTime" ToRole="BaseSchedule" />
+          <NavigationProperty Name="TuteeBusyTimes" Relationship="TutorDatabaseModel.BusyTimeFK2" FromRole="BusyTime" ToRole="TuteeBusyTime" />
+          <NavigationProperty Name="TutorBusyTimes" Relationship="TutorDatabaseModel.BusyTimesFK" FromRole="BusyTime" ToRole="TutorBusyTime" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FacultyCourses" Relationship="TutorDatabaseModel.CourseFK" FromRole="Cours" ToRole="FacultyCours" />
+          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="TutorDatabaseModel.CourseFK2" FromRole="Cours" ToRole="TutorTuteeCourseAppointment" />
+          <NavigationProperty Name="TutorConfirmationRequests" Relationship="TutorDatabaseModel.CourseFK3" FromRole="Cours" ToRole="TutorConfirmationRequest" />
+          <NavigationProperty Name="TutorCourses" Relationship="TutorDatabaseModel.FK_Course" FromRole="Cours" ToRole="TutorCourse" />
+        </EntityType>
         <EntityType Name="CurrentUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -863,13 +647,125 @@
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FacultyCourses" Relationship="TutorDatabaseModel.FacultyFK" FromRole="Faculty" ToRole="FacultyCours" />
+        </EntityType>
+        <EntityType Name="FacultyCours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="TutorDatabaseModel.CourseFK" FromRole="FacultyCours" ToRole="Cours" />
+          <NavigationProperty Name="Faculty" Relationship="TutorDatabaseModel.FacultyFK" FromRole="FacultyCours" ToRole="Faculty" />
+        </EntityType>
         <EntityType Name="StartEnd">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TuteeBusyTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TuteeId" Type="Int32" Nullable="false" />
+          <Property Name="BusyTimeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusyTime" Relationship="TutorDatabaseModel.BusyTimeFK2" FromRole="TuteeBusyTime" ToRole="BusyTime" />
+          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.TuteeFK2" FromRole="TuteeBusyTime" ToRole="Tutee" />
+        </EntityType>
+        <EntityType Name="Tutee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BaseSchedules" Relationship="TutorDatabaseModel.FK_TUTEE" FromRole="Tutee" ToRole="BaseSchedule" />
+          <NavigationProperty Name="TuteeBusyTimes" Relationship="TutorDatabaseModel.TuteeFK2" FromRole="Tutee" ToRole="TuteeBusyTime" />
+          <NavigationProperty Name="TutorTuteeNotifications" Relationship="TutorDatabaseModel.FK_Tutee2" FromRole="Tutee" ToRole="TutorTuteeNotification" />
+          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="TutorDatabaseModel.TuteeFK" FromRole="Tutee" ToRole="TutorTuteeCourseAppointment" />
+        </EntityType>
+        <EntityType Name="TutorBusyTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TutorId" Type="Int32" Nullable="false" />
+          <Property Name="BusyTimesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusyTime" Relationship="TutorDatabaseModel.BusyTimesFK" FromRole="TutorBusyTime" ToRole="BusyTime" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.TutorFK2" FromRole="TutorBusyTime" ToRole="Tutor" />
+        </EntityType>
+        <EntityType Name="TutorConfirmationRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TutorId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="TutorDatabaseModel.CourseFK3" FromRole="TutorConfirmationRequest" ToRole="Cours" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.TutorFK3" FromRole="TutorConfirmationRequest" ToRole="Tutor" />
+        </EntityType>
+        <EntityType Name="TutorCourse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TutorId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="TutorDatabaseModel.FK_Course" FromRole="TutorCourse" ToRole="Cours" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_Tutor" FromRole="TutorCourse" ToRole="Tutor" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Authorized" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BaseSchedules" Relationship="TutorDatabaseModel.FK_TUTORS" FromRole="Tutor" ToRole="BaseSchedule" />
+          <NavigationProperty Name="TutorBusyTimes" Relationship="TutorDatabaseModel.TutorFK2" FromRole="Tutor" ToRole="TutorBusyTime" />
+          <NavigationProperty Name="TutorConfirmationRequests" Relationship="TutorDatabaseModel.TutorFK3" FromRole="Tutor" ToRole="TutorConfirmationRequest" />
+          <NavigationProperty Name="TutorCourses" Relationship="TutorDatabaseModel.FK_Tutor" FromRole="Tutor" ToRole="TutorCourse" />
+          <NavigationProperty Name="TutorTuteeNotifications" Relationship="TutorDatabaseModel.FK_Tutor2" FromRole="Tutor" ToRole="TutorTuteeNotification" />
+          <NavigationProperty Name="TutorTuteeCourseAppointments" Relationship="TutorDatabaseModel.TutorFK" FromRole="Tutor" ToRole="TutorTuteeCourseAppointment" />
+        </EntityType>
+        <EntityType Name="TutorTuteeCourseAppointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TutorId" Type="Int32" Nullable="false" />
+          <Property Name="TuteeId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Appointment" Relationship="TutorDatabaseModel.AppointmentFK" FromRole="TutorTuteeCourseAppointment" ToRole="Appointment" />
+          <NavigationProperty Name="Cours" Relationship="TutorDatabaseModel.CourseFK2" FromRole="TutorTuteeCourseAppointment" ToRole="Cours" />
+          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.TuteeFK" FromRole="TutorTuteeCourseAppointment" ToRole="Tutee" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.TutorFK" FromRole="TutorTuteeCourseAppointment" ToRole="Tutor" />
         </EntityType>
         <EntityType Name="TutorTuteeNotification">
           <Key>
@@ -879,57 +775,23 @@
           <Property Name="TutorId" Type="Int32" />
           <Property Name="TuteeId" Type="Int32" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.FK_Tutee" FromRole="TutorTuteeNotification" ToRole="Tutee" />
-          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_Tutor" FromRole="TutorTuteeNotification" ToRole="Tutor" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.FK_Tutee2" FromRole="TutorTuteeNotification" ToRole="Tutee" />
+          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_Tutor2" FromRole="TutorTuteeNotification" ToRole="Tutor" />
         </EntityType>
-        <Association Name="FK_Tutee">
-          <End Type="TutorDatabaseModel.Tutee" Role="Tutee" Multiplicity="0..1" />
-          <End Type="TutorDatabaseModel.TutorTuteeNotification" Role="TutorTuteeNotification" Multiplicity="*" />
+        <Association Name="AppointmentFK">
+          <End Type="TutorDatabaseModel.Appointment" Role="Appointment" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorTuteeCourseAppointment" Role="TutorTuteeCourseAppointment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tutee">
+            <Principal Role="Appointment">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TutorTuteeNotification">
-              <PropertyRef Name="TuteeId" />
+            <Dependent Role="TutorTuteeCourseAppointment">
+              <PropertyRef Name="AppointmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutor">
-          <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="0..1" />
-          <End Type="TutorDatabaseModel.TutorTuteeNotification" Role="TutorTuteeNotification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tutor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TutorTuteeNotification">
-              <PropertyRef Name="TutorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="BaseSchedule">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TutorId" Type="Int32" />
-          <Property Name="TuteeId" Type="Int32" />
-          <Property Name="BusyTimeId" Type="Int32" />
-          <NavigationProperty Name="BusyTime" Relationship="TutorDatabaseModel.FK_Busy" FromRole="BaseSchedule" ToRole="BusyTime" />
-          <NavigationProperty Name="Tutee" Relationship="TutorDatabaseModel.FK_Tutee2" FromRole="BaseSchedule" ToRole="Tutee" />
-          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_Tutor2" FromRole="BaseSchedule" ToRole="Tutor" />
-        </EntityType>
-        <EntityType Name="TutorCourse">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TutorId" Type="Int32" Nullable="false" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cours" Relationship="TutorDatabaseModel.FK_Course" FromRole="TutorCourse" ToRole="Cours" />
-          <NavigationProperty Name="Tutor" Relationship="TutorDatabaseModel.FK_Tutor1" FromRole="TutorCourse" ToRole="Tutor" />
-        </EntityType>
-        <Association Name="FK_Busy">
+        <Association Name="FK_BUSY">
           <End Type="TutorDatabaseModel.BusyTime" Role="BusyTime" Multiplicity="0..1" />
           <End Type="TutorDatabaseModel.BaseSchedule" Role="BaseSchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -941,7 +803,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutee2">
+        <Association Name="FK_TUTEE">
           <End Type="TutorDatabaseModel.Tutee" Role="Tutee" Multiplicity="0..1" />
           <End Type="TutorDatabaseModel.BaseSchedule" Role="BaseSchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -953,7 +815,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutor2">
+        <Association Name="FK_TUTORS">
           <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="0..1" />
           <End Type="TutorDatabaseModel.BaseSchedule" Role="BaseSchedule" Multiplicity="*" />
           <ReferentialConstraint>
@@ -962,6 +824,66 @@
             </Principal>
             <Dependent Role="BaseSchedule">
               <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusyTimeFK2">
+          <End Type="TutorDatabaseModel.BusyTime" Role="BusyTime" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TuteeBusyTime" Role="TuteeBusyTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusyTime">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TuteeBusyTime">
+              <PropertyRef Name="BusyTimeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BusyTimesFK">
+          <End Type="TutorDatabaseModel.BusyTime" Role="BusyTime" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorBusyTime" Role="TutorBusyTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusyTime">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorBusyTime">
+              <PropertyRef Name="BusyTimesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CourseFK">
+          <End Type="TutorDatabaseModel.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.FacultyCours" Role="FacultyCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacultyCours">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CourseFK2">
+          <End Type="TutorDatabaseModel.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorTuteeCourseAppointment" Role="TutorTuteeCourseAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeCourseAppointment">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CourseFK3">
+          <End Type="TutorDatabaseModel.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorConfirmationRequest" Role="TutorConfirmationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorConfirmationRequest">
+              <PropertyRef Name="CourseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -977,7 +899,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tutor1">
+        <Association Name="FacultyFK">
+          <End Type="TutorDatabaseModel.Faculty" Role="Faculty" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.FacultyCours" Role="FacultyCours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacultyCours">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TuteeFK2">
+          <End Type="TutorDatabaseModel.Tutee" Role="Tutee" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TuteeBusyTime" Role="TuteeBusyTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TuteeBusyTime">
+              <PropertyRef Name="TuteeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutee2">
+          <End Type="TutorDatabaseModel.Tutee" Role="Tutee" Multiplicity="0..1" />
+          <End Type="TutorDatabaseModel.TutorTuteeNotification" Role="TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TuteeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TuteeFK">
+          <End Type="TutorDatabaseModel.Tutee" Role="Tutee" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorTuteeCourseAppointment" Role="TutorTuteeCourseAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeCourseAppointment">
+              <PropertyRef Name="TuteeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TutorFK2">
+          <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorBusyTime" Role="TutorBusyTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorBusyTime">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TutorFK3">
+          <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorConfirmationRequest" Role="TutorConfirmationRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorConfirmationRequest">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor">
           <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="1" />
           <End Type="TutorDatabaseModel.TutorCourse" Role="TutorCourse" Multiplicity="*" />
           <ReferentialConstraint>
@@ -989,126 +983,82 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Tutor2">
+          <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="0..1" />
+          <End Type="TutorDatabaseModel.TutorTuteeNotification" Role="TutorTuteeNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeNotification">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TutorFK">
+          <End Type="TutorDatabaseModel.Tutor" Role="Tutor" Multiplicity="1" />
+          <End Type="TutorDatabaseModel.TutorTuteeCourseAppointment" Role="TutorTuteeCourseAppointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorTuteeCourseAppointment">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TutorDatabaseModelStoreContainer" CdmEntityContainer="TutorDatabaseEntities">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StoreContainer" CdmEntityContainer="TutorDatabaseEntities" >
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.Admin">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="TutorDatabaseModel.Appointment">
               <MappingFragment StoreEntitySet="Appointments">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BaseSchedules">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.BaseSchedule">
+              <MappingFragment StoreEntitySet="BaseSchedule">
+                <ScalarProperty Name="BusyTimeId" ColumnName="BusyTimeId" />
+                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BusyTimes">
             <EntityTypeMapping TypeName="TutorDatabaseModel.BusyTime">
               <MappingFragment StoreEntitySet="BusyTimes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="TutorDatabaseModel.Cours">
               <MappingFragment StoreEntitySet="Courses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Faculties">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.Faculty">
-              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="First_Name" ColumnName="First Name" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FacultyCourses">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.FacultyCours">
-              <MappingFragment StoreEntitySet="FacultyCourses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TuteeBusyTimes">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.TuteeBusyTime">
-              <MappingFragment StoreEntitySet="TuteeBusyTimes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
-                <ScalarProperty Name="BusyTimeId" ColumnName="BusyTimeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tutees">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.Tutee">
-              <MappingFragment StoreEntitySet="Tutees">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TutorBusyTimes">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorBusyTime">
-              <MappingFragment StoreEntitySet="TutorBusyTimes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
-                <ScalarProperty Name="BusyTimesId" ColumnName="BusyTimesId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TutorConfirmationRequests">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorConfirmationRequest">
-              <MappingFragment StoreEntitySet="TutorConfirmationRequest">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tutors">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.Tutor">
-              <MappingFragment StoreEntitySet="Tutors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Authorized" ColumnName="Authorized" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TutorTuteeCourseAppointments">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorTuteeCourseAppointment">
-              <MappingFragment StoreEntitySet="TutorTuteeCourseAppointments">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
-                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
-                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1121,11 +1071,107 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacultyCourses">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.FacultyCours">
+              <MappingFragment StoreEntitySet="FacultyCourses">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StartEnds">
             <EntityTypeMapping TypeName="TutorDatabaseModel.StartEnd">
               <MappingFragment StoreEntitySet="StartEnd">
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TuteeBusyTimes">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.TuteeBusyTime">
+              <MappingFragment StoreEntitySet="TuteeBusyTimes">
+                <ScalarProperty Name="BusyTimeId" ColumnName="BusyTimeId" />
+                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tutees">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.Tutee">
+              <MappingFragment StoreEntitySet="Tutees">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorBusyTimes">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorBusyTime">
+              <MappingFragment StoreEntitySet="TutorBusyTimes">
+                <ScalarProperty Name="BusyTimesId" ColumnName="BusyTimesId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorConfirmationRequests">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorConfirmationRequest">
+              <MappingFragment StoreEntitySet="TutorConfirmationRequest">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorCourses">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorCourse">
+              <MappingFragment StoreEntitySet="TutorCourse">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tutors">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.Tutor">
+              <MappingFragment StoreEntitySet="Tutors">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Authorized" ColumnName="Authorized" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorTuteeCourseAppointments">
+            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorTuteeCourseAppointment">
+              <MappingFragment StoreEntitySet="TutorTuteeCourseAppointments">
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1141,28 +1187,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BaseSchedules">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.BaseSchedule">
-              <MappingFragment StoreEntitySet="BaseSchedule">
-                <ScalarProperty Name="BusyTimeId" ColumnName="BusyTimeId" />
-                <ScalarProperty Name="TuteeId" ColumnName="TuteeId" />
-                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TutorCourses">
-            <EntityTypeMapping TypeName="TutorDatabaseModel.TutorCourse">
-              <MappingFragment StoreEntitySet="TutorCourse">
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -1176,7 +1202,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

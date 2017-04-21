@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,8 +73,8 @@ namespace TutorWindows
             {
                 Admin adminWindow = new Admin();
                 adminWindow.ShowDialog();
-                //LaunchPage lp = new LaunchPage();
-                //lp.Show();
+                LaunchPage lp = new LaunchPage();
+                lp.Show();
                 //TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
                 //user.UserName = Username1.Text;
                 //user.Type = "admin";
@@ -102,12 +102,10 @@ namespace TutorWindows
                 user.Type = type;
                 userCreds.CurrentUsers.Load();
                 if (userCreds.CurrentUsers.Count() > 0)
-                {
                     foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
                     {
                         userCreds.CurrentUsers.Remove(i);
                     }
-                }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
 

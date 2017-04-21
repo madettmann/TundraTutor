@@ -25,21 +25,22 @@ namespace TutoringDB
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Appointment> Appointments { get; set; }
+        public virtual DbSet<BaseSchedule> BaseSchedules { get; set; }
         public virtual DbSet<BusyTime> BusyTimes { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<CurrentUser> CurrentUsers { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<FacultyCours> FacultyCourses { get; set; }
+        public virtual DbSet<StartEnd> StartEnds { get; set; }
         public virtual DbSet<TuteeBusyTime> TuteeBusyTimes { get; set; }
         public virtual DbSet<Tutee> Tutees { get; set; }
         public virtual DbSet<TutorBusyTime> TutorBusyTimes { get; set; }
         public virtual DbSet<TutorConfirmationRequest> TutorConfirmationRequests { get; set; }
+        public virtual DbSet<TutorCourse> TutorCourses { get; set; }
         public virtual DbSet<Tutor> Tutors { get; set; }
         public virtual DbSet<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }
-        public virtual DbSet<CurrentUser> CurrentUsers { get; set; }
-        public virtual DbSet<StartEnd> StartEnds { get; set; }
         public virtual DbSet<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
-        public virtual DbSet<BaseSchedule> BaseSchedules { get; set; }
-        public virtual DbSet<TutorCourse> TutorCourses { get; set; }
     }
 }

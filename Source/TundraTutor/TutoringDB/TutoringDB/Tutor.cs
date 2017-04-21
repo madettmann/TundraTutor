@@ -17,12 +17,12 @@ namespace TutoringDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tutor()
         {
+            this.BaseSchedules = new HashSet<BaseSchedule>();
             this.TutorBusyTimes = new HashSet<TutorBusyTime>();
             this.TutorConfirmationRequests = new HashSet<TutorConfirmationRequest>();
-            this.TutorTuteeCourseAppointments = new HashSet<TutorTuteeCourseAppointment>();
-            this.TutorTuteeNotifications = new HashSet<TutorTuteeNotification>();
-            this.BaseSchedules = new HashSet<BaseSchedule>();
             this.TutorCourses = new HashSet<TutorCourse>();
+            this.TutorTuteeNotifications = new HashSet<TutorTuteeNotification>();
+            this.TutorTuteeCourseAppointments = new HashSet<TutorTuteeCourseAppointment>();
         }
     
         public int Id { get; set; }
@@ -35,16 +35,16 @@ namespace TutoringDB
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaseSchedule> BaseSchedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorBusyTime> TutorBusyTimes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorConfirmationRequest> TutorConfirmationRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }
+        public virtual ICollection<TutorCourse> TutorCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BaseSchedule> BaseSchedules { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TutorCourse> TutorCourses { get; set; }
+        public virtual ICollection<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }
     }
 }
