@@ -1,8 +1,11 @@
 ﻿//Written by Victor
+using GalaSoft.MvvmLight.Command;
 using System;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace TutorWindows
 {
@@ -12,6 +15,8 @@ namespace TutorWindows
         private DateTime selectedDate;
         TutoringDB.CurrentUser user;
         TutoringDB.TutorDatabaseEntities readUser;
+        public ObservableCollection<Notification> Notifications;
+        public ICommand NotificationCommand { get; set; }
 
         public Week()
         {
@@ -28,6 +33,15 @@ namespace TutorWindows
             user = userList.FirstOrDefault();
 
             InitializeComponent();
+
+            Notifications = new ObservableCollection<Notification>();
+            NotificationCommand = new RelayCommand<object>(onNotificationClicked);
+            if (Notifications.Count == 0)
+            {
+                Notifications.Add(new Notification("Nothing here!"));
+            }
+
+            NotificationsList.ItemsSource = Notifications;
 
             nextButton.Click += (o,e) => refreshWeek(7);
             prevButton.Click += (o, e) => refreshWeek(-7);
@@ -119,6 +133,11 @@ namespace TutorWindows
         {
             Credits creditsPage = new Credits();
             creditsPage.ShowDialog();
+        }
+
+        private void onNotificationClicked(object obj)
+        {
+            MessageBox.Show((obj as Notification).Message);
         }
     }
 }

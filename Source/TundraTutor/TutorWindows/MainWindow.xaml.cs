@@ -1,10 +1,12 @@
 ﻿//Written by Victor
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace TutorWindows
 {
@@ -15,10 +17,10 @@ namespace TutorWindows
         int selectedMonth;
         int currYear;
         bool finished;
-        private ObservableCollection<Notification> notifications;
-        internal ObservableCollection<Notification> Notifications { get => notifications; set => notifications = value; }
+        public ObservableCollection<Notification> Notifications;
         TutoringDB.CurrentUser user;
         TutoringDB.TutorDatabaseEntities readUser;
+        public ICommand NotificationCommand { get; set; }
 
         enum MonthCounter { January = 1, February, March, April, May, June, July, August, September, October, November, December };
         MonthCounter calendarMonth;
@@ -27,14 +29,8 @@ namespace TutorWindows
 
         public MainWindow()
         {
-            //Application.Current.MainWindow.Width = SystemParameters.WorkArea.Width;
-            //Application.Current.MainWindow.Height = SystemParameters.WorkArea.Height;
-            //Application.Current.MainWindow.Left = SystemParameters.WorkArea.Left;
-            //Application.Current.MainWindow.Top = SystemParameters.WorkArea.Top;
-            //WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-
             months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-            notifications = new ObservableCollection<Notification>();
+            
 
             user = new TutoringDB.CurrentUser();
             readUser = new TutoringDB.TutorDatabaseEntities();
@@ -55,14 +51,19 @@ namespace TutorWindows
             nextButton.Click += (o, e) => refreshCalendar(1);
             prevButton.Click += (o, e) => refreshCalendar(2);
 
-            if(notifications.Count == 0)
+            Notifications = new ObservableCollection<Notification>();
+            NotificationCommand = new RelayCommand<object>(onNotificationClicked);
+            if (Notifications.Count == 0)
             {
                 Notifications.Add(new Notification("Nothing here!"));
             }
 
+            NotificationsList.ItemsSource = Notifications;
+
             DataContext = this;
         }
 
+        
         private void refreshCalendar(int x)
         {
             switch (x)
@@ -127,18 +128,16 @@ namespace TutorWindows
             this.Close();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            AddBusy addBusyWindow = new AddBusy();
-            addBusyWindow.ShowDialog();
-        }
-
         private void CustomWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Width = SystemParameters.WorkArea.Width;
             this.Height = SystemParameters.WorkArea.Height;
             this.Left = SystemParameters.WorkArea.Left;
             this.Top = SystemParameters.WorkArea.Top;
+
+            if (userMenu.Width == 0) { userMenu.Width = toolbarPanel.ActualWidth; userMenu.Height = toolbarPanel.ActualWidth; }
+            if (notificationsMenu.Width == 0) { notificationsMenu.Width = toolbarPanel.ActualWidth; notificationsMenu.Height = toolbarPanel.ActualWidth; }
+            if (actionsMenu.Width == 0) { actionsMenu.Width = toolbarPanel.ActualWidth; actionsMenu.Height = toolbarPanel.ActualWidth; }
         }
 
         private void TundraButton_Click(object sender, RoutedEventArgs e)
@@ -155,6 +154,17 @@ namespace TutorWindows
         {
             Credits creditsPage = new Credits();
             creditsPage.ShowDialog();
+        }
+
+        private void onNotificationClicked(object obj)
+        {
+            MessageBox.Show((obj as Notification).Message);
+        }
+
+        private void modSchedButton_Click(object sender, RoutedEventArgs e)
+        {
+            BaseSchedule modSched = new BaseSchedule();
+            modSched.ShowDialog();
         }
     }
 }

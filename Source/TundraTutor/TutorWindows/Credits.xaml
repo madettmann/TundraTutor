@@ -11,7 +11,7 @@
             <RowDefinition Height="190*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Brought to you by " HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="26"/>
-        <Image Source="Tundra Logo.png" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <Image Source="Icons\TundraLogo.png" VerticalAlignment="Bottom" Grid.Row="1"/>
         <TextBlock Grid.Row="2" Text="Developers: " VerticalAlignment="Top" FontSize="16"/>
         <StackPanel Grid.Row="3">
             <!--Sign your name here!!-->
