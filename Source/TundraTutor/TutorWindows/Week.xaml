@@ -5,17 +5,19 @@
         Title="Week" Width="Auto" Height="Auto" Loaded="CustomWindow_Loaded">
     <Grid Margin="0,-8,0,0" Width="Auto" Height="Auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="13*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="237*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="457*"/>
         </Grid.RowDefinitions>
         <!--Page-topping toolbar-->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="190*"/>
-                <ColumnDefinition Width="203*"/>
-                <ColumnDefinition Width="312*"/>
-                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="59*"/>
+                <ColumnDefinition Width="97*"/>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="63*"/>
+                <ColumnDefinition Width="97*"/>
+                <ColumnDefinition Width="17*"/>
             </Grid.ColumnDefinitions>
             <ToolBar Background="{x:Null}" Height="43" VerticalAlignment="Top" Margin="-15,-5,0,-12" Grid.Row="0" Grid.Column="0" Style="{DynamicResource TundraToolbar}">
                 <Menu Background="White" FontSize="24">
@@ -31,31 +33,24 @@
                     </MenuItem>
                 </Menu>
             </ToolBar>
-            <control:TundraButton Name="saveChangesButton" Grid.Column="1" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24" Click="saveChangesButton_Click">
+            <control:TundraButton Name="prevButton" Margin="0,0,5,7" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <TextBlock Text="Previous Week" FontSize="24" HorizontalAlignment="Right"/>
+            </control:TundraButton>
+            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="2" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Width="127" Grid.ColumnSpan="2">
+                <TextBlock Text="Next Week" FontSize="24"/>
+            </control:TundraButton>
+            <control:TundraButton Name="saveChangesButton" Grid.Column="3" Margin="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24" Click="saveChangesButton_Click">
                 <TextBlock Text="Save Changes to Schedule"/>
             </control:TundraButton>
-            <control:TundraButton Name="monthButton" Grid.Row="0" Grid.Column="2" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="monthButton_Click">
+            <control:TundraButton Name="monthButton" Grid.Row="0" Grid.Column="4" Margin="0,0,0,7" VerticalContentAlignment="Stretch" HorizontalAlignment="Left" Click="monthButton_Click">
                 <TextBlock Text="View Current Month" FontSize="24"/>
             </control:TundraButton>
-            <control:TundraButton Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,7,7" Width="33" Grid.ColumnSpan="2">
+            <control:TundraButton Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,7,7" Width="33" Grid.ColumnSpan="2">
                 <TextBlock Text="Help"/>
             </control:TundraButton>
 
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="18*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <control:TundraButton Name="prevButton" Grid.Column="0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                <Image Source="LeftArrow.png"/>
-            </control:TundraButton>
-            <control:TundraWeek x:Name="week" TimeClick="week_TimeClick" Grid.Column="1"/>
-            <control:TundraButton Name="nextButton" Grid.Row="0" Grid.Column="2" VerticalContentAlignment="Stretch">
-                <Image Source="RightArrow.png"/>
-            </control:TundraButton>
-        </Grid>
+        <control:TundraWeek x:Name="week" Grid.Row="2" TimeClick="week_TimeClick" />
 
     </Grid>
 </control:CustomWindow>

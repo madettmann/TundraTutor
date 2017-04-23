@@ -107,11 +107,11 @@ namespace TutorWindows
                 }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-                if(user.Type == "faculty")
+                if (user.Type == "faculty")
                 {
                     FacultyView faculty = new FacultyView();
                     faculty.Show();
-                    
+
                 }
                 else
                 {
@@ -152,6 +152,12 @@ namespace TutorWindows
             {
                 Button_Click(sender, e);
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddAppointment f = new AddAppointment();
+            f.Show();
         }
     }
 }

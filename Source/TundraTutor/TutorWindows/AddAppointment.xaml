@@ -1,278 +1,48 @@
-﻿<control:CustomWindow
+﻿<control:CustomWindow 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Name="dateLabel" x:Class="TutorWindows.AddAppointment"
-        Title="Add Appointment" Height="365.333" Width="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="42*"/>
-            <RowDefinition Height="29*"/>
-            <RowDefinition Height="37*"/>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="36*"/>
-            <RowDefinition Height="38*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="30*"/>
-        </Grid.RowDefinitions>
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:TutoringDB="clr-namespace:TutoringDB;assembly=TutoringDB" mc:Ignorable="d" x:Class="TutorWindows.AddAppointment"
+        Title="Add Appointment" Height="480.59" Width="517.445" Loaded="Window_Loaded">
+    <control:CustomWindow.Resources>
+        <CollectionViewSource x:Key="coursViewSource" d:DesignSource="{d:DesignInstance {x:Type TutoringDB:Cours}, CreateList=True}"/>
+    </control:CustomWindow.Resources>
+    <Grid DataContext="{StaticResource coursViewSource}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="182*"/>
+            <ColumnDefinition Width="55*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Date" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16"  Grid.Row="5" Height="31" Width="43"/>
-        <Label x:Name="startTimeLabel" Content="Start Time" HorizontalAlignment="RIght" VerticalAlignment="Top" FontSize="16" Grid.Row="6" Height="31" Width="81"/>
-        <Label x:Name="durationLabel" Content="Duration" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="16" Grid.Row="7" Height="31" Width="72"/>
-        <control:TundraButton x:Name="submitButton" Content="Submit" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="8" VerticalAlignment="Bottom" Width="75" Click="submitButton_Click" Height="21" Margin="0,0,7,7"/>
-        <control:TundraButton x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Grid.Row="8" VerticalAlignment="Bottom" Width="75" Height="21" Margin="7,0,0,7" />
-        <Label x:Name="titleLabel" Content="Add Appointment" Margin="46,0" VerticalAlignment="Top" FontSize="24" Grid.ColumnSpan="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Height="42" Width="200" Grid.RowSpan="2"/>
-        <Label x:Name="orLabel" Content="OR" Grid.Row="2" Grid.ColumnSpan="2" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" FontSize="16" Margin="135,0" Width="22" />
-        <Label x:Name="courseLabel" Content="Choose a course:" Grid.Row="3" Grid.Column="0" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" FontSize="16" Height="22" Margin="0,4,0,11" Width="120"/>
-        <Label x:Name="tutorLabel" Content="Pick a tutor:" Grid.Row="4" Grid.Column="0" Padding="0" FontSize="16" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Height="20" Margin="0" Width="83"/>
-        <DatePicker x:Name="dateDatePicker" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="5" VerticalAlignment="Top" Height="30" Width="102"/>
-        <Menu x:Name="startTimeMenu" Margin="8,0,44,19" Grid.Column="1" Grid.Row="6" Background="{x:Null}" FontSize="16">
-            <MenuItem x:Name="selectItemMenuItem" Header="Select Time">
-                <MenuItem Header="1:" Click="TimeSelected">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="1:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="13:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="2:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="2:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="14:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="3:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="3:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="15:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="4:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="16:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="16:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="4:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="4:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="4:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="5:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="5:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="17:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="6:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="6:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="18:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="7:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="7:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="19:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="8:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="8:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="20:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="9:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="9:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="21:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="10:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="10:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="22:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="11:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="11:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="23:45"/>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="12:">
-                    <MenuItem Header="00">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:00"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:00"/>
-                    </MenuItem>
-                    <MenuItem Header="15">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:15"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:15"/>
-                    </MenuItem>
-                    <MenuItem Header="30">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:30"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:30"/>
-                    </MenuItem>
-                    <MenuItem Header="45">
-                        <MenuItem Header="AM" Click="TimeSelected" Tag="0:45"/>
-                        <MenuItem Header="PM" Click="TimeSelected" Tag="12:45"/>
-                    </MenuItem>
-                </MenuItem>
-            </MenuItem>
-        </Menu>
-        <Menu x:Name="durationTimeMenu" Margin="8,4,44,14" Grid.Column="1" Grid.Row="7" Background="{x:Null}" FontSize="16">
-            <MenuItem x:Name="selectDurationMenuItem" Header="Duration">
-                <MenuItem Header="1:" >
-                    <MenuItem Header="00" Click="DurationSelected" Tag="1:00"/>
-                    <MenuItem Header="15" Click="DurationSelected" Tag="1:15"/>
-                    <MenuItem Header="30" Click="DurationSelected" Tag="1:30"/>
-                    <MenuItem Header="45" Click="DurationSelected" Tag="1:45"/>
-                </MenuItem>
-                <MenuItem Header="2:">
-                    <MenuItem Header="00" Click="DurationSelected" Tag="2:00"/>
-                    <MenuItem Header="15" Click="DurationSelected" Tag="2:15"/>
-                    <MenuItem Header="30" Click="DurationSelected" Tag="2:30"/>
-                    <MenuItem Header="45" Click="DurationSelected" Tag="2:45"/>
-                </MenuItem>
-                <MenuItem Header="3:">
-                    <MenuItem Header="00" Click="DurationSelected" Tag="3:00"/>
-                    <MenuItem Header="15" Click="DurationSelected" Tag="3:15"/>
-                    <MenuItem Header="30" Click="DurationSelected" Tag="3:30"/>
-                </MenuItem>
-            </MenuItem>
-        </Menu>
-        <control:TundraButton Content="Match Me with a Tutor Automatically" Margin="0,6" Grid.ColumnSpan="2" Grid.Row="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
-        <ComboBox x:Name="courseListBox" ItemsSource="{Binding CourseList}" DisplayMemberPath="CourseName" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="120" Padding="10,0,0,0" VerticalContentAlignment="Center"/>
-        <ComboBox x:Name="tutorsListBox" ItemsSource="{Binding TutorList}" DisplayMemberPath="FirstName" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="120" Padding="10,0,0,0" VerticalContentAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="180*"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
+
+        <control:TundraButton x:Name="scheduleTomorrowButton" Content="Tomorrow" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="255" RenderTransformOrigin="0.359,-0.713" Grid.Row="1" Grid.ColumnSpan="2" FontSize="36" Height="287" IsEnabled="False" Visibility="Hidden" Click="scheduleTomorrowButton_Click"/>
+        <control:TundraButton x:Name="thisWeekButton" Content="This Week" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Width="254" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="36" Height="287" HorizontalContentAlignment="Right" IsEnabled="False" Visibility="Hidden" Click="thisWeekButton_Click"/>
+        <Label x:Name="durationLabel" Content="Duration:" HorizontalAlignment="Center" Margin="82,25,175,0" VerticalAlignment="Top" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsEnabled="False" Visibility="Hidden"/>
+        <ComboBox x:Name="durationComboBox" HorizontalAlignment="Center" Margin="147,0,82,23" VerticalAlignment="Bottom" Width="89" SelectedIndex="4" Grid.Column="1" HorizontalContentAlignment="Center" IsEnabled="False" Visibility="Hidden">
+            <ComboBoxItem Content="30 min"/>
+            <ComboBoxItem Content="1 hr"/>
+            <ComboBoxItem Content="1 hr 30 min"/>
+            <ComboBoxItem Content="2 hr"/>
+            <ComboBoxItem Content="2 hr 30 min"/>
+            <ComboBoxItem Content="3 hr"/>
+        </ComboBox>
+        <Label x:Name="orLabel" Content="-or-" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" IsEnabled="False" Visibility="Hidden"/>
+        <Label x:Name="pickTutorLabel" Content="Pick a Tutor:" HorizontalAlignment="Left" Height="25" Margin="0,28,0,0" Grid.Row="2" VerticalAlignment="Top" Width="74" Grid.Column="1" IsEnabled="False" Visibility="Hidden"/>
+        <ComboBox x:Name="pickTutorComboBox" Grid.Column="1" HorizontalAlignment="Center" Margin="83,31,0,0" Grid.Row="2" VerticalAlignment="Top" Width="234" ItemsSource="{Binding tutorList}" DisplayMemberPath="FullName" HorizontalContentAlignment="Center" IsEnabled="False" Visibility="Hidden"/>
+        <Label x:Name="CourseLabel" Content="Course" HorizontalAlignment="Left" Margin="50,115,0,0" VerticalAlignment="Top" FontSize="36" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <ListBox x:Name="courseListBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="287" VerticalAlignment="Top" Width="254" Grid.Row="1" Grid.Column="1" Margin="159,0,0,0" SelectedValuePath="Id" DisplayMemberPath="CourseName" ItemsSource="{Binding}" Background="#FFFDFDFD"/>
+        <control:TundraButton x:Name="submitCourseButton" Content="Submit" Grid.Column="1" HorizontalAlignment="Center" Margin="0,58,0,0" Grid.Row="2" VerticalAlignment="Top" Width="138" HorizontalContentAlignment="Center" Click="submitCourseButton_Click"/>
+        <Rectangle x:Name="selectorRectangle" Grid.ColumnSpan="3" Fill="#FF050066" HorizontalAlignment="Left" Height="186" Margin="10,91,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="489" Visibility="Hidden" IsEnabled="False"/>
+        <Label x:Name="dateLabel" Content="FRI APR 28" HorizontalAlignment="Left" Margin="25,103,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Grid.ColumnSpan="2" Foreground="White" Visibility="Hidden" IsEnabled="False"/>
+        <Label x:Name="timeLabel" Content="HH:MM PM" HorizontalAlignment="Left" Margin="90,103,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Grid.Column="1" Foreground="White" Visibility="Hidden" IsEnabled="False"/>
+        <Label x:Name="tutorNameLabel" Content="FIRSTNAME LASTNAME" HorizontalAlignment="Left" Margin="25,165,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Grid.ColumnSpan="2" Foreground="White" Visibility="Hidden" IsEnabled="False"/>
+        <Label x:Name="appointmentDurationLabel" Content="H hrs M mins" HorizontalAlignment="Left" Margin="210,165,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" Visibility="Hidden" IsEnabled="False"/>
+        <control:TundraButton x:Name="confirmAppointmentButton" Content="✓" HorizontalAlignment="Left" Margin="0,213,0,0" Grid.Row="1" VerticalAlignment="Top" Width="255" FontSize="36" Grid.ColumnSpan="2" Height="64" Background="{x:Null}" Foreground="#FF1FD80C" FontWeight="Bold" Visibility="Hidden" IsEnabled="False" Click="confirmAppointmentButton_Click"/>
+        <control:TundraButton x:Name="rejectAppointmentButton" Content="✕" Grid.Column="1" HorizontalAlignment="Left" Margin="159,213,0,0" Grid.Row="1" VerticalAlignment="Top" Width="254" FontSize="36" Grid.ColumnSpan="2" Height="64" FontWeight="Bold" Foreground="#FFF90303" Visibility="Hidden" IsEnabled="False" Click="rejectAppointmentButton_Click"/>
+
     </Grid>
 </control:CustomWindow>

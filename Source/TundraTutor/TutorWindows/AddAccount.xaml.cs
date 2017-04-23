@@ -49,7 +49,7 @@ namespace TutorWindows
                 temp.Password = passwordTextBox.Text;
                 temp.Year = Convert.ToInt32( yearTextBox.Text);
                 temp.Email = emailTextBox.Text;
-                //temp.Id = ;
+                temp.Id = numTutees;
 
                 db.Tutees.Add(temp);
                 db.SaveChanges();

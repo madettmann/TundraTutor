@@ -38,8 +38,9 @@ namespace TutoringDB
         public virtual DbSet<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }
         public virtual DbSet<CurrentUser> CurrentUsers { get; set; }
         public virtual DbSet<StartEnd> StartEnds { get; set; }
-        public virtual DbSet<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
-        public virtual DbSet<BaseSchedule> BaseSchedules { get; set; }
         public virtual DbSet<TutorCourse> TutorCourses { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<BaseSchedule> BaseSchedules { get; set; }
+        public virtual DbSet<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
@@ -14,13 +13,9 @@ namespace TutorWindows
         int selectedMonth;
         int currYear;
         bool finished;
-        private ObservableCollection<Notification> notifications;
-        internal ObservableCollection<Notification> Notifications { get => notifications; set => notifications = value; }
 
         enum MonthCounter { January = 1, February, March, April, May, June, July, August, September, October, November, December };
         MonthCounter calendarMonth;
-
-        
 
         public MainWindow()
         {
@@ -31,7 +26,6 @@ namespace TutorWindows
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
-            notifications = new ObservableCollection<Notification>();
 
             InitializeComponent();
 
@@ -46,14 +40,16 @@ namespace TutorWindows
             nextButton.Click += (o, e) => refreshCalendar(1);
             prevButton.Click += (o, e) => refreshCalendar(2);
 
-            if(notifications.Count == 0)
-            {
-                Notifications.Add(new Notification("Nothing here!"));
-            }
-
-            DataContext = this;
+            TutoringDB.TutorDatabaseEntities reset = new TutoringDB.TutorDatabaseEntities();
+            reset.BusyTimes.Load();
+            reset.BaseSchedules.Load();
+            foreach(var item in reset.BusyTimes) { reset.BusyTimes.Remove(item); }
+            foreach(var item in reset.BaseSchedules) { reset.BaseSchedules.Remove(item); }
+            
         }
 
+        //There is work to be done here, the calendar numbers can often get mixed up badly when 
+        //clicking through years
         private void refreshCalendar(int x)
         {
             switch (x)
@@ -82,6 +78,11 @@ namespace TutorWindows
             calendar.BuildCalendar(targetDate);
         }
 
+        private void calendar_DayChanged(object sender, TundraControls.DayChangedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
             finished = false;
@@ -98,8 +99,10 @@ namespace TutorWindows
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
         {
-            ScheduleAppointment newAppt = new ScheduleAppointment();
-            newAppt.ShowDialog();
+            //ScheduleAppointment newAppt = new ScheduleAppointment();
+            //newAppt.ShowDialog();
+            AddAppointment f = new AddAppointment();
+            f.ShowDialog();
         }
 
         private void infoButton_Click(object sender, RoutedEventArgs e)
@@ -133,6 +136,11 @@ namespace TutorWindows
         private void TundraButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("No use helping you...");
+        }
+
+        private void calendar_DayClick(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void calendar_DayClick_1(object sender, RoutedEventArgs e)

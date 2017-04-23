@@ -12,10 +12,10 @@ namespace TutoringDB
     using System;
     using System.Collections.Generic;
     
-    public partial class StartEnd
+    public partial class Admin
     {
         public int Id { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -19,8 +19,8 @@ namespace TutoringDB
         {
             this.TuteeBusyTimes = new HashSet<TuteeBusyTime>();
             this.TutorTuteeCourseAppointments = new HashSet<TutorTuteeCourseAppointment>();
-            this.TutorTuteeNotifications = new HashSet<TutorTuteeNotification>();
             this.BaseSchedules = new HashSet<BaseSchedule>();
+            this.TutorTuteeNotifications = new HashSet<TutorTuteeNotification>();
         }
     
         public int Id { get; set; }
@@ -36,8 +36,8 @@ namespace TutoringDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorTuteeCourseAppointment> TutorTuteeCourseAppointments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BaseSchedule> BaseSchedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TutorTuteeNotification> TutorTuteeNotifications { get; set; }
     }
 }

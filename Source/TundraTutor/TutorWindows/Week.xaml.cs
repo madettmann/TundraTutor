@@ -73,23 +73,7 @@ namespace TutorWindows
         private void week_TimeClick(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("Clicked" + week.SelectedDate.ToShortDateString() + " " + week.SelectedTime.ToString());
-            if (week.times[week.SelectedIndex].BusyOrAppt != 2)
-                week.markTime(week.SelectedIndex);
-            else
-            {
-                if (week.times[week.SelectedIndex].TimeInfo == "--")
-                {
-                    week.SelectedIndex -= 7;
-                    week.SelectedTime = week.times[week.SelectedIndex].Time;
-                    week_TimeClick(sender, e);
-                }
-                else
-                {
-                    AppointmentInfo apInfo = new AppointmentInfo(week.SelectedDate, week.SelectedTime);
-                    apInfo.ShowDialog();
-                }
-            }
-
+            week.markTime(week.SelectedIndex);
         }
 
         private void saveChangesButton_Click(object sender, RoutedEventArgs e)
