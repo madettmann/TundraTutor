@@ -20,7 +20,7 @@
         <Label x:Name="Username" Content="Username:" HorizontalAlignment="Left" Margin="64,2,0,0" VerticalAlignment="Top" Height="26" Width="66" Grid.Row="1"/>
         <Label x:Name="Password" Content="Password:" HorizontalAlignment="Left" Margin="64,8,0,0" VerticalAlignment="Top" Height="26" Width="62" Grid.Row="2" Grid.RowSpan="2"/>
         <Label x:Name="Label3" Content="" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="Red" Height="26" Grid.Row="3" Width="292"/>
-        <Image Margin="83,16,83,17" Source="TundraTutorLogo.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Height="116" Width="126"/>
+        <Image Margin="83,16,83,17" Source="Icons\TundraTutorLogo.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Height="116" Width="126"/>
         <control:TundraButton Content="Add Account" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Bottom" FontSize="12" Margin="0,0,0,5" Click="TundraButton_Click" Background="{x:Null}" Height="16" Width="68" VerticalContentAlignment="Bottom"/>
     </Grid>
 </control:CustomWindow>

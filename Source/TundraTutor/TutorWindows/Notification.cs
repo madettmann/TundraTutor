@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TutorWindows
 {
-    class Notification : INotifyPropertyChanged
+    public class Notification : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
