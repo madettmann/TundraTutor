@@ -1,8 +1,9 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:TundraControls"
-    xmlns:Converters="clr-namespace:TundraControls.Converters">
+﻿<!--Written by Victor-->
+<ResourceDictionary
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:local="clr-namespace:TundraControls"
+xmlns:Converters="clr-namespace:TundraControls.Converters">
 
     <!--Converters for the calendar-->
     <Converters:DateConverter x:Key="DateConverter"></Converters:DateConverter>
@@ -812,5 +813,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
 </ResourceDictionary>

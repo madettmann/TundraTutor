@@ -1,8 +1,12 @@
-﻿using System;
+﻿//Written by Victor
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace TutorWindows
 {
@@ -13,19 +17,26 @@ namespace TutorWindows
         int selectedMonth;
         int currYear;
         bool finished;
+        public ObservableCollection<Notification> Notifications;
+        TutoringDB.CurrentUser user;
+        TutoringDB.TutorDatabaseEntities readUser;
+        public ICommand NotificationCommand { get; set; }
 
         enum MonthCounter { January = 1, February, March, April, May, June, July, August, September, October, November, December };
         MonthCounter calendarMonth;
 
+        
+
         public MainWindow()
         {
-            Application.Current.MainWindow.Width = SystemParameters.WorkArea.Width;
-            Application.Current.MainWindow.Height = SystemParameters.WorkArea.Height;
-            //Application.Current.MainWindow.Left = SystemParameters.WorkArea.Left;
-            //Application.Current.MainWindow.Top = SystemParameters.WorkArea.Top;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-
             months = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            
+
+            user = new TutoringDB.CurrentUser();
+            readUser = new TutoringDB.TutorDatabaseEntities();
+            readUser.CurrentUsers.Load();
+            var userList = from i in readUser.CurrentUsers select i;
+            user = userList.FirstOrDefault();
 
             InitializeComponent();
 
@@ -40,16 +51,19 @@ namespace TutorWindows
             nextButton.Click += (o, e) => refreshCalendar(1);
             prevButton.Click += (o, e) => refreshCalendar(2);
 
-            TutoringDB.TutorDatabaseEntities reset = new TutoringDB.TutorDatabaseEntities();
-            reset.BusyTimes.Load();
-            reset.BaseSchedules.Load();
-            foreach(var item in reset.BusyTimes) { reset.BusyTimes.Remove(item); }
-            foreach(var item in reset.BaseSchedules) { reset.BaseSchedules.Remove(item); }
-            
+            Notifications = new ObservableCollection<Notification>();
+            NotificationCommand = new RelayCommand<object>(onNotificationClicked);
+            if (Notifications.Count == 0)
+            {
+                Notifications.Add(new Notification("Nothing here!"));
+            }
+
+            NotificationsList.ItemsSource = Notifications;
+
+            DataContext = this;
         }
 
-        //There is work to be done here, the calendar numbers can often get mixed up badly when 
-        //clicking through years
+        
         private void refreshCalendar(int x)
         {
             switch (x)
@@ -78,11 +92,6 @@ namespace TutorWindows
             calendar.BuildCalendar(targetDate);
         }
 
-        private void calendar_DayChanged(object sender, TundraControls.DayChangedEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
             finished = false;
@@ -94,7 +103,7 @@ namespace TutorWindows
 
         private void CustomWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(finished) Application.Current.Shutdown();
+            if(finished && !user.Type.ToLower().Contains("admin")) Application.Current.Shutdown();
         }
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
@@ -119,18 +128,16 @@ namespace TutorWindows
             this.Close();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            AddBusy addBusyWindow = new AddBusy();
-            addBusyWindow.ShowDialog();
-        }
-
         private void CustomWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Width = SystemParameters.WorkArea.Width;
             this.Height = SystemParameters.WorkArea.Height;
             this.Left = SystemParameters.WorkArea.Left;
             this.Top = SystemParameters.WorkArea.Top;
+
+            if (userMenu.Width == 0) { userMenu.Width = toolbarPanel.ActualWidth; userMenu.Height = toolbarPanel.ActualWidth; }
+            if (notificationsMenu.Width == 0) { notificationsMenu.Width = toolbarPanel.ActualWidth; notificationsMenu.Height = toolbarPanel.ActualWidth; }
+            if (actionsMenu.Width == 0) { actionsMenu.Width = toolbarPanel.ActualWidth; actionsMenu.Height = toolbarPanel.ActualWidth; }
         }
 
         private void TundraButton_Click(object sender, RoutedEventArgs e)
@@ -138,14 +145,26 @@ namespace TutorWindows
             MessageBox.Show("No use helping you...");
         }
 
-        private void calendar_DayClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void calendar_DayClick_1(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Clicked " + calendar.SelectedDate.ToShortDateString());
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            Credits creditsPage = new Credits();
+            creditsPage.ShowDialog();
+        }
+
+        private void onNotificationClicked(object obj)
+        {
+            MessageBox.Show((obj as Notification).Message);
+        }
+
+        private void modSchedButton_Click(object sender, RoutedEventArgs e)
+        {
+            BaseSchedule modSched = new BaseSchedule();
+            modSched.ShowDialog();
         }
     }
 }

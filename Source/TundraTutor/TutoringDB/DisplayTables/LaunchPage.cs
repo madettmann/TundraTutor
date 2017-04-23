@@ -149,7 +149,7 @@ namespace DisplayTables
 
             TutoringDB.Tutor tempTutor = new TutoringDB.Tutor();
             TutoringDB.Tutee tempTutee = new TutoringDB.Tutee();
-            TutoringDB.TutorCourse tempTutorCourse = new TutoringDB.TutorCourse();
+            
             //Fill Tutors
             foreach (string line in File.ReadLines(@"fakeTutors.csv"))
             {
@@ -201,16 +201,20 @@ namespace DisplayTables
             List<TutoringDB.TutorCourse> tcList = new List<TutoringDB.TutorCourse>();
             db.Courses.Load();
             db.Tutors.Load();
-            var tutorlist = db.Tutors.Local;
-            foreach(TutoringDB.Cours c in db.Courses)
+            var tutorlist = db.Tutors.Local.ToList();
+            var courselist = db.Courses.Local.ToList();
+            int index = 0;
+            foreach(TutoringDB.Cours c in courselist)
             {
                 Random rnd = new Random();
                 int lim = rnd.Next(2, 5);
                 
                 for(int i = 0; i< lim; i++)
                 {
+                    TutoringDB.TutorCourse tempTutorCourse = new TutoringDB.TutorCourse();
                     tempTutorCourse.Cours = c;
-                    tempTutorCourse.Tutor = tutorlist[rnd.Next(0, tutorlist.Count - 1)];
+                    tempTutorCourse.Tutor = tutorlist[index % tutorlist.Count()];
+                    index++;
                     tcList.Add(tempTutorCourse);
                 }
                 
@@ -223,6 +227,93 @@ namespace DisplayTables
             }
             db.SaveChanges();
             MessageBox.Show("Successfully Loaded.");
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
+            db.TutorTuteeCourseAppointments.Load();
+            foreach(var i in db.TutorTuteeCourseAppointments)
+            {
+                db.TutorTuteeCourseAppointments.Remove(i);
+            }
+            db.TutorTuteeNotifications.Load();
+            foreach (var i in db.TutorTuteeNotifications)
+            {
+                db.TutorTuteeNotifications.Remove(i);
+            }
+            db.TutorConfirmationRequests.Load();
+            foreach (var i in db.TutorConfirmationRequests)
+            {
+                db.TutorConfirmationRequests.Remove(i);
+            }
+            db.TutorCourses.Load();
+            foreach (var i in db.TutorCourses)
+            {
+                db.TutorCourses.Remove(i);
+            }
+            db.TutorBusyTimes.Load();
+            foreach (var i in db.TutorBusyTimes)
+            {
+                db.TutorBusyTimes.Remove(i);
+            }
+            db.FacultyCourses.Load();
+            foreach (var i in db.FacultyCourses)
+            {
+                db.FacultyCourses.Remove(i);
+            }
+            db.TuteeBusyTimes.Load();
+            foreach (var i in db.TuteeBusyTimes)
+            {
+                db.TuteeBusyTimes.Remove(i);
+            }
+            db.Appointments.Load();
+            foreach (var i in db.Appointments)
+            {
+                db.Appointments.Remove(i);
+            }
+            db.BaseSchedules.Load();
+            foreach (var i in db.BaseSchedules)
+            {
+                db.BaseSchedules.Remove(i);
+            }
+            db.BusyTimes.Load();
+            foreach (var i in db.BusyTimes)
+            {
+                db.BusyTimes.Remove(i);
+            }
+            db.Courses.Load();
+            foreach (var i in db.Courses)
+            {
+                db.Courses.Remove(i);
+            }
+            db.CurrentUsers.Load();
+            foreach (var i in db.CurrentUsers)
+            {
+                db.CurrentUsers.Remove(i);
+            }
+            db.Faculties.Load();
+            foreach (var i in db.Faculties)
+            {
+                db.Faculties.Remove(i);
+            }
+            db.StartEnds.Load();
+            foreach (var i in db.StartEnds)
+            {
+                db.StartEnds.Remove(i);
+            }
+            db.Tutees.Load();
+            foreach (var i in db.Tutees)
+            {
+                db.Tutees.Remove(i);
+            }
+            db.Tutors.Load();
+            foreach (var i in db.Tutors)
+            {
+                db.Tutors.Remove(i);
+            }
+            db.SaveChanges();
+            MessageBox.Show("Successfully Cleared.");
         }
     }
 }

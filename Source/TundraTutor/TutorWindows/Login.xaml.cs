@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,8 +49,8 @@ namespace TutorWindows
 
             userCreds = new TutoringDB.TutorDatabaseEntities();
             userCreds.CurrentUsers.Load();
-            var index = userCreds.CurrentUsers.FirstOrDefault();
-            if(index != null) userCreds.CurrentUsers.Remove(index);
+            var index = userCreds.CurrentUsers.FirstOrDefault(); 
+            if (index != null) userCreds.CurrentUsers.Remove(index);
             userCreds.SaveChanges();
         }
 
@@ -71,21 +71,24 @@ namespace TutorWindows
 
             if (Username1.Text == "admin" && Password1.Password == "admin")
             {
-                LaunchPage lp = new LaunchPage();
-                lp.Show();
-                TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
-                user.UserName = Username1.Text;
-                user.Type = "admin";
-                userCreds.CurrentUsers.Load();
-                if (userCreds.CurrentUsers.Count() > 0)
-                {
-                    foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
-                    {
-                        userCreds.CurrentUsers.Remove(i);
-                    }
-                }
-                userCreds.CurrentUsers.Add(user);
-                userCreds.SaveChanges();
+                Admin adminWindow = new Admin();
+                adminWindow.Show();
+                Close();
+                //LaunchPage lp = new LaunchPage();
+                //lp.Show();
+                //TutoringDB.CurrentUser user = new TutoringDB.CurrentUser();
+                //user.UserName = Username1.Text;
+                //user.Type = "admin";
+                //userCreds.CurrentUsers.Load();
+                //if (userCreds.CurrentUsers.Count() > 0)
+                //{
+                //    foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
+                //    {
+                //        userCreds.CurrentUsers.Remove(i);
+                //    }
+                //}
+                //userCreds.CurrentUsers.Add(user);
+                //userCreds.SaveChanges();
             }
 
             else if (Username1.Text == "" && Password1.Password == "")
@@ -99,27 +102,17 @@ namespace TutorWindows
                 user.UserName = Username1.Text;
                 user.Type = type;
                 userCreds.CurrentUsers.Load();
-                if(userCreds.CurrentUsers.Count() > 0)
-                {
-                    foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers){
+                if (userCreds.CurrentUsers.Count() > 0)
+                    foreach (TutoringDB.CurrentUser i in userCreds.CurrentUsers)
+                    {
                         userCreds.CurrentUsers.Remove(i);
                     }
-                }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-                if (user.Type == "faculty")
-                {
-                    FacultyView faculty = new FacultyView();
-                    faculty.Show();
 
-                }
-                else
-                {
-                    MainWindow monthView = new MainWindow();
-                    monthView.Show();
-                   
-                }
-                this.Close();
+                MainWindow monthView = new MainWindow();
+                monthView.Show();
+                Close();
             }
             else
             {
@@ -140,7 +133,7 @@ namespace TutorWindows
 
         private void Password1_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if(e.Key == Key.Return)
+            if (e.Key == Key.Return)
             {
                 Button_Click(sender, e);
             }
@@ -152,12 +145,6 @@ namespace TutorWindows
             {
                 Button_Click(sender, e);
             }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            AddAppointment f = new AddAppointment();
-            f.Show();
         }
     }
 }

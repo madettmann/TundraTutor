@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Victor
+using System;
 
 namespace TundraControls
 {

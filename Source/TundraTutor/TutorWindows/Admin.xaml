@@ -1,0 +1,48 @@
+﻿<!--Written by Victor-->
+    <control:CustomWindow x:Class="TutorWindows.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
+        Title="Admin" Width="345" Height="495.35">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="309*"/>
+            <RowDefinition Height="34*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Administrator" Grid.Row="0" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="96,8,96,0" Height="32" Width="145"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Tutors" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Column="1" Text="Tutees" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Grid.Column="2" Text="Faculty" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="tutorList" ItemsSource="{Binding TutorNames}" Grid.Column="0" SelectionChanged="tutorList_SelectionChanged" PreviewMouseLeftButtonDown="tutorList_MouseDown" Background="{x:Null}"/>
+            <ListBox x:Name="tuteeList" ItemsSource="{Binding TuteeNames}" Grid.Column="1" SelectionChanged="tuteeList_SelectionChanged" PreviewMouseLeftButtonDown="tuteeList_MouseDown" Background="{x:Null}"/>
+            <ListBox x:Name="facultyList" ItemsSource="{Binding FacultyNames}" Grid.Column="2" SelectionChanged="facultyList_SelectionChanged" PreviewMouseLeftButtonDown="facultyList_MouseDown" Background="{x:Null}"/>
+        </Grid>
+
+        <control:TundraButton x:Name="databaseButton" Grid.Row="3" Content="Directly Modify Databse (Unrecommended)" Click="databaseButton_Click" MouseEnter="databaseButton_MouseEnter" MouseLeave="databaseButton_MouseLeave" FontSize="12" HorizontalAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <control:TundraButton x:Name="lofOffButton" Content="Log Off" Grid.Column="0" Click="lofOffButton_Click"/>
+            <control:TundraButton x:Name="selectButton" Content="View as Selected User" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Margin="0" Click="selectButton_Click"/>
+        </Grid>
+    </Grid>
+</control:CustomWindow>

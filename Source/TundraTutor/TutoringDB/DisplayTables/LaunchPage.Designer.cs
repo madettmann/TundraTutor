@@ -37,6 +37,7 @@
             this.startEndButton = new System.Windows.Forms.Button();
             this.fillFacultyButton = new System.Windows.Forms.Button();
             this.fillTutorsTutees = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tutorsbutton
@@ -129,11 +130,22 @@
             this.fillTutorsTutees.UseVisualStyleBackColor = true;
             this.fillTutorsTutees.Click += new System.EventHandler(this.fillTutorsTutees_Click);
             // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(139, 71);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(120, 23);
+            this.clearButton.TabIndex = 9;
+            this.clearButton.Text = "Clear All";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // LaunchPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.fillTutorsTutees);
             this.Controls.Add(this.fillFacultyButton);
             this.Controls.Add(this.startEndButton);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.Button startEndButton;
         private System.Windows.Forms.Button fillFacultyButton;
         private System.Windows.Forms.Button fillTutorsTutees;
+        private System.Windows.Forms.Button clearButton;
     }
 }

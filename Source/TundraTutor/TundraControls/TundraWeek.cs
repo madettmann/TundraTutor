@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Victor
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
@@ -189,32 +190,32 @@ namespace TundraControls
             //Add busies from database to a var, filter out unecessary ones
             if (isTutor)
             {
-                var baseBusies = from i in tutorBusyTime.BaseSchedules
-                           where i.Tutor.UserName == user.UserName
-                           select i;
+                //var baseBusies = from i in tutorBusyTime.BaseSchedules
+                //           where i.Tutor.UserName == user.UserName
+                //           select i;
                 var busies = from i in tutorBusyTime.TutorBusyTimes
                              where (i.BusyTime.Date.Month == startDate.Date.Month || i.BusyTime.Date.Month == startDate.Date.Month + 1)
                                     && (i.Tutor.UserName == user.UserName)
                              orderby i.BusyTime.Date, i.BusyTime.Time
                              select i;
                 //Add all the busies to a list (to avoid type conflict)
-                foreach (var onebusy in baseBusies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, 
-                                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014, 1, 5)).TotalDays)));
+                //foreach (var onebusy in baseBusies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, 
+                //                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014, 1, 5)).TotalDays)));
                 foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
             else
             {
-                var baseBusies = from i in tutorBusyTime.BaseSchedules
-                                 where i.Tutee.Username == user.UserName
-                                 select i;
+                //var baseBusies = from i in tutorBusyTime.BaseSchedules
+                //                 where i.Tutee.Username == user.UserName
+                //                 select i;
                 var busies = from i in tutorBusyTime.TuteeBusyTimes
                              where (i.BusyTime.Date.Month == startDate.Date.Month || i.BusyTime.Date.Month == startDate.Date.Month + 1)
                                     && (i.Tutee.Username == user.UserName)
                              orderby i.BusyTime.Date, i.BusyTime.Time
                              select i;
                 //Add all the busies to a list (to avoid type conflict)
-                foreach (var onebusy in baseBusies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, 
-                                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014,1,5)).TotalDays)));
+                //foreach (var onebusy in baseBusies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, 
+                //                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014,1,5)).TotalDays)));
                 foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
 #endregion
@@ -238,7 +239,7 @@ namespace TundraControls
                                                                         + appt.Tutor.FirstName + " " + appt.Tutor.LastName, 
                                                       appt.Appointment.Date));
                 //Find how many 30-minute timeslots the appointment takes up
-                int numMore = (appt.Appointment.Duration.Value.Hours * 2) + (appt.Appointment.Duration.Value.Minutes / 30) - 1;
+                int numMore = (appt.Appointment.Duration.Hours * 2) + (appt.Appointment.Duration.Minutes / 30) - 1;
                 for (int i = 0; i < numMore; i++)
                 {
                     //Add the appointment in 30-minute blocks to the list
@@ -334,8 +335,17 @@ namespace TundraControls
         /// <param name="index">Index of the time within the ItemsControl (use SelectedIndex property)</param>
         public void markTime(int index)
         {
-            if (times.ElementAt(index).Marked) times.ElementAt(index).Marked = false;
-            else times.ElementAt(index).Marked = true;
+            if (times.ElementAt(index).Marked > 0)
+            {
+                times.ElementAt(index).Marked = 0;
+            }
+            else
+            {
+                if (times.ElementAt(index).Busy.Count > 0)
+                    times.ElementAt(index).Marked = 2;
+                else
+                    times.ElementAt(index).Marked = 1;
+            }
         }
 
         /// <summary>
@@ -346,11 +356,12 @@ namespace TundraControls
             TutoringDB.TutorDatabaseEntities addBusy = new TutoringDB.TutorDatabaseEntities();
 
             foreach (var time in times)
-            {
-                if (time.Marked)
+            { 
+                //Adds to wrong-ish day ----- check for startDate DOW
+                if (time.Marked == 1)
                 {
                     TutoringDB.BusyTime tempBusy = new TutoringDB.BusyTime();
-                    tempBusy.Id = addBusy.BusyTimes.Count();
+                    //tempBusy.Id = addBusy.BusyTimes.Count();
                     tempBusy.Time = time.Time;
                     tempBusy.Date = time.Date;
                     tempBusy.Duration = new TimeSpan(00, 30, 00);
@@ -360,7 +371,7 @@ namespace TundraControls
                         addBusy.Tutors.Load();
                         addBusy.TutorBusyTimes.Load();
                         TutoringDB.TutorBusyTime newBusy = new TutoringDB.TutorBusyTime();
-                        newBusy.BusyTimesId = tempBusy.Id;
+                        //newBusy.BusyTimesId = tempBusy.Id;
                         TutoringDB.Tutor tempTutor = addBusy.Tutors.Where(i => i.UserName == addBusy.CurrentUsers.FirstOrDefault().UserName).First();
                         newBusy.TutorId = tempTutor.Id;
                         newBusy.Id = addBusy.TutorBusyTimes.Count();
@@ -374,8 +385,40 @@ namespace TundraControls
                         newBusy.BusyTimeId = tempBusy.Id;
                         TutoringDB.Tutee tempTutee = addBusy.Tutees.Where(i => i.Username == addBusy.CurrentUsers.FirstOrDefault().UserName).First();
                         newBusy.TuteeId = tempTutee.Id;
-                        newBusy.Id = addBusy.TuteeBusyTimes.Count();
+                        //newBusy.Id = addBusy.TuteeBusyTimes.Count();
                         addBusy.TuteeBusyTimes.Add(newBusy);
+                    }
+                    addBusy.SaveChanges();
+                }
+
+                if (time.Marked == 2)
+                {
+                    addBusy.BusyTimes.Load();
+                    if (isTutor)
+                    {
+                        addBusy.TutorBusyTimes.Load();
+                        var busy = from i in addBusy.TutorBusyTimes
+                                   where i.Tutor.UserName == user.UserName &&
+                                         i.BusyTime.Date == time.Date &&
+                                         i.BusyTime.Time == time.Time
+                                   select i;
+                        TutoringDB.TutorBusyTime toChange = busy.FirstOrDefault();
+                        //toChange.BusyTime.Date = new DateTime(2010, 1, 1); //Move it out of the schedule without changing the count variable
+                        addBusy.BusyTimes.Remove(toChange.BusyTime);
+                        addBusy.TutorBusyTimes.Remove(toChange);
+                    }
+                    else
+                    {
+                        addBusy.TuteeBusyTimes.Load();
+                        var busy = from i in addBusy.TuteeBusyTimes
+                                   where i.Tutee.Username == user.UserName &&
+                                         i.BusyTime.Date == time.Date &&
+                                         i.BusyTime.Time == time.Time
+                                   select i;
+                        TutoringDB.TuteeBusyTime toChange = busy.FirstOrDefault();
+                        //toChange.BusyTime.Date = new DateTime(2010, 1, 1); //Move it out of the schedule without changing the count variable
+                        addBusy.BusyTimes.Remove(toChange.BusyTime);
+                        addBusy.TuteeBusyTimes.Remove(toChange);
                     }
                     addBusy.SaveChanges();
                 }

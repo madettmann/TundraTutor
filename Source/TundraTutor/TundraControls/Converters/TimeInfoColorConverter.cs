@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Victor
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -18,6 +19,8 @@ namespace TundraControls.Converters
                     return new SolidColorBrush(Color.FromRgb(0, 124, 255));
                 case 3:
                     return new SolidColorBrush(Color.FromArgb(50, 255, 0, 0));
+                case 4:
+                    return new SolidColorBrush(Color.FromArgb(50, 0, 255, 0));
                 default:
                     return new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
                     };

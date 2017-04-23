@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Victor
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -116,7 +117,8 @@ namespace TundraControls
                     }
                     fakeMax = false;
 
-                    Application.Current.MainWindow.DragMove();
+                    //Application.Current.MainWindow.DragMove();
+                    Window.GetWindow(this).DragMove();
                 }
         }
 

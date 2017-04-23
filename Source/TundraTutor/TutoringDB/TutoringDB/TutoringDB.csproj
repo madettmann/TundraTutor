@@ -146,6 +146,7 @@
       <LastGenOutput>TutoringTables.Context.cs</LastGenOutput>
       <DependentUpon>TutoringTables.edmx</DependentUpon>
     </Content>
+    <Content Include="TutoringTables.edmx.sql" />
     <Content Include="TutoringTables.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TutoringTables.edmx</DependentUpon>
