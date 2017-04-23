@@ -15,6 +15,7 @@
         <TextBlock Grid.Row="2" Text="Developers: " VerticalAlignment="Top" FontSize="16"/>
         <StackPanel Grid.Row="3">
             <!--Sign your name here!!-->
+
             <TextBlock x:Name="Chris" Text="--"/>
             <TextBlock x:Name="Makena" Text="--"/>
             <TextBlock x:Name="Victor" Text="Victor Herrig" FontFamily="Vivaldi" FontSize="24" Foreground="#FF4B2E2B"/>
