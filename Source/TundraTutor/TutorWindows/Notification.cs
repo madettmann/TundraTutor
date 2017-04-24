@@ -21,8 +21,12 @@ namespace TutorWindows
         }
 
         private string message;
+        private string type;
+        private int id;
         public string Message { get => message; set { message = value; NotifyPropertyChanged("Message"); } }
+        public string Type { get => type; set => type = value; }
+        public int Id { get => id; set => id = value; }
 
-        public Notification(string mes) { message = mes; }
+        public Notification(string mes, string typ, int ID) { message = mes; Type = typ; Id = ID; }
     }
 }

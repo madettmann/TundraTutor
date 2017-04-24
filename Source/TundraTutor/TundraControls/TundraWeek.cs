@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using System.Windows.Data;
 
 namespace TundraControls
 {
@@ -148,6 +149,8 @@ namespace TundraControls
                     break;
 
             };
+            DataContext = null;
+            DataContext = this;
             #endregion
 
             #region Database Loading
@@ -239,7 +242,7 @@ namespace TundraControls
                                                                         + appt.Tutor.FirstName + " " + appt.Tutor.LastName, 
                                                       appt.Appointment.Date));
                 //Find how many 30-minute timeslots the appointment takes up
-                int numMore = (appt.Appointment.Duration.Hours * 2) + (appt.Appointment.Duration.Minutes / 30) - 1;
+                int numMore = (appt.Appointment.Duration.Value.Hours * 2) + (appt.Appointment.Duration.Value.Minutes / 30) - 1;
                 for (int i = 0; i < numMore; i++)
                 {
                     //Add the appointment in 30-minute blocks to the list

@@ -17,9 +17,9 @@ namespace TutoringDB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BusyTime()
         {
-            this.BaseSchedules = new HashSet<BaseSchedule>();
             this.TuteeBusyTimes = new HashSet<TuteeBusyTime>();
             this.TutorBusyTimes = new HashSet<TutorBusyTime>();
+            this.BaseSchedules = new HashSet<BaseSchedule>();
         }
     
         public int Id { get; set; }
@@ -28,10 +28,10 @@ namespace TutoringDB
         public System.TimeSpan Duration { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BaseSchedule> BaseSchedules { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TuteeBusyTime> TuteeBusyTimes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorBusyTime> TutorBusyTimes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BaseSchedule> BaseSchedules { get; set; }
     }
 }

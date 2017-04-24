@@ -19,16 +19,6 @@ using System.Windows.Forms;
 
 namespace TutorWindows
 {
-    //
-    //
-    //
-    //
-    //Faculty cannot log in ---- ?
-    //
-    //
-    //
-    //
-
     public partial class Login : TundraControls.CustomWindow
     {
         public static TutoringDB.Tutee user;
@@ -55,6 +45,7 @@ namespace TutorWindows
             if (index != null) userCreds.CurrentUsers.Remove(index);
             userCreds.SaveChanges();
             s.Close();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -112,16 +103,18 @@ namespace TutorWindows
                     }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-                if (type == "faculty")
+
+                if (user.Type == "faculty")
                 {
-                    FacultyView fView = new FacultyView();
-                    fView.Show();
+                    FacultyView faculty = new FacultyView();
+                    faculty.Show();
                 }
                 else
                 {
                     MainWindow monthView = new MainWindow();
                     monthView.Show();
                 }
+
                 Close();
             }
             else

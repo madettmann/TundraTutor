@@ -5,42 +5,41 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="09232ab3c7f74265bd8cf96e7c99f0f8" Name="Diagram1" ZoomLevel="97">
-        <EntityTypeShape EntityType="TutorDatabaseModel.Admin" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.Appointment" Width="1.5" PointX="3.75" PointY="15.375" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.BaseSchedule" Width="1.5" PointX="3" PointY="9.25" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.BusyTime" Width="1.5" PointX="0.75" PointY="13.125" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.Cours" Width="1.5" PointX="3.75" PointY="2.125" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.CurrentUser" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.Faculty" Width="1.5" PointX="3.75" PointY="18.25" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.FacultyCours" Width="1.5" PointX="6" PointY="2.375" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.StartEnd" Width="1.5" PointX="8.75" PointY="3.75" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.TuteeBusyTime" Width="1.5" PointX="9" PointY="8.875" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.Tutee" Width="1.5" PointX="0.75" PointY="4.25" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.TutorBusyTime" Width="1.5" PointX="3" PointY="12.375" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.TutorConfirmationRequest" Width="1.5" PointX="3" PointY="6.375" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.TutorCourse" Width="1.5" PointX="6" PointY="5.375" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.Tutor" Width="1.5" PointX="0.75" PointY="8.5" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.TutorTuteeCourseAppointment" Width="1.5" PointX="6" PointY="8.875" />
-        <EntityTypeShape EntityType="TutorDatabaseModel.TutorTuteeNotification" Width="1.5" PointX="6" PointY="13.25" />
-        <AssociationConnector Association="TutorDatabaseModel.AppointmentFK" />
-        <AssociationConnector Association="TutorDatabaseModel.FK_BUSY" />
-        <AssociationConnector Association="TutorDatabaseModel.FK_TUTEE" />
-        <AssociationConnector Association="TutorDatabaseModel.FK_TUTORS" />
-        <AssociationConnector Association="TutorDatabaseModel.BusyTimeFK2" />
-        <AssociationConnector Association="TutorDatabaseModel.BusyTimesFK" />
-        <AssociationConnector Association="TutorDatabaseModel.CourseFK" />
-        <AssociationConnector Association="TutorDatabaseModel.CourseFK2" />
-        <AssociationConnector Association="TutorDatabaseModel.CourseFK3" />
-        <AssociationConnector Association="TutorDatabaseModel.FK_Course" />
-        <AssociationConnector Association="TutorDatabaseModel.FacultyFK" />
-        <AssociationConnector Association="TutorDatabaseModel.TuteeFK2" />
-        <AssociationConnector Association="TutorDatabaseModel.FK_Tutee2" />
-        <AssociationConnector Association="TutorDatabaseModel.TuteeFK" />
-        <AssociationConnector Association="TutorDatabaseModel.TutorFK2" />
-        <AssociationConnector Association="TutorDatabaseModel.TutorFK3" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.Appointment" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.BusyTime" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.Cours" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.Faculty" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.FacultyCours" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TuteeBusyTime" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.Tutee" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorBusyTime" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorConfirmationRequest" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.Tutor" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorTuteeCourseAppointment" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="TutorDatabaseModel.AppointmentFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.BusyTimeFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.BusyTimesFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.CourseFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.CourseFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.CourseFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.FacultyFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.TuteeFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.TuteeFK" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.TutorFK2" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.TutorFK3" ManuallyRouted="false" />
+        <AssociationConnector Association="TutorDatabaseModel.TutorFK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.CurrentUser" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.StartEnd" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorTuteeNotification" Width="1.5" PointX="9" PointY="7.875" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutee" />
         <AssociationConnector Association="TutorDatabaseModel.FK_Tutor" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.BaseSchedule" Width="1.5" PointX="6" PointY="10.125" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.TutorCourse" Width="1.5" PointX="8" PointY="2.625" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Busy" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutee2" />
         <AssociationConnector Association="TutorDatabaseModel.FK_Tutor2" />
-        <AssociationConnector Association="TutorDatabaseModel.TutorFK" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Course" />
+        <AssociationConnector Association="TutorDatabaseModel.FK_Tutor1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

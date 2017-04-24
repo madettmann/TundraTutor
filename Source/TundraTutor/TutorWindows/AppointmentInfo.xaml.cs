@@ -81,6 +81,27 @@ namespace TutorWindows
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
+                //Make a new notification
+                var userTutee = readUser.Tutees.Where(tut => tut.Username == user.Username).FirstOrDefault();
+                string tuteeName = userTutee.FirstName + " " + userTutee.LastName;
+
+                //For the tutee who scheduled it
+                readUser.TutorTuteeNotifications.Load();
+                TutoringDB.TutorTuteeNotification newNot = new TutoringDB.TutorTuteeNotification();
+                newNot.Message = "Appointment with " + appointmentInfo.AppointmentTutor + " has been canceled";
+                newNot.Type = "TutorTuteeCourseAppointments";
+                newNot.targetId = -1;
+                newNot.TuteeId = readUser.Tutees.Where(tut => tut.Username == user.Username).FirstOrDefault().Id;
+                readUser.TutorTuteeNotifications.Add(newNot);
+
+                //Add the tutor with whom it is scheduled
+                newNot.Message = "Appointment with " + user.Username + " " + user.Username + " has been canceled";
+                newNot.Type = "TutorTuteeCourseAppointments";
+                newNot.targetId = -1;
+                newNot.TutorId = readUser.Tutors.Where(tut => tut.UserName == link.Tutor.UserName).FirstOrDefault().Id;
+                readUser.TutorTuteeNotifications.Add(newNot);
+                readUser.SaveChanges();
+
                 readUser.Appointments.Remove(appt);
                 readUser.TutorTuteeCourseAppointments.Remove(link);
                 readUser.SaveChanges();
