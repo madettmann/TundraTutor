@@ -1,0 +1,13 @@
+﻿<Window x:Class="TutorWindows.Splash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TutorWindows"
+        mc:Ignorable="d"
+        Title="Splash" Height="536" Width="1660" Background="{x:Null}" WindowStyle="None" Foreground="{x:Null}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Grid>
+        <Image x:Name="splashImage" Height="536" VerticalAlignment="Top" Source="Splash.png" HorizontalAlignment="Right" Width="1660"/>
+
+    </Grid>
+</Window>

@@ -166,5 +166,11 @@ namespace TutorWindows
             BaseSchedule modSched = new BaseSchedule();
             modSched.ShowDialog();
         }
+
+        private void requesttoTutorButton_Click(object sender, RoutedEventArgs e)
+        {
+            RequestTutor reqTutorWindow = new RequestTutor();
+            reqTutorWindow.ShowDialog();
+        }
     }
 }

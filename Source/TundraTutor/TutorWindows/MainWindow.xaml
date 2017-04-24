@@ -51,6 +51,7 @@
                                         </Image>
                                     </StackPanel>
                                 </MenuItem.Header>
+                                <MenuItem x:Name="requesttoTutorButton" Header="Tutor a Class" Background="White" Margin="-1" Click="requesttoTutorButton_Click"/>
                                 <MenuItem x:Name="infoButton" Header="Account" Background="White" Margin="-1" Click="infoButton_Click"/>
                                 <MenuItem x:Name="logoutButton" Header="Log Out" Background="White" Margin="-1" Click="logoutButton_Click"/>
                                 <MenuItem x:Name="creditsButton" Header="Credits" Background="White" Margin="-1" Click="MenuItem_Click_1"/>
@@ -157,13 +158,13 @@
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="22*"/>
+                <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
                 <control:TundraButton Name="prevButton" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,30,0">
                     <Image Source="Icons\LeftArrow.png"/>
                 </control:TundraButton>
-                <Label Name="monthLabel" Content="{Binding}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="24"/>
+                <Label Name="monthLabel" Content="{Binding}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontSize="20"/>
                 <control:TundraButton Name="nextButton" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Margin="30,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                     <Image Source="Icons\RightArrow.png"/>
                 </control:TundraButton>

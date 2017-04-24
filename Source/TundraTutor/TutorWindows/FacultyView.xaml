@@ -12,20 +12,29 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="43*"/>
-            <RowDefinition Height="410*"/>
+            <RowDefinition Height="202*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="168*"/>
             <RowDefinition Height="51*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="190*"/>
+            <ColumnDefinition Width="93*"/>
+            <ColumnDefinition Width="97*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="Pending1" VerticalContentAlignment="Stretch"  Grid.RowSpan="1" Grid.Row="1" Margin="7,0,0,0" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="1"/>
-        <control:TundraButton x:Name="Accept_" Content="Accept" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="75" Grid.Row="2" VerticalContentAlignment="Center"/>
-        <control:TundraButton x:Name="Deny" Content="Deny" HorizontalAlignment="Right" Margin="297,5,0,0" VerticalAlignment="Center" Width="75" Grid.Row="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-        <TextBlock x:Name="Pending" HorizontalAlignment="Left" Margin="36,17,0,0" TextWrapping="Wrap" Text="Pending Tutors" VerticalAlignment="Top" FontSize="16"/>
-        <ListBox Grid.Column="1" HorizontalAlignment="Right" Height="410" Grid.Row="1" VerticalAlignment="Top" Width="380" HorizontalContentAlignment="Right" VerticalContentAlignment="Top"/>
-        <Label x:Name="Recommend_Tutor" Content="Recommend Tutor" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <control:TundraButton x:Name="Apply" Content="Apply" Grid.Column="1" HorizontalAlignment="Left" Margin="295,15,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
+        <ListBox x:Name="Pending1" VerticalContentAlignment="Stretch"  Grid.RowSpan="3" Grid.Row="1" Margin="7,0,0,0" HorizontalContentAlignment="Stretch" Grid.Column="0" Grid.ColumnSpan="1"/>
+        <control:TundraButton x:Name="Accept_" Content="Accept" HorizontalAlignment="Left" Margin="10,0,0,15" VerticalAlignment="Bottom" Width="75" Grid.Row="4" VerticalContentAlignment="Center" Click="Accept__Click" Height="21"/>
+        <control:TundraButton x:Name="Deny" Content="Deny" HorizontalAlignment="Right" Margin="0,0,0,12" VerticalAlignment="Bottom" Width="75" Grid.Row="4" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="22" Click="Deny_Click"/>
+        <TextBlock x:Name="Pending" HorizontalAlignment="Left" Margin="36,17,0,0" TextWrapping="Wrap" Text="Pending Tutors" VerticalAlignment="Top" FontSize="16" Height="21" Width="107"/>
+        <ListBox x:Name="PotentialTutors" Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,0,7,0" Grid.ColumnSpan="2"/>
+        <Label x:Name="Recommend_Tutor" Content="Recommend Tutor" Grid.Column="1" HorizontalAlignment="Left" Margin="36,0,0,10" VerticalAlignment="Bottom" FontSize="16" Height="31" Width="141" Grid.Row="1" Grid.RowSpan="2"/>
+        <control:TundraButton x:Name="Apply" Content="Apply" Grid.Column="2" HorizontalAlignment="Left" Margin="109,15,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Height="21" Click="Apply_Click"/>
+        <Label x:Name="label3" Content="" HorizontalAlignment="Left" Margin="108,24,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="10"/>
+        <ListBox x:Name="CurrentTutors" Grid.Column="1" Grid.Row="1" Margin="0,0,7,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="36,17,0,0" TextWrapping="Wrap" Text="Current Tutors" FontSize="16" Height="21" VerticalAlignment="Top"/>
+        <ListBox x:Name="Courses" Grid.Column="2" Height="21" Margin="0,17,10,0" VerticalAlignment="Top" SelectionChanged="Courses_SelectionChanged"/>
+        <control:TundraButton x:Name="Remove" Content="Remove" Grid.Column="2" HorizontalAlignment="Left" Margin="109,5,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="Remove_Click"/>
+        <control:TundraButton x:Name="Logout" Content="Logout" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,12" Grid.Row="4" Width="75" Height="21" VerticalAlignment="Bottom" Click="Logout_Click"/>
         <!--IsSynchronizedWithCurrentItem="True"-->
         <!--SelectedValuePath="LastName" IsSynchronizedWithCurrentItem="True"-->
         <!--DataContext="{StaticResource facultyCoursViewSource}"-->

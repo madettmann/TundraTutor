@@ -43,6 +43,8 @@ namespace TutorWindows
         
         public Login()
         {
+            Splash s = new Splash();
+            s.Show();
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             Username1.Focus();
@@ -52,6 +54,7 @@ namespace TutorWindows
             var index = userCreds.CurrentUsers.FirstOrDefault(); 
             if (index != null) userCreds.CurrentUsers.Remove(index);
             userCreds.SaveChanges();
+            s.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -109,9 +112,16 @@ namespace TutorWindows
                     }
                 userCreds.CurrentUsers.Add(user);
                 userCreds.SaveChanges();
-
-                MainWindow monthView = new MainWindow();
-                monthView.Show();
+                if (type == "faculty")
+                {
+                    FacultyView fView = new FacultyView();
+                    fView.Show();
+                }
+                else
+                {
+                    MainWindow monthView = new MainWindow();
+                    monthView.Show();
+                }
                 Close();
             }
             else

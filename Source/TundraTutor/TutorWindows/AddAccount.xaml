@@ -20,7 +20,7 @@
         <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="23" Margin="140,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="4"/>
         <TextBox x:Name="firstNameTextBox" HorizontalAlignment="Left" Height="23" Margin="140,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1"/>
         <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="23" Margin="140,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="5"/>
-        <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="140,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="140,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="6"/>
 
         <TundraControls:TundraButton x:Name="addButton" Content="Add" HorizontalAlignment="Left" Margin="106,230,0,0" VerticalAlignment="Top" Width="75" Click="addButton_Click" Background="{x:Null}"/>
         <Label x:Name="addInformationLabel" Content="Add Your Information Below"  HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
