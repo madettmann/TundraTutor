@@ -4,6 +4,17 @@
     xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
     Title="DayMenu" Icon="Icons\Icon.ico">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="439*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding DateString}"/>
+        <ListBox ItemsSource="{Binding AppointmentsList}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Tutor}"/>
+                <TextBlock Text="{Binding courseNumber}"/>
+                <TextBlock Text="{Binding Time}"/>
+            </StackPanel>
+        </ListBox>
     </Grid>
 </control:CustomWindow>

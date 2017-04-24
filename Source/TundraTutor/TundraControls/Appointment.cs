@@ -13,36 +13,39 @@ namespace TundraControls
 
         public Appointment(string tr, string te, TimeSpan ti, string cc)
         {
-            tutor = tr;
-            tutee = te;
-            time = ti;
+            Tutor = tr;
+            Tutee = te;
+            Time = ti;
             courseCode = cc;
         }
 
         public Appointment(string tr, string te, TimeSpan ti, string cc, DateTime d)
         {
-            tutor = tr;
-            tutee = te;
-            time = ti;
+            Tutor = tr;
+            Tutee = te;
+            Time = ti;
             courseCode = cc;
             Date = d;
         }
 
         public Appointment(Appointment toCopy)
         {
-            tutor = toCopy.tutor;
-            tutee = toCopy.tutee;
-            time = toCopy.time;
+            Tutor = toCopy.Tutor;
+            Tutee = toCopy.Tutee;
+            Time = toCopy.Time;
             courseCode = toCopy.courseCode;
         }
 
-        public string apptLabel => courseCode + " " + time;
+        public string apptLabel => courseCode + " " + Time;
 
         public DateTime Date { get => date; set => date = value; }
+        public string Tutor { get => tutor; set => tutor = value; }
+        public string Tutee { get => tutee; set => tutee = value; }
+        public TimeSpan Time { get => time; set => time = value; }
 
         private string tutor;
         private string tutee;
-        public TimeSpan time;
+        private TimeSpan time;
         private DateTime date;
         public string courseCode;
     }

@@ -153,7 +153,9 @@ namespace TutorWindows
 
         private void calendar_DayClick_1(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Clicked " + calendar.SelectedDate.ToShortDateString());
+            //MessageBox.Show("Clicked " + calendar.SelectedDate.ToShortDateString());
+            DayMenu dayView = new DayMenu(calendar.SelectedDate);
+            dayView.ShowDialog();
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
