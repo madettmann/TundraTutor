@@ -157,13 +157,13 @@ namespace TutorWindows
             string ln = i.ElementAt(1);
             TutoringDB.TutorCourse temp3 = new TutorCourse();
             TutoringDB.Cours tempc2 = new Cours();
-            foreach (var c in db.Tutors)
+            foreach (var c in db.Tutors) //Doesn't work for tutees
             {
                 if (fn == c.FirstName && ln == c.LastName)
                 {
                     TutoringDB.Tutor tt = new Tutor();
                     tt = c;
-                    temp3.Tutor = tt;
+                    temp3.TutorId = tt.Id;
 
                     foreach (var l in db.Courses)
                     {
@@ -177,7 +177,7 @@ namespace TutorWindows
             }
             if (temp3 != null)
             {
-                temp3.Cours = tempc2;
+                temp3.CourseId = tempc2.Id;
                 db.TutorCourses.Add(temp3);
                 db.SaveChanges();
                 refresh2();
@@ -200,7 +200,7 @@ namespace TutorWindows
             temp2.UserName = temp.Username;
             temp2.Year = temp.Year;
             temp2.Email = temp.Email;
-            temp2.Id = db.Tutors.Count();
+            //temp2.Id = db.Tutors.Count();
             db.Tutors.Add(temp2);
             db.Tutees.Remove(temp);
             db.SaveChanges();
