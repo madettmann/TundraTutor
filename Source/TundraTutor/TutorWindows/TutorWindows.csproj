@@ -117,16 +117,15 @@
     <Compile Include="Credits.xaml.cs">
       <DependentUpon>Credits.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DayMenu.xaml.cs">
-      <DependentUpon>DayMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FacultyView.xaml.cs">
       <DependentUpon>FacultyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Notification.cs" />
+    <Compile Include="RequestTutor.xaml.cs" />
     <Compile Include="ScheduleAppointment.xaml.cs">
       <DependentUpon>ScheduleAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Splash.xaml.cs" />
     <Compile Include="Week.xaml.cs">
       <DependentUpon>Week.xaml</DependentUpon>
     </Compile>
@@ -162,10 +161,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DayMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="FacultyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -195,9 +190,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RequestTutor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ScheduleAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Splash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Week.xaml">
       <SubType>Designer</SubType>
@@ -260,15 +263,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Splash.png" />
     <Resource Include="Icons\ActionsSelected.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Content Include="Icons\HelpSelected.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Icons\HaveNotifications.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Include="Icons\NotificationsSelected.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -331,4 +332,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
 </Project>
