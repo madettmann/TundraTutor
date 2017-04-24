@@ -53,10 +53,16 @@ namespace TutorWindows
 
             Notifications = new ObservableCollection<Notification>();
             NotificationCommand = new RelayCommand<object>(onNotificationClicked);
+            readUser.TutorTuteeNotifications.Load();
+            var nots = from i in readUser.TutorTuteeNotifications
+                       where i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName
+                       select i;
+            foreach (var not in nots) Notifications.Add(new Notification(not.Message, not.Type, (int)not.targetId));
             if (Notifications.Count == 0)
             {
-                Notifications.Add(new Notification("Nothing here!"));
+                Notifications.Add(new Notification("Nothing here!", "empty", -1));
             }
+            else Notifications.Add(new Notification("Clear", "clear", -1));
 
             NotificationsList.ItemsSource = Notifications;
 
@@ -158,7 +164,34 @@ namespace TutorWindows
 
         private void onNotificationClicked(object obj)
         {
-            MessageBox.Show((obj as Notification).Message);
+            Notification selection = obj as Notification;
+            switch (selection.Type)
+            {
+                case "clear":
+                    Notifications.Clear();
+                    Notifications.Add(new Notification("Nothing here!", "empty", -1));
+                    var clearer = from i in readUser.TutorTuteeNotifications
+                                  where i.Tutor.UserName == user.UserName || i.Tutee.Username == user.UserName
+                                  select i;
+                    foreach (var element in clearer)
+                    {
+                        readUser.TutorTuteeNotifications.Remove(element);
+                    }
+                    readUser.SaveChanges();
+                    break;
+                case "empty":
+                    break;
+                case "TutorTuteeCourseAppointments":
+                    if (readUser.TutorTuteeCourseAppointments.Any(appointment => appointment.Id == selection.Id))
+                    {
+                        var appt = readUser.TutorTuteeCourseAppointments.Where(appointment => appointment.Id == selection.Id).FirstOrDefault();
+                        AppointmentInfo seeAppt = new AppointmentInfo(appt.Appointment.Date, appt.Appointment.Time);
+                        seeAppt.ShowDialog();
+                    }
+                    else MessageBox.Show("Appointment was cancelled");
+                    break;
+
+            };
         }
 
         private void modSchedButton_Click(object sender, RoutedEventArgs e)

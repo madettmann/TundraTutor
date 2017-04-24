@@ -124,12 +124,22 @@ namespace TutorWindows
             }
             userCreds.CurrentUsers.Add(user);
             userCreds.SaveChanges();
-            MainWindow userView = new MainWindow();
-            userView.ShowDialog();
+            if (userLists.ListSelected == 3)
+            {
+                FacultyView facView = new FacultyView();
+                facView.ShowDialog();
+            }
+            else
+            {
+                MainWindow userView = new MainWindow();
+                userView.ShowDialog();
+            }
         }
 
         private void lofOffButton_Click(object sender, RoutedEventArgs e)
         {
+            Login loginScreen = new Login();
+            loginScreen.Show();
             Close();
         }
 

@@ -36,11 +36,16 @@ namespace TutorWindows
 
             Notifications = new ObservableCollection<Notification>();
             NotificationCommand = new RelayCommand<object>(onNotificationClicked);
+            readUser.TutorTuteeNotifications.Where(not => not.Tutee.Username == user.UserName || not.Tutor.UserName == user.UserName).Load();
+            var nots = from i in readUser.TutorTuteeNotifications
+                       where i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName
+                       select i;
+            foreach (var not in nots) Notifications.Add(new Notification(not.Message, not.Type, (int)not.targetId));
             if (Notifications.Count == 0)
             {
-                Notifications.Add(new Notification("Nothing here!"));
+                Notifications.Add(new Notification("Nothing here!", "empty", -1));
             }
-
+            else Notifications.Add(new Notification("Clear", "clear", -1));
             NotificationsList.ItemsSource = Notifications;
 
             nextButton.Click += (o,e) => refreshWeek(7);

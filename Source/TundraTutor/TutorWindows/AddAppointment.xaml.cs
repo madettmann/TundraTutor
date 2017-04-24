@@ -127,7 +127,7 @@ namespace TutorWindows
             dateLabel.Content = ttcaList.ElementAt(index).Appointment.Date.ToString("ddd, MMM dd");
             timeLabel.Content = ttcaList.ElementAt(index).Appointment.Time.ToString(@"hh\:mm");
             tutorNameLabel.Content = ttcaList.ElementAt(index).Tutor.FirstName +' '+ ttcaList.ElementAt(index).Tutor.LastName;
-            appointmentDurationLabel.Content = "Duration: "+ttcaList.ElementAt(index).Appointment.Duration.ToString(@"hh\:mm");
+            appointmentDurationLabel.Content = "Duration: "+ttcaList.ElementAt(index).Appointment.Duration.ToString(/*@"hh\:mm"*/);
             index++;
         }
         private void thisWeekButton_Click(object sender, RoutedEventArgs e)
@@ -458,6 +458,34 @@ namespace TutorWindows
             db.Appointments.Add(ttcaList.ElementAt(index - 1).Appointment);
             db.TutorTuteeCourseAppointments.Add(ttcaList.ElementAt(index - 1));
             db.SaveChanges();
+
+            //Add a notification
+            var tuto = ttcaList.ElementAt(index - 1).Tutor;
+            var tute = ttcaList.ElementAt(index - 1).Tutee;
+            var tutoid = db.Tutors.Where(tut => tut.UserName == tuto.UserName).FirstOrDefault().Id;
+            var tuteid = db.Tutees.Where(tut => tut.Username == tute.Username).FirstOrDefault().Id;
+            var time = ttcaList.ElementAt(index - 1).Appointment.Time;
+            var date = ttcaList.ElementAt(index - 1).Appointment.Date;
+
+            //For the tutee who scheduled it
+            db.TutorTuteeNotifications.Load();
+            TutoringDB.TutorTuteeNotification newNot = new TutoringDB.TutorTuteeNotification();
+            newNot.Message = "Appointment scheduled with " + tuto.FirstName + " " + tuto.LastName + " for " + ttcaList.ElementAt(index - 1).Cours.CourseName;
+            newNot.Type = "TutorTuteeCourseAppointments";
+            newNot.targetId = db.TutorTuteeCourseAppointments.Where(apt => apt.TuteeId == tuteid && apt.TutorId == tutoid
+                                                              && apt.Appointment.Date == date && apt.Appointment.Time == time).FirstOrDefault().Id;
+            newNot.TuteeId = tuteid;
+            db.TutorTuteeNotifications.Add(newNot);
+
+            //Add the tutor with whom it is scheduled
+            newNot.Message = "Appointment scheduled with " + ttcaList.ElementAt(index - 1).Tutee.FirstName + " " + ttcaList.ElementAt(index - 1).Tutee.LastName;
+            newNot.Type = "TutorTuteeCourseAppointments";
+            newNot.targetId = db.TutorTuteeCourseAppointments.Where(apt => apt.TuteeId == tuteid && apt.TutorId == tutoid
+                                                              && apt.Appointment.Date == date && apt.Appointment.Time == time).FirstOrDefault().Id;
+            newNot.TutorId = tutoid;
+            db.TutorTuteeNotifications.Add(newNot);
+            db.SaveChanges();
+
             MessageBox.Show("Appointment scheduled.");
             this.Close();
         }

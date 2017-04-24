@@ -237,10 +237,13 @@ namespace TundraControls
                             var busies = addBusy.TutorBusyTimes.Where(bus => bus.BusyTime.Date == time.Date
                                                                       && bus.BusyTime.Time == time.Time
                                                                       && bus.TutorId == tempTutor.Id).ToList();
+                            var appointments = addBusy.TutorTuteeCourseAppointments.Where(appt => appt.Appointment.Date == time.Date
+                                                                                          && appt.Appointment.Time == time.Time
+                                                                                          && appt.TutorId == tempTutor.Id).ToList();
                             //from bus in addBusy.TuteeBusyTimes
                             //where bus.BusyTime.Time == time.Time && bus.Tutee.Username == user.UserName && bus.BusyTime.Date == time.Date
                             //select i;
-                            if (busies.Count == 0)
+                            if (busies.Count == 0 && appointments.Count == 0)
                             {
                                 TutoringDB.BusyTime newBusy = new TutoringDB.BusyTime();
                                 newBusy.Date = i;
@@ -287,10 +290,13 @@ namespace TundraControls
                             var busies = addBusy.TuteeBusyTimes.Where(bus => bus.BusyTime.Date == time.Date
                                                                       && bus.BusyTime.Time == time.Time
                                                                       && bus.TuteeId == tempTutee.Id).ToList();
+                            var appointments = addBusy.TutorTuteeCourseAppointments.Where(appt => appt.Appointment.Date == time.Date
+                                                                                          && appt.Appointment.Time == time.Time
+                                                                                          && appt.TuteeId == tempTutee.Id).ToList();
                             //from bus in addBusy.TuteeBusyTimes
                             //where bus.BusyTime.Time == time.Time && bus.Tutee.Username == user.UserName && bus.BusyTime.Date == time.Date
                             //select i;
-                            if (busies.Count == 0)
+                            if (busies.Count == 0 && appointments.Count == 0)
                             {
                                 TutoringDB.BusyTime newBusy = new TutoringDB.BusyTime();
                                 newBusy.Date = i;

@@ -19,6 +19,7 @@ namespace TutoringDB
         public Nullable<int> TuteeId { get; set; }
         public string Message { get; set; }
         public string Type { get; set; }
+        public Nullable<int> targetId { get; set; }
     
         public virtual Tutee Tutee { get; set; }
         public virtual Tutor Tutor { get; set; }
