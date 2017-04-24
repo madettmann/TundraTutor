@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09232ab3c7f74265bd8cf96e7c99f0f8" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="09232ab3c7f74265bd8cf96e7c99f0f8" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="TutorDatabaseModel.Appointment" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="TutorDatabaseModel.BusyTime" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TutorDatabaseModel.Cours" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
@@ -40,6 +40,7 @@
         <AssociationConnector Association="TutorDatabaseModel.FK_Tutor2" />
         <AssociationConnector Association="TutorDatabaseModel.FK_Course" />
         <AssociationConnector Association="TutorDatabaseModel.FK_Tutor1" />
+        <EntityTypeShape EntityType="TutorDatabaseModel.Admin" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

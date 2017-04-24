@@ -175,7 +175,7 @@ namespace TutorWindows
 
                 }
             }
-            if (temp3 != null)
+            if (temp3.Tutor != null)
             {
                 temp3.CourseId = tempc2.Id;
                 db.TutorCourses.Add(temp3);
@@ -188,9 +188,7 @@ namespace TutorWindows
             {
                 if (fn == d.FirstName && ln == d.LastName)
                 {
-
                     temp = d;
-
                 }
             }
             TutoringDB.Tutor temp2 = new TutoringDB.Tutor();

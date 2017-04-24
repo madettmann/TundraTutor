@@ -38,7 +38,6 @@ namespace TutorWindows
         public string LastName { get => lastName; set { lastName = value; NotifyPropertyChanged("FirstName"); } }
         public string FullName { get => firstName + ' ' + lastName; }
     }
-
     /// <summary>
     /// Interaction logic for AddAppointment.xaml
     /// </summary>
@@ -61,12 +60,7 @@ namespace TutorWindows
             var deptList = db.Courses.Select(i => i.Department).Distinct();
 
             System.Windows.Data.CollectionViewSource coursViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("coursViewSource")));
-            //System.Windows.Data.CollectionViewSource deptViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("deptViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // coursViewSource.Source = [generic data source]
-            coursViewSource.Source = db.Courses.Local;
-            //deptViewSource.Source = deptList;
-            
+            coursViewSource.Source = db.Courses.Local;            
         }
 
         private void submitCourseButton_Click(object sender, RoutedEventArgs e)
@@ -92,12 +86,12 @@ namespace TutorWindows
                 durationLabel.Visibility = Visibility.Visible;
                 durationComboBox.IsEnabled = true;
                 durationComboBox.Visibility = Visibility.Visible;
-                //orLabel.IsEnabled = true;
-                //orLabel.Visibility = Visibility.Visible;
-                //pickTutorLabel.IsEnabled = true;
-                //pickTutorLabel.Visibility = Visibility.Visible;
-                //pickTutorComboBox.IsEnabled = true;
-                //pickTutorComboBox.Visibility = Visibility.Visible;
+                orLabel.IsEnabled = true;
+                orLabel.Visibility = Visibility.Visible;
+                pickTutorLabel.IsEnabled = true;
+                pickTutorLabel.Visibility = Visibility.Visible;
+                pickTutorComboBox.IsEnabled = true;
+                pickTutorComboBox.Visibility = Visibility.Visible;
 
                 db.Tutors.Load();
                 db.TutorCourses.Load();
@@ -111,12 +105,7 @@ namespace TutorWindows
                         tutorList.Add(temp);
                     }
                 }
-                //pickTutorComboBox.Items.Refresh();
-                foreach (AvailableTutors t in tutorList)
-                {
-                    pickTutorComboBox.Items.Add(t.fullName);
-                }
-
+                pickTutorComboBox.ItemsSource = tutorList;
 
                 DataContext = tutorList;
             }
@@ -130,6 +119,7 @@ namespace TutorWindows
             appointmentDurationLabel.Content = "Duration: "+ttcaList.ElementAt(index).Appointment.Duration.ToString(/*@"hh\:mm"*/);
             index++;
         }
+
         private void thisWeekButton_Click(object sender, RoutedEventArgs e)
         {
             //Hide Screen 2
@@ -142,7 +132,11 @@ namespace TutorWindows
             durationComboBox.IsEnabled = false;
             durationComboBox.Visibility = Visibility.Hidden;
             orLabel.IsEnabled = false;
-            orLabel.Visibility = Visibility.Hidden;
+            orLabel.Visibility = Visibility.Hidden;;
+            pickTutorLabel.IsEnabled = false;
+            pickTutorLabel.Visibility = Visibility.Hidden;
+            pickTutorComboBox.IsEnabled = false;
+            pickTutorComboBox.Visibility = Visibility.Hidden;
 
 
 
@@ -300,9 +294,12 @@ namespace TutorWindows
             durationComboBox.Visibility = Visibility.Hidden;
             orLabel.IsEnabled = false;
             orLabel.Visibility = Visibility.Hidden;
-
-
-
+            orLabel.IsEnabled = false;
+            orLabel.Visibility = Visibility.Hidden; ;
+            pickTutorLabel.IsEnabled = false;
+            pickTutorLabel.Visibility = Visibility.Hidden;
+            pickTutorComboBox.IsEnabled = false;
+            pickTutorComboBox.Visibility = Visibility.Hidden;
 
             db.TutorCourses.Load();
             db.Tutors.Load();
@@ -488,6 +485,154 @@ namespace TutorWindows
 
             MessageBox.Show("Appointment scheduled.");
             this.Close();
+        }
+
+        private void pickTutorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Hide Screen 2
+            scheduleTomorrowButton.IsEnabled = false;
+            scheduleTomorrowButton.Visibility = Visibility.Hidden;
+            thisWeekButton.IsEnabled = false;
+            thisWeekButton.Visibility = Visibility.Hidden;
+            durationLabel.IsEnabled = false;
+            durationLabel.Visibility = Visibility.Hidden;
+            durationComboBox.IsEnabled = false;
+            durationComboBox.Visibility = Visibility.Hidden;
+            orLabel.IsEnabled = false;
+            orLabel.Visibility = Visibility.Hidden;
+            pickTutorLabel.IsEnabled = false;
+            pickTutorLabel.Visibility = Visibility.Hidden;
+            pickTutorComboBox.IsEnabled = false;
+            pickTutorComboBox.Visibility = Visibility.Hidden;
+
+
+            db.TutorCourses.Load();
+            db.Tutors.Load();
+            db.Appointments.Load();
+            db.CurrentUsers.Load();
+            db.TuteeBusyTimes.Load();
+            db.TutorTuteeCourseAppointments.Load();
+            var current = db.CurrentUsers.FirstOrDefault();
+            TutoringDB.Tutee user = new TutoringDB.Tutee();
+            var tutBusyTimes = db.TuteeBusyTimes.Where(i => i.Tutee.Username == user.Username).ToList();
+            var tutAppointmentTimes = db.TutorTuteeCourseAppointments.Where(i => i.Tutee.Username == user.Username).ToList();
+            user = db.Tutees.Where(i => i.Username == current.UserName).FirstOrDefault();
+            db.TutorTuteeCourseAppointments.Load();
+            TutoringDB.Tutor matchedTutor = new TutoringDB.Tutor();
+
+            string selectedFirstName = (pickTutorComboBox.SelectedItem as AvailableTutors).FirstName;
+            string selectedLastName = (pickTutorComboBox.SelectedItem as AvailableTutors).LastName;
+            matchedTutor = db.Tutors.Where(i=>i.FirstName == selectedFirstName).Where(j=>j.LastName == selectedLastName).FirstOrDefault();
+
+            var busyTimes = db.TutorBusyTimes.Where(i => i.Tutor.UserName == matchedTutor.UserName).ToList();
+            var appointmentTimes = db.TutorTuteeCourseAppointments.Where(i => i.Tutor.UserName == matchedTutor.UserName).ToList();
+            int adjacentFree = 0;
+            DateTime temp = DateTime.Today.AddDays(1);
+            temp = temp.AddHours(-temp.Hour);
+            temp = temp.AddMinutes(-temp.Minute);
+            temp = temp.AddHours(7);
+            for (int i = 0; i < 5; i++)
+            {
+                temp = temp.AddDays(1);
+                for (int j = 0; j < 24; j++)
+                {
+                    temp = temp.AddMinutes(30);
+                    bool busyConflict = false;
+                    foreach (var bt in busyTimes)
+                    {
+                        if (bt.BusyTime.Date.Month == temp.Month &&
+                            bt.BusyTime.Date.Day == temp.Day &&
+                                bt.BusyTime.Time.Hours == temp.Hour &&
+                                bt.BusyTime.Time.Minutes == temp.Minute)
+                        {
+                            busyConflict = true;
+                            break;
+                        }
+                    }
+                    if (!busyConflict)
+                    {
+                        foreach (var apt in appointmentTimes)
+                        {
+                            if (apt.Appointment.Date.Month == temp.Month &&
+                                apt.Appointment.Date.Day == temp.Day &&
+                                    apt.Appointment.Time.Hours == temp.Hour &&
+                                    apt.Appointment.Time.Minutes == temp.Minute)
+                            {
+                                busyConflict = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!busyConflict)
+                    {
+                        foreach (var tbt in tutBusyTimes)
+                        {
+                            if (tbt.BusyTime.Date.Month == temp.Month &&
+                                    tbt.BusyTime.Date.Day == temp.Day &&
+                                        tbt.BusyTime.Time.Hours == temp.Hour &&
+                                        tbt.BusyTime.Time.Minutes == temp.Minute)
+                            {
+                                busyConflict = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!busyConflict)
+                    {
+                        foreach (var tApt in tutAppointmentTimes)
+                        {
+                            if (tApt.Appointment.Date.Month == temp.Month &&
+                                    tApt.Appointment.Date.Day == temp.Day &&
+                                        tApt.Appointment.Time.Hours == temp.Hour &&
+                                        tApt.Appointment.Time.Minutes == temp.Minute)
+                            {
+                                busyConflict = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (busyConflict)
+                    {
+                        adjacentFree = 0;
+                    }
+                    else
+                    {
+                        adjacentFree++;
+                        if (adjacentFree == durationComboBox.SelectedIndex + 1)
+                        {
+                            TutoringDB.Appointment tempAppointment = new TutoringDB.Appointment();
+                            TutoringDB.TutorTuteeCourseAppointment tempTTCA = new TutoringDB.TutorTuteeCourseAppointment();
+                            tempAppointment.Time = temp.TimeOfDay;
+                            tempAppointment.Date = temp.Date;
+                            DateTime length = new DateTime(1, 1, 1, 0, 0, 0);
+                            tempAppointment.Duration = length.AddMinutes((durationComboBox.SelectedIndex + 1) * 30).TimeOfDay;
+                            tempTTCA.Appointment = tempAppointment;
+                            tempTTCA.Tutor = matchedTutor;
+                            tempTTCA.Tutee = db.Tutees.Where(t => t.Username == db.CurrentUsers.FirstOrDefault().UserName).FirstOrDefault();
+                            tempTTCA.Cours = courseListBox.SelectedItem as TutoringDB.Cours;
+                            ttcaList.Add(tempTTCA);
+                            adjacentFree = 0;
+                        }
+                    }
+                }
+                adjacentFree = 0;
+            }
+            //Show Screen 3
+            selectorRectangle.Visibility = Visibility.Visible;
+            selectorRectangle.IsEnabled = true;
+            dateLabel.Visibility = Visibility.Visible;
+            dateLabel.IsEnabled = true;
+            timeLabel.Visibility = Visibility.Visible;
+            timeLabel.IsEnabled = true;
+            tutorNameLabel.Visibility = Visibility.Visible;
+            tutorNameLabel.IsEnabled = true;
+            appointmentDurationLabel.Visibility = Visibility.Visible;
+            appointmentDurationLabel.IsEnabled = true;
+            confirmAppointmentButton.Visibility = Visibility.Visible;
+            confirmAppointmentButton.IsEnabled = true;
+            rejectAppointmentButton.Visibility = Visibility.Visible;
+            rejectAppointmentButton.IsEnabled = true;
+            DisplayNextAppointment();
         }
     }
 }
