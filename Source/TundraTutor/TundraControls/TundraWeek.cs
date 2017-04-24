@@ -75,12 +75,9 @@ namespace TundraControls
             user = new TutoringDB.CurrentUser();
             var readUser = new TutoringDB.TutorDatabaseEntities();
             readUser.CurrentUsers.Load();
-            var userList = from i in readUser.CurrentUsers select i;
-            TutoringDB.Tutee oneUser = new TutoringDB.Tutee();
-            foreach (var element in userList) { oneUser.Username = element.UserName; }
-            user.UserName = oneUser.Username;
+            user = readUser.CurrentUsers.FirstOrDefault();
 
-            
+            isTutor = user.Type.Contains("tutor");
 
             times = new ObservableCollection<Timeslot>();
             BuildWeek( CurrentDate );
@@ -162,7 +159,7 @@ namespace TundraControls
             tutorAppointments.TutorTuteeCourseAppointments
                 .Load();
 
-            isTutor = user.Type == "tutor";
+            isTutor = user.Type.Contains("tutor");
             //Load busy times <---------------- SOMETIMES BUSIES JUST DON'T GET SHOWN ... TRY JIM (IF STILL APPLICABLE)
             if(isTutor)
             tutorBusyTime.TutorBusyTimes
@@ -285,7 +282,7 @@ namespace TundraControls
 
                 //Add appointments to weekview
                 time.Appointment = new ObservableCollection<Appointment>();
-                foreach (var appt in appointmentBlocks) if(appt.time == t && appt.Date == d) time.Appointment.Add(appt);
+                foreach (var appt in appointmentBlocks) if(appt.Time == t && appt.Date == d) time.Appointment.Add(appt);
 
                 //Add busy to weekview
                 time.Busy = new ObservableCollection<Busy>();

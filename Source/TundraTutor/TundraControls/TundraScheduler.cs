@@ -322,9 +322,12 @@ namespace TundraControls
                         addBusy.TutorBusyTimes.Where(tutBus => tutBus.Tutor.UserName == user.UserName
                                                      && tutBus.BusyTime.Date == time.Date
                                                      && tutBus.BusyTime.Time == time.Time).Load();
+                        //int difference = DayOfWeekNumber(time.Date.DayOfWeek) - DayOfWeekNumber(start.DayOfWeek);
+                        //start = start.AddDays(difference);
                         var tutBusies = from i in addBusy.TutorBusyTimes
                                         where i.Tutor.UserName == user.UserName &&
-                                              i.BusyTime.Date.DayOfWeek == time.Date.DayOfWeek &&
+                                              //i.BusyTime.Date.DayOfWeek == time.Date.DayOfWeek &&
+                                              DbFunctions.DiffDays(time.Date, i.BusyTime.Date) % 7 == 0 &&
                                               i.BusyTime.Time == time.Time
                                         select i;
                         foreach (var oneBusy in tutBusies)

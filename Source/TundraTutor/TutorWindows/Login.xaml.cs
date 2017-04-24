@@ -111,8 +111,28 @@ namespace TutorWindows
                 }
                 else
                 {
-                    MainWindow monthView = new MainWindow();
-                    monthView.Show();
+                    if (!userCreds.BaseSchedules.Any(sched => sched.Tutee.Username == user.UserName || sched.Tutor.UserName == user.UserName))
+                    {
+                        MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("We've noticed you don't have a base schedule set.\nWould you like to go to your base schedule now?", "Fill out your schedule",  System.Windows.MessageBoxButton.YesNo);
+                        if(messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            MainWindow monthView = new MainWindow();
+                            monthView.Show();
+                            BaseSchedule newBase = new BaseSchedule();
+                            newBase.Show();
+                            Close();
+                        }
+                        else
+                        {
+                            MainWindow monthView = new MainWindow();
+                            monthView.Show();
+                        }
+                    }
+                    else
+                    {
+                        MainWindow monthView = new MainWindow();
+                        monthView.Show();
+                    }
                 }
 
                 Close();

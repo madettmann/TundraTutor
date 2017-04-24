@@ -117,6 +117,9 @@
     <Compile Include="Credits.xaml.cs">
       <DependentUpon>Credits.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DayMenu.xaml.cs">
+      <DependentUpon>DayMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FacultyView.xaml.cs">
       <DependentUpon>FacultyView.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
     <Page Include="Credits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DayMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="FacultyView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -332,5 +339,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
 </Project>
