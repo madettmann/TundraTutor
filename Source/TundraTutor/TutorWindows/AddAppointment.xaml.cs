@@ -503,6 +503,7 @@ namespace TutorWindows
             db.TutorTuteeNotifications.Add(newNot);
 
             //And the tutor with whom it is scheduled
+            newNot = new TutoringDB.TutorTuteeNotification();
             newNot.Message = "Appointment scheduled with " + ttcaList.ElementAt(index - 1).Tutee.FirstName + " " + ttcaList.ElementAt(index - 1).Tutee.LastName;
             newNot.Type = "TutorTuteeCourseAppointments";
             newNot.targetId = db.TutorTuteeCourseAppointments.Where(apt => apt.TuteeId == tuteid && apt.TutorId == tutoid

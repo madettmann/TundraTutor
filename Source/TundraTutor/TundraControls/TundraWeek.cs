@@ -32,11 +32,19 @@ namespace TundraControls
         public ObservableCollection<string> DayNames { get; set; }
         public static readonly DependencyProperty CurrentDateProperty = DependencyProperty.Register("CurrentDate", typeof(DateTime), typeof(TundraWeek));
         public static readonly DependencyProperty CurrentTimeProperty = DependencyProperty.Register("CurrentTime", typeof(TimeSpan), typeof(TundraWeek));
+        /// <summary>
+        /// Time selected when timeslot clicked
+        /// </summary>
         public TimeSpan SelectedTime { get => selectedTime; set => selectedTime = value; }
+        /// <summary>
+        /// Date selected when timeslot clicked
+        /// </summary>
         public DateTime SelectedDate { get => selectedDate; set => selectedDate = value; }
+        /// <summary>
+        /// Index of the ItemsControl selected when timeslot clicked
+        /// </summary>
         public int SelectedIndex { get => selectedIndex; set => selectedIndex = value; }
         #endregion
-
 
         #region Events 
         //Command that listens to each timeslot and wait for a click on them - assigned in constructor
@@ -48,7 +56,7 @@ namespace TundraControls
         public event RoutedEventHandler TimeClick { add => AddHandler(TimeClickEvent, value); remove => RemoveHandler(TimeClickEvent, value); }
         #endregion
 
-        //For style
+        //Ensure the template is applied
         static TundraWeek()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TundraWeek), new FrameworkPropertyMetadata(typeof(TundraWeek)));
@@ -160,7 +168,7 @@ namespace TundraControls
                 .Load();
 
             isTutor = user.Type.Contains("tutor");
-            //Load busy times <---------------- SOMETIMES BUSIES JUST DON'T GET SHOWN ... TRY JIM (IF STILL APPLICABLE)
+            //Load busy times
             if(isTutor)
             tutorBusyTime.TutorBusyTimes
                 .Where(busy => busy.BusyTime.Date >= startDate && busy.BusyTime.Date <= endDate)
@@ -218,9 +226,16 @@ namespace TundraControls
                 //                                                          onebusy.BusyTime.Date.AddDays(startDate.Subtract(new DateTime(2014,1,5)).TotalDays)));
                 foreach (var onebusy in busies) busyList.Add(new Busy(onebusy.BusyTime.Time, onebusy.BusyTime.Duration, onebusy.BusyTime.Date));
             }
-#endregion
+            #endregion
 
             #region Time Blocking
+
+            //
+            //Blocks the appointments and busy times into 30-minute blocks
+            //Necessary for appointments to appear in every time which they occupy
+            //Used to be necessary for busies, now is just a safeguard - isn't too strenuous for the machine
+            //
+
             //Keep track of the busies and appts as time blocks
             appointmentBlocks = new List<Appointment>();
             busyBlocks = new List<Busy>();
@@ -239,7 +254,7 @@ namespace TundraControls
                                                                         + appt.Tutor.FirstName + " " + appt.Tutor.LastName, 
                                                       appt.Appointment.Date));
                 //Find how many 30-minute timeslots the appointment takes up
-                int numMore = (appt.Appointment.Duration.Hours * 2) + (appt.Appointment.Duration.Minutes / 30) - 1;
+                int numMore = (appt.Appointment.Duration.Value.Hours * 2) + (appt.Appointment.Duration.Value.Minutes / 30) - 1;
                 for (int i = 0; i < numMore; i++)
                 {
                     //Add the appointment in 30-minute blocks to the list
@@ -432,7 +447,7 @@ namespace TundraControls
         /// <param name="obj">The time clicked</param>
         private void onCurrentTimeClicked(object obj)
         {
-            //Records the selected, time, date and index in times
+            //Records the selected, time, date and index in the ItemsControl (or times [well, both really])
             selectedTime = (obj as Timeslot).Time;
             selectedDate = (obj as Timeslot).Date;
             selectedIndex = times.IndexOf(obj as Timeslot);

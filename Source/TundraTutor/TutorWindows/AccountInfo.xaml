@@ -30,8 +30,9 @@
         <PasswordBox x:Name="newPasswordBox" Margin="0,0,25,0" VerticalAlignment="Center" PasswordChar="*" HorizontalAlignment="Right" Width="176" Grid.Row="6" TabIndex="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Height="20" FontSize="16"/>
         <control:TundraButton x:Name="submitButton" Content="Submit New Password" HorizontalAlignment="Right" Margin="0,0,35,0" Grid.Row="7" HorizontalContentAlignment="Right" Background="{x:Null}" VerticalAlignment="Top" Click="submitButton_Click" />
         <Label x:Name="wrongPassLabel" Content="{Binding WrongOldPassword}" Grid.Row="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,0,0,5" FontSize="14" Foreground="Red" Background="{x:Null}"/>
-        <control:TundraButton x:Name="backButton" Content="Back to Schedule" HorizontalAlignment="Left" Margin="50,0,0,0" Grid.Row="8" VerticalAlignment="Center" VerticalContentAlignment="Center" Click="submitButton_Click"/>
-        <control:TundraButton x:Name="editButton" Content="Edit Details" HorizontalAlignment="Right" Margin="0,0,65,0" Grid.Row="8" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+        <control:TundraButton x:Name="backButton" Content="Back to Schedule" HorizontalAlignment="Left" Margin="50,0,0,0" Grid.Row="8" VerticalAlignment="Center" VerticalContentAlignment="Center" Click="backButton_Click"/>
+        <!--Edit Button not used- we decided users should not be able to change their names or usernames, and that only passwords should be changable-->
+        <control:TundraButton x:Name="editButton" Content="Edit Details" HorizontalAlignment="Right" Margin="0,0,65,0" Grid.Row="8" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Visibility="Hidden"/>
 
 
     </Grid>

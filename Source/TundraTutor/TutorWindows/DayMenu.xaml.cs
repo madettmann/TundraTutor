@@ -41,6 +41,9 @@ namespace TutorWindows
     }
     public partial class DayMenu : TundraControls.CustomWindow
     {
+        //Never gets used, was going to display the appointments in a day when clicked in the month view -- not high enmough priority
+        //With a little work, the display could easily be implemented, click commands to go to appointment info may take a little longer
+
         TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
         public Info info;
         TutoringDB.CurrentUser user;

@@ -1,4 +1,5 @@
-﻿<control:CustomWindow x:Class="TutorWindows.DayMenu"
+﻿<!--Written by Victor; unused-->
+    <control:CustomWindow x:Class="TutorWindows.DayMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"

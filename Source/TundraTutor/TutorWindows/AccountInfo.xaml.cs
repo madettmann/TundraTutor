@@ -63,14 +63,15 @@ namespace TutorWindows
     }
     public partial class AccountInfo : TundraControls.CustomWindow
     {
+        /// <summary>
+        /// Displays the information for the current tutor or tutee - also has faculty implementation that is never used
+        /// </summary>
         UserInfo info;
         private TutoringDB.TutorDatabaseEntities readUser;
         private TutoringDB.CurrentUser user;
 
         public AccountInfo()
         {
-            //userName = "jim";
-
             //Get the current user
             user = new TutoringDB.CurrentUser();
             readUser = new TutoringDB.TutorDatabaseEntities();

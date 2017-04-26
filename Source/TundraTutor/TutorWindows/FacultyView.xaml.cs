@@ -135,7 +135,6 @@ namespace TutorWindows
             db.TutorConfirmationRequests.Remove(temp4);
             db.SaveChanges();
             Refresh1();
-
         }
 
         private void Courses_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -288,6 +287,7 @@ namespace TutorWindows
             if (db.CurrentUsers.FirstOrDefault().Type.Contains("admin"))
             {
                 this.Close();
+                return;
             }
             Login logoutScreen = new Login();
             logoutScreen.Show();

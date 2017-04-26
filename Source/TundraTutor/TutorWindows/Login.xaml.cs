@@ -1,4 +1,11 @@
 ﻿//Written by Makena
+
+//
+//All controls (except menu and whatever is used in faculty view...) are customized in the TundraControls project
+//Several are built from scratch
+//For more information, consult the top of the TundraCalendar.cs file
+//
+
 ﻿﻿using System;
 using System.IO;
 using System.Collections.Generic;
