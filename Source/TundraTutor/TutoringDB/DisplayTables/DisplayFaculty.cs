@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Makena
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,7 @@ namespace DisplayTables
                 .ThenBy(faculty => faculty.First_Name)
                 .Load();
 
-            //specify DataSource for tutorBindingSource
+            //specify DataSource for facultyBindingSource
             facultyBindingSource.DataSource = dbcontext.Faculties.Local;
         }
 

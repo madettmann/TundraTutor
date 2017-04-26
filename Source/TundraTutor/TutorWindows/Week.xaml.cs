@@ -74,14 +74,18 @@ namespace TutorWindows
 
         private void appointmentButton_Click_1(object sender, RoutedEventArgs e)
         {
-            ScheduleAppointment newAppt = new ScheduleAppointment();
+            AddAppointment newAppt = new AddAppointment();
             newAppt.ShowDialog();
+            refreshNotifications();
+            refreshWeek(0);
         }
 
         private void infoButton_Click(object sender, RoutedEventArgs e)
         {
             AccountInfo infoPage = new AccountInfo();
             infoPage.ShowDialog();
+            //HelpWindow hWindow = new HelpWindow();
+            //hWindow.ShowDialog();
         }
 
         private void monthButton_Click(object sender, RoutedEventArgs e)
@@ -117,9 +121,11 @@ namespace TutorWindows
                 {
                     AppointmentInfo apInfo = new AppointmentInfo(week.SelectedDate, week.SelectedTime);
                     apInfo.ShowDialog();
+                    
                 }
+                refreshWeek(0);
             }
-
+            refreshNotifications();
         }
 
         private void saveChangesButton_Click(object sender, RoutedEventArgs e)
@@ -132,6 +138,7 @@ namespace TutorWindows
         {
             BaseSchedule modSched = new BaseSchedule();
             modSched.ShowDialog();
+            refreshWeek(0);
         }
 
         private void creditsButton_Click(object sender, RoutedEventArgs e)
@@ -142,7 +149,62 @@ namespace TutorWindows
 
         private void onNotificationClicked(object obj)
         {
-            MessageBox.Show((obj as Notification).Message);
+            Notification selection = obj as Notification;
+            switch (selection.Type)
+            {
+                case "clear":
+                    Notifications.Clear();
+                    Notifications.Add(new Notification("Nothing here!", "empty", -1));
+                    var clearer = from i in readUser.TutorTuteeNotifications
+                                  where i.Tutor.UserName == user.UserName || i.Tutee.Username == user.UserName
+                                  select i;
+                    foreach (var element in clearer)
+                    {
+                        readUser.TutorTuteeNotifications.Remove(element);
+                    }
+                    readUser.SaveChanges();
+                    refreshNotifications();
+                    break;
+                case "empty":
+                    break;
+                case "TutorTuteeCourseAppointments":
+                    if (readUser.TutorTuteeCourseAppointments.Any(appointment => appointment.Id == selection.Id))
+                    {
+                        var appt = readUser.TutorTuteeCourseAppointments.Where(appointment => appointment.Id == selection.Id).FirstOrDefault();
+                        AppointmentInfo seeAppt = new AppointmentInfo(appt.Appointment.Date, appt.Appointment.Time);
+                        seeAppt.ShowDialog();
+                        refreshWeek(0);
+                    }
+                    else MessageBox.Show("Appointment was cancelled");
+                    break;
+
+            };
+        }
+
+        private void refreshNotifications()
+        {
+            Notifications = new ObservableCollection<Notification>();
+            readUser.TutorTuteeNotifications.Load();
+            var nots = from i in readUser.TutorTuteeNotifications
+                       where i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName
+                       select i;
+            foreach (var not in nots) Notifications.Add(new Notification(not.Message, not.Type, (int)not.targetId));
+            if (Notifications.Count == 0)
+            {
+                Notifications.Add(new Notification("Nothing here!", "empty", -1));
+            }
+            else Notifications.Add(new Notification("Clear", "clear", -1));
+
+            NotificationsList.ItemsSource = Notifications;
+
+            DataContext = null;
+            DataContext = this;
+        }
+
+        private void helpButton_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow hWindow = new HelpWindow();
+            hWindow.ShowDialog();
         }
     }
 }

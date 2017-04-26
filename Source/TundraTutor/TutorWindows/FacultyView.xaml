@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:TutoringDB="clr-namespace:TutoringDB;assembly=TutoringDB" mc:Ignorable="d" x:Class="TutorWindows.FacultyView"
-        Title="Faculty" Closing="CustomWindow_Closing" Loaded="CustomWindow_Loaded">
+        Title="Faculty" Closing="CustomWindow_Closing" Loaded="CustomWindow_Loaded" Icon="Icons/Icon.ico">
 
     <!--<control:CustomWindow.Resources>
         <CollectionViewSource x:Key="facultyCoursViewSource" d:DesignSource="{d:DesignInstance {x:Type TutoringDB:Faculty}, CreateList=True}"/>

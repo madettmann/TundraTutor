@@ -1,0 +1,12 @@
+﻿<control:CustomWindow x:Class="TutorWindows.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
+        Title="Help Window" Height="325.333" Width="300" Icon="Icons/Icon.ico">
+    <Grid>
+        <TextBlock x:Name="Label1" HorizontalAlignment="Left" Margin="28,39,0,0" TextWrapping="Wrap" Text="Subject:" VerticalAlignment="Top" FontSize="16"/>
+        <ListBox x:Name="Subjects" HorizontalAlignment="Left" Height="21" Margin="88,39,0,0" VerticalAlignment="Top" Width="194" SelectionChanged="Subjects_SelectionChanged"/>
+        <TextBlock x:Name="Info" HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="204" Width="272"/>
+
+    </Grid>
+</control:CustomWindow>

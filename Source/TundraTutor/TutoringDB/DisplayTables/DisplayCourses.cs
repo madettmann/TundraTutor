@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Makena
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,15 +28,13 @@ namespace DisplayTables
                 .ThenBy(course => course.CourseNumber)
                 .Load();
 
-            //specify DataSource for tutorBindingSource
+            //specify DataSource for coursBindingSource
             coursBindingSource.DataSource = dbcontext.Courses.Local;
         }
 
         private void courseBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             TutoringDB.Tutor b = new TutoringDB.Tutor();
-            //b.Id = 3; b.FirstName = "mike"; b.LastName = "Johnson"; b.UserName = "mikkee"; b.Password = "aloha"; b.Year = 2; b.Email = "mike@mike.mike";
-            //dbcontext.Tutors.Add(b);
             Validate();
             coursBindingSource.EndEdit();
             try

@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
-        Title="AccountInfo" Width="345" Height="495.35">
+        Title="AccountInfo" Width="345" Height="495.35" Icon="Icons/Icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

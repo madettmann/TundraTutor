@@ -29,12 +29,13 @@ namespace TutorWindows
     public partial class FacultyView : TundraControls.CustomWindow
     {
         bool finished;
+        List<string> combined = new List<string>();
         TutoringDB.TutorDatabaseEntities db = new TutoringDB.TutorDatabaseEntities();
         public FacultyView()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            finished = true;
+            finished = !db.CurrentUsers.FirstOrDefault().Type.Contains("admin");
             Refresh1();
         }
         private void CustomWindow_Loaded(object sender, RoutedEventArgs e)
@@ -113,8 +114,7 @@ namespace TutorWindows
                 label3.Content = "Select an Item";
 
             }
-            string item2;
-            item2 = Pending1.SelectedItem.ToString();
+            string item2 = Pending1.SelectedItem.ToString();
             char[] delimiterChars = { ' ' };
             var i = item2.Split(delimiterChars);
             string id = i.FirstOrDefault();
@@ -163,11 +163,11 @@ namespace TutorWindows
                 {
                     TutoringDB.Tutor tt = new Tutor();
                     tt = c;
-                    temp3.TutorId = tt.Id;
+                    temp3.Tutor = tt;
 
                     foreach (var l in db.Courses)
                     {
-                        if (l.CourseName == Courses.SelectedItem.ToString())
+                        if (l.CourseName == Courses.SelectedItem as string)
                         {
                             tempc2 = l;
                         }
@@ -200,7 +200,7 @@ namespace TutorWindows
             temp2.Email = temp.Email;
             //temp2.Id = db.Tutors.Count();
             db.Tutors.Add(temp2);
-            db.Tutees.Remove(temp);
+            //db.Tutees.Remove(temp);
             db.SaveChanges();
             TutoringDB.Cours tempc = new Cours();
             foreach (var l in db.Courses)
@@ -285,6 +285,10 @@ namespace TutorWindows
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             finished = false;
+            if (db.CurrentUsers.FirstOrDefault().Type.Contains("admin"))
+            {
+                this.Close();
+            }
             Login logoutScreen = new Login();
             logoutScreen.Show();
 
@@ -356,9 +360,12 @@ namespace TutorWindows
             int c2 = PotentialTutors.Items.Count;
             while (c2 != 0)
             {
-                PotentialTutors.Items.RemoveAt(c2 - 1);
+                //PotentialTutors.Items.RemoveAt(c2 - 1);
+                //combined.Remove(combined.ElementAt(c2 - 1));
+                combined.RemoveAt(c2 - 1);
                 c2--;
             }
+            PotentialTutors.ItemsSource = combined;
             List<TutoringDB.TutorCourse> tutList = new List<TutorCourse>();
             foreach (var tutr in db.TutorCourses)
             {
@@ -373,6 +380,7 @@ namespace TutorWindows
                 count3--;
             }
 
+            
             List<TutoringDB.Tutor> tutorList = new List<Tutor>();
             foreach (var tutr in db.Tutors)
             {
@@ -387,21 +395,38 @@ namespace TutorWindows
             while (count3 != 0)
             {
                 string item = tutorList.ElementAt(count3 - 1).FirstName + " " + tutorList.ElementAt(count3 - 1).LastName;
-                PotentialTutors.Items.Add(item);
+                combined.Add(item);
                 count3--;
             }
             List<TutoringDB.Tutee> tuteeList = new List<Tutee>();
             foreach (var tute in db.Tutees)
             {
                 tuteeList.Add(tute);
+                foreach(var tutor in tutorList)
+                {
+                    if(tutor.UserName == tute.Username)
+                    {
+                        tuteeList.Remove(tute);
+                    }
+                }
             }
             count3 = tuteeList.Count();
             while (count3 != 0)
             {
                 string item = tuteeList.ElementAt(count3 - 1).FirstName + " " + tuteeList.ElementAt(count3 - 1).LastName;
-                PotentialTutors.Items.Add(item);
+                combined.Add(item);
                 count3--;
             }
+            var itemList = CurrentTutors.Items;
+            foreach(var str in itemList)
+            {
+                if(combined.Any(i=> i== (string)str))
+                {
+                    combined.Remove((string)str);
+                }
+            }
+            combined = combined.OrderBy(i => i).ToList();
+            PotentialTutors.ItemsSource = combined;
         }
 
     }

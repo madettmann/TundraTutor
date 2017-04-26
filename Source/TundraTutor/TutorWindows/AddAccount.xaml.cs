@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Makena
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace TutorWindows
     /// </summary>
     public partial class AddAccount : TundraControls.CustomWindow
     {
+        
         public AddAccount()
         {
             InitializeComponent();
@@ -34,13 +36,17 @@ namespace TutorWindows
             db.Tutors.Load();
             db.Faculties.Load();
             int numTutees = db.Tutees.Count();
-
+            //Error Checking
             if(firstNameTextBox.Text != "" &&
                 lastNameTextBox.Text != "" &&
                 usernameTextBox.Text != "" &&
                 passwordTextBox.Text != "" &&
-                yearTextBox.Text != "" &&
-                emailTextBox.Text != "")
+                (yearTextBox.Text == "1" ||
+                yearTextBox.Text == "2" ||
+                yearTextBox.Text == "3" ||
+                yearTextBox.Text == "4") &&
+                emailTextBox.Text != "" 
+                )
             {
                 TutoringDB.Tutee temp = new TutoringDB.Tutee();
                 temp.FirstName = firstNameTextBox.Text;
@@ -49,7 +55,6 @@ namespace TutorWindows
                 temp.Password = passwordTextBox.Text;
                 temp.Year = Convert.ToInt32( yearTextBox.Text);
                 temp.Email = emailTextBox.Text;
-                //temp.Id = ;
 
                 db.Tutees.Add(temp);
                 db.SaveChanges();
@@ -66,7 +71,6 @@ namespace TutorWindows
         {
             Login loginWindow = new Login();
             loginWindow.Show();
-            //this.Close();
         }
     }
 }

@@ -84,6 +84,7 @@ namespace TutorWindows
                         }
                     }
                 }
+                courseList = courseList.OrderBy(i => i.CourseName).ToList();
                 int count = courseList.Count;
                 while (count != 0)
                 {
@@ -121,7 +122,7 @@ namespace TutorWindows
                 //temp2.Id = db.Tutors.Count();
                 //K:LWEKFN:OINF:EWIOLFNSMDNF:OILEKNF:SOIDLKFNEOIL?JFEWFDSFS
                 db.Tutors.Add(temp2);
-                db.Tutees.Remove(temp);
+                //db.Tutees.Remove(temp);
                 //FKLJFEPLDKSFNPNEIKNELFPDIMOS:LDKFN:OEIJS
                 db.SaveChanges();
             }
