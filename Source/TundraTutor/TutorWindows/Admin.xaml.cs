@@ -51,6 +51,7 @@ namespace TutorWindows
         public ObservableCollection<string> TutorNames { get {
                 ObservableCollection<string> outList = new ObservableCollection<string>();
                 foreach (var tutor in tutorList) outList.Add(tutor.FirstName + " " + tutor.LastName);
+                //outList = new ObservableCollection<string>(outList.OrderBy(i => i));
                 return outList;} }
 
         public ObservableCollection<string> TuteeNames
@@ -59,6 +60,7 @@ namespace TutorWindows
             {
                 ObservableCollection<string> outList = new ObservableCollection<string>();
                 foreach (var tutee in tuteeList) outList.Add(tutee.FirstName + " " + tutee.LastName);
+                //outList = new ObservableCollection<string>(outList.OrderBy(i => i));
                 return outList;
             }
         }
@@ -68,6 +70,7 @@ namespace TutorWindows
             {
                 ObservableCollection<string> outList = new ObservableCollection<string>();
                 foreach (var faculty in facultyList) outList.Add(faculty.First_Name + " " + faculty.LastName);
+                //outList = new ObservableCollection<string>(outList.OrderBy(i => i));
                 return outList;
             }
         }

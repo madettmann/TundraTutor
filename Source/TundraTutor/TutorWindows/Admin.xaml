@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
-        Title="Admin" Width="345" Height="495.35" MinWidth="450">
+        Title="Admin" Width="345" Height="495.35" MinWidth="450" Icon="Icons/Icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>

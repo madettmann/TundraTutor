@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Written By Makena
+//This screen was eventually replaced by the click on calendar to add busy
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;

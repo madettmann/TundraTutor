@@ -1,4 +1,5 @@
-﻿﻿﻿using System;
+﻿//Written by Makena
+﻿﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,7 +110,7 @@ namespace TutorWindows
                     FacultyView faculty = new FacultyView();
                     faculty.Show();
                 }
-                else
+                else if(usernamePasswordCorrect)
                 {
                     if (!userCreds.BaseSchedules.Any(sched => sched.Tutee.Username == user.UserName || sched.Tutor.UserName == user.UserName))
                     {
@@ -134,7 +135,10 @@ namespace TutorWindows
                         monthView.Show();
                     }
                 }
+                else
+                {
 
+                }
                 Close();
             }
             else

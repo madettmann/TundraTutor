@@ -53,18 +53,19 @@ namespace TutorWindows
 
             Notifications = new ObservableCollection<Notification>();
             NotificationCommand = new RelayCommand<object>(onNotificationClicked);
-            readUser.TutorTuteeNotifications.Load();
-            var nots = from i in readUser.TutorTuteeNotifications
-                       where i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName
-                       select i;
-            foreach (var not in nots) Notifications.Add(new Notification(not.Message, not.Type, (int)not.targetId));
-            if (Notifications.Count == 0)
-            {
-                Notifications.Add(new Notification("Nothing here!", "empty", -1));
-            }
-            else Notifications.Add(new Notification("Clear", "clear", -1));
+            //readUser.TutorTuteeNotifications.Load();
+            //var nots = from i in readUser.TutorTuteeNotifications
+            //           where i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName
+            //           select i;
+            //foreach (var not in nots) Notifications.Add(new Notification(not.Message, not.Type, (int)not.targetId));
+            //if (Notifications.Count == 0)
+            //{
+            //    Notifications.Add(new Notification("Nothing here!", "empty", -1));
+            //}
+            //else Notifications.Add(new Notification("Clear", "clear", -1));
 
-            NotificationsList.ItemsSource = Notifications;
+            //NotificationsList.ItemsSource = Notifications;
+            refreshNotifications();
 
             DataContext = this;
         }
@@ -118,6 +119,8 @@ namespace TutorWindows
             //newAppt.ShowDialog();
             AddAppointment f = new AddAppointment();
             f.ShowDialog();
+            refreshNotifications();
+            refreshCalendar(0);
         }
 
         private void infoButton_Click(object sender, RoutedEventArgs e)
@@ -148,14 +151,15 @@ namespace TutorWindows
 
         private void TundraButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("No use helping you...");
+            //MessageBox.Show("No use helping you...");
+            HelpWindow hWindow = new HelpWindow();
+            hWindow.ShowDialog();
         }
 
         private void calendar_DayClick_1(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Clicked " + calendar.SelectedDate.ToShortDateString());
-            DayMenu dayView = new DayMenu(calendar.SelectedDate);
-            dayView.ShowDialog();
+            //DayMenu dayView = new DayMenu(calendar.SelectedDate);
+            //dayView.ShowDialog();
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -180,6 +184,7 @@ namespace TutorWindows
                         readUser.TutorTuteeNotifications.Remove(element);
                     }
                     readUser.SaveChanges();
+                    refreshNotifications();
                     break;
                 case "empty":
                     break;
@@ -189,11 +194,13 @@ namespace TutorWindows
                         var appt = readUser.TutorTuteeCourseAppointments.Where(appointment => appointment.Id == selection.Id).FirstOrDefault();
                         AppointmentInfo seeAppt = new AppointmentInfo(appt.Appointment.Date, appt.Appointment.Time);
                         seeAppt.ShowDialog();
+                        refreshCalendar(0);
                     }
                     else MessageBox.Show("Appointment was cancelled");
                     break;
 
             };
+            refreshNotifications();
         }
 
         private void modSchedButton_Click(object sender, RoutedEventArgs e)
@@ -206,6 +213,26 @@ namespace TutorWindows
         {
             RequestTutor reqTutorWindow = new RequestTutor();
             reqTutorWindow.ShowDialog();
+        }
+
+        private void refreshNotifications()
+        {
+            Notifications = new ObservableCollection<Notification>();
+            readUser.TutorTuteeNotifications.Load();
+            var nots = from i in readUser.TutorTuteeNotifications
+                       where i.Tutee.Username == user.UserName || i.Tutor.UserName == user.UserName
+                       select i;
+            foreach (var not in nots) Notifications.Add(new Notification(not.Message, not.Type, (int)not.targetId));
+            if (Notifications.Count == 0)
+            {
+                Notifications.Add(new Notification("Nothing here!", "empty", -1));
+            }
+            else Notifications.Add(new Notification("Clear", "clear", -1));
+
+            NotificationsList.ItemsSource = Notifications;
+
+            DataContext = null;
+            DataContext = this;
         }
     }
 }

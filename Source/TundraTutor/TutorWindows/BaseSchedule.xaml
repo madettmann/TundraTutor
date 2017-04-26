@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:control="clr-namespace:TundraControls;assembly=TundraControls"
-        Title="BaseSchedule" Width="Auto" Height="Auto" Loaded="CustomWindow_Loaded">
+        Title="BaseSchedule" Width="Auto" Height="Auto" Loaded="CustomWindow_Loaded" Icon="Icons/Icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
