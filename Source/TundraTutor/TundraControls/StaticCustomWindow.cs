@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Written by Victor
+using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,8 @@ namespace TundraControls
 {
     public class StaticCustomWindow : Window
     {
+        //Never gets used, was going to be applied to windows that we didn't want to be resizable, movable, min-ed, max-ed or closed
+
         Point normalSize;
         Point normalLoc;
         bool fakeMax;

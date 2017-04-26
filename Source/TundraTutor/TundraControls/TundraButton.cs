@@ -8,7 +8,7 @@ namespace TundraControls
     {
         static TundraButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TundraButton),
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TundraButton), //Ensure the template is applied
             new FrameworkPropertyMetadata(typeof(TundraButton)));
         }
     }
